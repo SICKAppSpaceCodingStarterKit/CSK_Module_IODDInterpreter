@@ -1,0 +1,1 @@
+Here you can place relevant media files regarding documentation (e.g. screenshots, gifs, ... to use within main README.md of the repository)
