@@ -1,14 +1,15 @@
-# CSK_Module_[ModuleName]
+# CSK_Module_IODDInterpreter
+## INFO: Draft version. Not further developed / tested so far! Check for available GitHub forks of this repository to see latest updates.
 
 Module / Application to provide [...] functionality.
 
 *If available, please also add a screenshot/gif of the UI of the module here placed within /docu/media/ (see code)*
-![](https://github.com/SICKAppSpaceCodingStarterKit/[REPO_OF_MODULE]/blob/main/docu/media/UI_Screenshot.png)
+![](https://github.com/SICKAppSpaceCodingStarterKit/CSK_Module_Database/blob/main/docu/media/UI_Screenshot.png)
 
 ## How to Run
 
 [***...please fill with informations...***]  
-For further information check out the [documentation](https://raw.githack.com/SICKAppSpaceCodingStarterKit/[REPO_OF_MODULE]/main/docu/CSK_Module_[MODULENAME].html) [update link] in the folder "docu".
+For further information check out the [documentation](https://raw.githack.com/SICKAppSpaceCodingStarterKit/CSK_Module_IODDInterpreter/main/docu/CSK_Module_IODDInterpreter.html) in the folder "docu".
 
 ## Information
 
@@ -28,4 +29,4 @@ Please check the [documentation](https://github.com/SICKAppSpaceCodingStarterKit
 
 ## Topics
 
-Coding Starter Kit, CSK, Module, SICK-AppSpace, [key_words]
+Coding Starter Kit, CSK, Module, SICK-AppSpace, IODD, IO-Link

@@ -1,0 +1,106 @@
+<layout-row id="RowLayout1">
+	<layout-column id="ColumnLayout1" style="align-items:stretch">
+		<stacked-view id="SV_Login">
+			<stacked-pane id="SP_LoginOK" value="true">
+				<layout-column id="Column_PersistentData"
+					class="myCustomFrame_CSK_Module_IODDInterpreter"
+					style="align-items: stretch">
+					<layout-row id="RowLayout4"
+						style="justify-content: space-between; align-items: center">
+						<layout-column id="ColumnLayout5" style="align-items: stretch">
+							<davinci-value-display id="VD_ParameterName" value="Parameter name:"
+								title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+							</davinci-value-display>
+						</layout-column>
+						<layout-column id="ColumnLayout6" style="align-items: stretch">
+							<davinci-text-field id="TF_ParameterName" type="text"
+								title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+								<crown-edpws-binding property="value"
+									name="CSK_IODDInterpreter/OnNewParameterName" update-on-resume>
+								</crown-edpws-binding>
+								<crown-binding event="change" name="CSK_IODDInterpreter/setParameterName"
+									path="param/args/name" auto-commit>
+								</crown-binding>
+								<crown-edpws-binding property="disabled"
+									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+									update-on-resume converter="function(value) {return !value;}">
+								</crown-edpws-binding>
+							</davinci-text-field>
+						</layout-column>
+					</layout-row>
+					<layout-row id="RowLayout2"
+						style="justify-content: space-between; align-items: center">
+						<davinci-value-display id="VD_LoadConfig"
+							value="Load config on app start:"
+							title="Load configured parameters from CSK_PersistentData on app start.">
+						</davinci-value-display>
+						<davinci-checkbox id="CB_LoadConfig"
+							title="Load configured parameters from CSK_PersistentData on app start.">
+							<span></span>
+							<crown-edpws-binding property="checked"
+								name="CSK_IODDInterpreter/OnNewStatusLoadParameterOnReboot"
+								update-on-resume>
+							</crown-edpws-binding>
+							<crown-edpws-binding property="disabled"
+								name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+								update-on-resume converter="function(value) {return !value;}">
+							</crown-edpws-binding>
+							<crown-binding event="change" name="CSK_IODDInterpreter/setLoadOnReboot"
+								path="param/args/status" auto-commit>
+							</crown-binding>
+						</davinci-checkbox>
+					</layout-row>
+					<layout-row id="RowLayout3">
+						<layout-column id="ColumnLayout3" style="align-items: stretch">
+							<davinci-button id="B_LoadConfig" type="primary"
+								icon-position="append"
+								title="Load configured parameters from CSK_PersistentData module.">
+								<span>Load Config</span>
+								<crown-binding event="submit" name="CSK_IODDInterpreter/loadParameters"
+									auto-commit>
+								</crown-binding>
+								<crown-edpws-binding property="disabled"
+									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+									update-on-resume converter="function(value) {return !value;}">
+								</crown-edpws-binding>
+							</davinci-button>
+						</layout-column>
+						<layout-column id="ColumnLayout4" style="align-items: stretch">
+							<davinci-button id="B_SaveConfig" type="primary"
+								icon-position="append"
+								title="Save current configured parameters of this module within CSK_PersistentData module.">
+								<span>Save Config</span>
+								<crown-binding event="submit" name="CSK_IODDInterpreter/sendParameters"
+									auto-commit>
+								</crown-binding>
+								<crown-edpws-binding property="disabled"
+									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+									update-on-resume converter="function(value) {return !value;}">
+								</crown-edpws-binding>
+							</davinci-button>
+						</layout-column>
+					</layout-row>
+				</layout-column>
+			</stacked-pane>
+			<stacked-pane id="SP_LoginNotOK" value="false">
+				<davinci-callout id="Callout1" type="info">
+					<span>
+						Please log in via CSK_UserManagement module (at least via user level "Operator")
+					</span>
+				</davinci-callout>
+			</stacked-pane>
+			<crown-edpws-binding property="value"
+				name="CSK_IODDInterpreter/OnUserLevelOperatorActive" update-on-resume
+				converter="function(value) {return value.toString();}">
+			</crown-edpws-binding>
+		</stacked-view>
+		<stacked-view id="SV_PageCalled">
+			<crown-binding property="value" name="CSK_IODDInterpreter/pageCalled"
+				path="result/data/empty" auto-update="0" update-on-resume>
+			</crown-binding>
+		</stacked-view>
+	</layout-column>
+	<layout-column id="ColumnLayout2" style="flex-grow:3">
+	</layout-column>
+  
+</layout-row>
