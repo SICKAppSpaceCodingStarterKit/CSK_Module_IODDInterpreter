@@ -1,0 +1,95 @@
+<layout-row id="RowLayout1" style="width: 100%">
+	<layout-column id="ColumnLayout1" style="width: 100%">
+		<davinci-value-display id="VD_SelectedInstance"
+			label="Selected Instance">
+			<crown-on property="value"
+				crown-event="CSK_IODDInterpreter/OnNewSelectedInstance">
+			</crown-on>
+		</davinci-value-display>
+		<stacked-view id="SV_IsInstanceSelected">
+			<stacked-pane id="SP_InstanceISSelected" value="true">
+				<layout-column id="ColumnLayout2">
+					<stacked-view id="SV_IsProcessDataStructureVariable">
+						<stacked-pane id="SP_StructureIsFixed" value="false">
+						</stacked-pane>
+						<stacked-pane id="SP_StructureIsVariable" value="true">
+							<davinci-drop-down id="DD_ProcessDataStructureOptions"
+								label="Process data structure option">
+								<crown-edpws-binding property="data"
+									name="CSK_IODDInterpreter/OnNewProcessDataStructureOptionsDropdownContent"
+									update-on-resume converter="convertToList">
+								</crown-edpws-binding>
+								<crown-edpws-binding property="value"
+									name="CSK_IODDInterpreter/OnNewSelectedProcessDataStructureOption"
+									update-on-resume>
+								</crown-edpws-binding>
+								<crown-set event="change"
+									crown-function="CSK_IODDInterpreter/changeProcessDataStructureOptionName"
+									protocol="crownMSGPACK" crown-path="newPDStructureOptionName">
+								</crown-set>
+							</davinci-drop-down>
+						</stacked-pane>
+						<crown-on property="value"
+							crown-event="CSK_IODDInterpreter/isProcessDataStructureVariable"
+							converter="bool2str">
+						</crown-on>
+					</stacked-view>
+					<curie-table id="DT_ProcessDataInStructure" selectable
+						title="Structure of ProcessDataIn" style="width: 80%">
+						<curie-table-column id="read_colPD1" header="Subindex">
+						</curie-table-column>
+						<curie-table-column id="read_colPD2" header="Name">
+						</curie-table-column>
+						<curie-table-column id="read_colPD3"
+							header="Data type, Range, Single value description">
+						</curie-table-column>
+						<crown-binding event="row-selected"
+							name="CSK_IODDInterpreter/processDataInRowSelected"
+							path="param/args/jsonSelectedRow" auto-commit>
+						</crown-binding>
+						<crown-on property="data"
+							crown-event="CSK_IODDInterpreter/OnNewProcessDataInTableContent">
+						</crown-on>
+					</curie-table>
+					<curie-table id="DT_ReadParametersTable" selectable
+						title="Read Parameters Table" style="width: 80%">
+						<curie-table-column id="read_colSD1" header="Index">
+						</curie-table-column>
+						<curie-table-column id="read_colSD2" header="Subindex">
+						</curie-table-column>
+						<curie-table-column id="read_colSD3" header="ID">
+						</curie-table-column>
+						<curie-table-column id="read_colSD4" header="Name">
+						</curie-table-column>
+						<curie-table-column id="read_colSD5"
+							header="Data type, Range, Single value description">
+						</curie-table-column>
+						<curie-table-column id="read_colSD6" header="Read/Write">
+						</curie-table-column>
+						<curie-table-column id="read_colSD7" header="Description">
+						</curie-table-column>
+						<crown-binding event="row-selected"
+							name="CSK_IODDInterpreter/readParameterRowSelected"
+							path="param/args/jsonSelectedRow" auto-commit>
+						</crown-binding>
+						<crown-on property="data"
+							crown-event="CSK_IODDInterpreter/OnNewReadParametersTableContent">
+						</crown-on>
+					</curie-table>
+				</layout-column>
+			</stacked-pane>
+			<stacked-pane id="SP_InstanceIsNOTSelected" value="false">
+			</stacked-pane>
+			<crown-on property="value"
+				crown-event="CSK_IODDInterpreter/isInstanceSelected"
+				converter="bool2str">
+			</crown-on>
+		</stacked-view>
+		<stacked-view id="pageCalled">
+			<crown-binding property="value"
+				name="CSK_IODDInterpreter/pageCalledReadData"
+				path="result/data/empty" auto-update="0" update-on-resume>
+			</crown-binding>
+		</stacked-view>
+	</layout-column>
+</layout-row>

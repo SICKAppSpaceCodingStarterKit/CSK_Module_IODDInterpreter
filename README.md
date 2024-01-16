@@ -1,26 +1,32 @@
 # CSK_Module_IODDInterpreter
-## INFO: Draft version. Not further developed / tested so far! Check for available GitHub forks of this repository to see latest updates.
 
-Module / Application to provide [...] functionality.
+Module to interpret IOLink IODD files for further use by CSK_Module_MultiIOLinkSMI, CSK_Module_MultiIOLinkRestMaster or for your customized app.
 
-*If available, please also add a screenshot/gif of the UI of the module here placed within /docu/media/ (see code)*
-![](https://github.com/SICKAppSpaceCodingStarterKit/CSK_Module_Database/blob/main/docu/media/UI_Screenshot.png)
+### Info: Regarding further information on how to use this module please have a look into the [CSK_Module_IODDInterpreter](https://github.com/SICKAppSpaceCodingStarterKit/CSK_Module_IODDInterpreter).
+
+![plot](./docu/media/mainPage.jpg)
+![plot](./docu/media/readData.jpg)
+![plot](./docu/media/writeData.jpg)
 
 ## How to Run
 
-[***...please fill with informations...***]  
+The app includes an intuitive GUI to setup and interpret IODD files.  
 For further information check out the [documentation](https://raw.githack.com/SICKAppSpaceCodingStarterKit/CSK_Module_IODDInterpreter/main/docu/CSK_Module_IODDInterpreter.html) in the folder "docu".
+
+## Dependencies
+
+Following CSK modules are mostly necessary to make use of the features of this module:
+|Module|Version|Remark
+|--|--|--|
+|CSK_1stModule_Logger|[V4.0.0](https://github.com/SICKAppSpaceCodingStarterKit/CSK_1stModule_Logger/releases/tag/v4.0.0)|Optional
+|CSK_Module_PersistentData|[V4.0.0](https://github.com/SICKAppSpaceCodingStarterKit/CSK_Module_PersistentData)|To persist data
 
 ## Information
 
-Tested on:
-[Device] - [firmware]
-...
-
-[***optionally***]
-Following CSK modules are used for this application via Git subtrees and should NOT be further developed within this repository (see [contribution guideline](https://github.com/SICKAppSpaceCodingStarterKit/.github/blob/main/Contribution_Guideline.md) of this GitHub organization):  
-
-  * CSK_Module_XYZ (release/tag v1.2.3)
+### Tested on
+|Device|Firmware|
+|--|--|
+|SIM1012|V2.3.0|
 
 This application / module is part of the SICK AppSpace Coding Starter Kit developing approach.  
 It is programmed in an object oriented way. Some of the modules use kind of "classes" in Lua to make it possible to reuse code / classes in other projects.  
@@ -29,4 +35,4 @@ Please check the [documentation](https://github.com/SICKAppSpaceCodingStarterKit
 
 ## Topics
 
-Coding Starter Kit, CSK, Module, SICK-AppSpace, IODD, IO-Link
+Coding Starter Kit, CSK, Module, SICK-AppSpace, IO-Link, IODD

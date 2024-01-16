@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD-Primitives1.1.xsd">
+	<DocumentInfo version="V1.1.3" releaseDate="2021-01-21" copyright="IO-Link Community"/>
+	<Language xml:lang="zh">
+		<Text id="STD_TN_Reserved" value="已保留"/>
+		<!-- Variables -->
+		<Text id="STD_TN_V_DirectParameters_1" value="直接参数 - 第 1 页"/>
+		<Text id="STD_TD_V_DirectParameters_1" value="包含了定义通信特性的必要参数和设备验证标识符所需的参数。"/>
+		<Text id="STD_TN_MasterCycleTime" value="主站周期时间"/>
+		<Text id="STD_TD_MasterCycleTime" value="通信： 主站使用的当前通信周期时间 此值可定义过程数据交互周期。"/>
+		<Text id="STD_TN_MinCycleTime" value="最小周期时间"/>
+		<Text id="STD_TD_MinCycleTime" value="通信： 设备所支持的最小通信周期时间。此值定义了最低的过程数据交互周期。"/>
+		<Text id="STD_TN_M-SequenceCapability" value="M 序列能力"/>
+		<Text id="STD_TD_M-SequenceCapability" value="通信： 有关结构以及通信消息支持的功能的信息。"/>
+		<Text id="STD_TN_RevisionID" value="IO-Link 修订 ID"/>
+		<Text id="STD_TD_RevisionID" value="通信： 当前所使用的通信协议的版本标识符。"/>
+		<Text id="STD_TN_ProcessDataIn" value="过程数据输入长度"/>
+		<Text id="STD_TD_ProcessDataIn" value="通信： 有关过程输入数据的宽度和特性的信息（从设备到主站的过程数据）。"/>
+		<Text id="STD_TN_ProcessDataOut" value="过程数据输出长度"/>
+		<Text id="STD_TD_ProcessDataOut" value="通信： 有关过程输出数据的宽度和特性的信息（从主站到设备的过程数据）。"/>
+		<Text id="STD_TN_VendorID1" value="Vendor ID 1"/>
+		<Text id="STD_TD_VendorID1" value="标识： 供应商 ID 的最高八位字节。 结合参数 Vendor ID 2，定义由 IO-Link协会指定的唯一 供应商 ID 的 16 位值。"/>
+		<Text id="STD_TN_VendorID2" value="Vendor ID 2"/>
+		<Text id="STD_TD_VendorID2" value="标识： 供应商 ID 的最低八位字节。 结合Vendor ID 1，定义由 IO-Link协会指定的唯一 供应商 ID 的 16 位值。"/>
+		<Text id="STD_TN_DeviceID1" value="Device ID 1"/>
+		<Text id="STD_TD_DeviceID1" value="标识： 设备 ID 的最高八位字节。 结合 Device ID 2 和 3 ，定义供应商特定设备 ID 的 24 位值。"/>
+		<Text id="STD_TN_DeviceID2" value="Device ID 2"/>
+		<Text id="STD_TD_DeviceID2" value="标识： 设备 ID 的中间八位字节。 结合 Device ID 1 和 3 ，定义供应商特定设备 ID 的 24 位值。"/>
+		<Text id="STD_TN_DeviceID3" value="Device ID 3"/>
+		<Text id="STD_TD_DeviceID3" value="标识： 设备 ID 的最低八位字节。 结合 Device ID 1 和 2 ，定义供应商特定设备 ID 的 24 位值。"/>
+		<Text id="STD_TN_V_DirectParameters_2" value="直接参数 - 第 2 页"/>
+		<Text id="STD_TD_V_DirectParameters_2" value="设备的一组参数（无 ISDU 支持）。"/>
+		<Text id="STD_TN_DeviceSpecific_1" value="设备特定的 Parameter 1"/>
+		<Text id="STD_TN_DeviceSpecific_2" value="设备特定的 Parameter 2"/>
+		<Text id="STD_TN_DeviceSpecific_3" value="设备特定的 Parameter 3"/>
+		<Text id="STD_TN_DeviceSpecific_4" value="设备特定的 Parameter 4"/>
+		<Text id="STD_TN_DeviceSpecific_5" value="设备特定的 Parameter 5"/>
+		<Text id="STD_TN_DeviceSpecific_6" value="设备特定的 Parameter 6"/>
+		<Text id="STD_TN_DeviceSpecific_7" value="设备特定的 Parameter 7"/>
+		<Text id="STD_TN_DeviceSpecific_8" value="设备特定的 Parameter 8"/>
+		<Text id="STD_TN_DeviceSpecific_9" value="设备特定的 Parameter 9"/>
+		<Text id="STD_TN_DeviceSpecific_10" value="设备特定的 Parameter 10"/>
+		<Text id="STD_TN_DeviceSpecific_11" value="设备特定的 Parameter 11"/>
+		<Text id="STD_TN_DeviceSpecific_12" value="设备特定的 Parameter 12"/>
+		<Text id="STD_TN_DeviceSpecific_13" value="设备特定的 Parameter 13"/>
+		<Text id="STD_TN_DeviceSpecific_14" value="设备特定的 Parameter 14"/>
+		<Text id="STD_TN_DeviceSpecific_15" value="设备特定的 Parameter 15"/>
+		<Text id="STD_TN_DeviceSpecific_16" value="设备特定的 Parameter 16"/>
+		<Text id="STD_TN_SystemCommand_Sub16" value="系统命令"/>
+		<Text id="STD_TD_SystemCommand_Sub16" value="应用： 设备的命令界面（无 ISDU 支持）。 命令的有效范围和执行情况尚未确认。"/>
+		<Text id="STD_TN_V_SystemCommand" value="系统命令"/>
+		<Text id="STD_TD_V_SystemCommand" value="应用程序的命令界面。 肯定确认表示所请求功能已完整、正确地完成。"/>
+		<Text id="STD_TN_SystemCommand_DeviceReset" value="设备重置"/>
+		<Text id="STD_TN_SystemCommand_ApplicationReset" value="应用程序重置"/>
+		<Text id="STD_TN_SystemCommand_RestoreFactorySettings" value="还原出厂设置"/>
+		<Text id="STD_TN_SystemCommand_BackToBox" value="Back-to-box"/>
+		<Text id="STD_TN_V_DeviceAccessLocks" value="设备访问锁定"/>
+		<Text id="STD_TD_V_DeviceAccessLocks" value="通过在此参数中设置适当的标志，可以限制对设备参数的访问。"/>
+		<Text id="STD_TN_ParameterAccess" value="参数写入访问"/>
+		<Text id="STD_TD_ParameterAccess" value="此锁可阻止对设备的所有可读/写的参数进行写入访问（参数 'Device Access Locks' 除外）。"/>
+		<Text id="STD_TN_DataStorage" value="数据存储"/>
+		<Text id="STD_TD_DataStorage" value="此锁可阻止通过参数存储机制对设备参数进行写入访问。"/>
+		<Text id="STD_TN_LocalParameterization" value="本地参数化"/>
+		<Text id="STD_TD_LocalParameterization" value="此锁可阻止通过设备上的本地操作元件更改设备设置。"/>
+		<Text id="STD_TN_LocalUserInterface" value="本地用户界面"/>
+		<Text id="STD_TD_LocalUserInterface" value="此锁可阻止通过本地用户界面访问设备的设置和显示。 用户界面被禁用。"/>
+		<Text id="STD_TN_locked" value="已锁定"/>
+		<Text id="STD_TN_unlocked" value="未锁定"/>
+		<Text id="STD_TN_V_VendorName" value="供应商名称"/>
+		<Text id="STD_TD_V_VendorName" value="指定给供应商 ID 的供应商名称。"/>
+		<Text id="STD_TN_V_VendorText" value="供应商文本"/>
+		<Text id="STD_TD_V_VendorText" value="有关供应商的其他信息。"/>
+		<Text id="STD_TN_V_ProductName" value="产品名称"/>
+		<Text id="STD_TD_V_ProductName" value="完整产品名称。"/>
+		<Text id="STD_TN_V_ProductID" value="产品 ID"/>
+		<Text id="STD_TD_V_ProductID" value="供应商特定产品或类型标识（例如 项目编号或型号）。"/>
+		<Text id="STD_TN_V_ProductText" value="产品文本"/>
+		<Text id="STD_TD_V_ProductText" value="设备的其他信息。"/>
+		<Text id="STD_TN_V_SerialNumber" value="序列号"/>
+		<Text id="STD_TD_V_SerialNumber" value="单个设备的供应商特定唯一标识符。"/>
+		<Text id="STD_TN_V_HardwareRevision" value="硬件版本"/>
+		<Text id="STD_TD_V_HardwareRevision" value="单个设备硬件版本的供应商特定唯一标识符。"/>
+		<Text id="STD_TN_V_FirmwareRevision" value="固件版本"/>
+		<Text id="STD_TD_V_FirmwareRevision" value="单个设备固件版本的供应商特定唯一标识符。"/>
+		<Text id="STD_TN_V_ApplicationSpecificTag" value="应用程序特定标记"/>
+		<Text id="STD_TD_V_ApplicationSpecificTag" value="使用用户或应用程序特定信息标记设备的可能性。"/>
+		<Text id="STD_TN_V_ErrorCount" value="错误计数"/>
+		<Text id="STD_TD_V_ErrorCount" value="自开机或重新启动后，在特定技术应用程序中发生的错误数。"/>
+		<Text id="STD_TN_V_DeviceStatus" value="装置状态"/>
+		<Text id="STD_TD_V_DeviceStatus" value="当前设备状态和诊断状态的指示。"/>
+		<Text id="STD_TN_DeviceStatus_OK" value="设备正常"/>
+		<Text id="STD_TN_DeviceStatus_MaintenanceRequired" value="需要维护"/>
+		<Text id="STD_TN_DeviceStatus_OutOfSpecification" value="不合规格"/>
+		<Text id="STD_TN_DeviceStatus_FunctionalCheck" value="功能检查"/>
+		<Text id="STD_TN_DeviceStatus_Failure" value="故障"/>
+		<Text id="STD_TN_V_DetailedDeviceStatus" value="详细设备状态"/>
+		<Text id="STD_TD_V_DetailedDeviceStatus" value="设备中所有当前待处理事件的列表。"/>
+		<Text id="STD_TN_V_ProcessDataInput" value="过程数据 输入"/>
+		<Text id="STD_TD_V_ProcessDataInput" value="设备的最后一次有效的过程输入数据。"/>
+		<Text id="STD_TN_V_ProcessDataOutput" value="过程数据 输出"/>
+		<Text id="STD_TD_V_ProcessDataOutput" value="设备的最后一次有效的过程输出数据。"/>
+		<Text id="STD_TN_V_OffsetTime" value="偏移时间"/>
+		<Text id="STD_TD_V_OffsetTime" value="使通信周期上的技术特定应用程序与可调偏移时间同步。 偏移时间可根据周期时间规格（参数 'Min Cycle Time'）进行设置。"/>
+		<!-- ErrorTypes -->
+		<Text id="STD_TN_0x8000" value="设备应用程序错误 - 无详细信息"/>
+		<Text id="STD_TD_0x8000" value="服务被技术特定的应用程序拒绝。 没有可用的详细根本原因信息。"/>
+		<Text id="STD_TN_0x8011" value="索引不可用"/>
+		<Text id="STD_TD_0x8011" value="对不存在索引的读取或写入访问尝试。"/>
+		<Text id="STD_TN_0x8012" value="子索引不可用"/>
+		<Text id="STD_TD_0x8012" value="对现有索引的不存在子索引的读取或写入访问尝试。"/>
+		<Text id="STD_TN_0x8020" value="服务暂时不可用"/>
+		<Text id="STD_TD_0x8020" value="由于技术特定应用程序的当前状态，无法访问参数。"/>
+		<Text id="STD_TN_0x8021" value="服务暂时不可用 - 本地控制"/>
+		<Text id="STD_TD_0x8021" value="无法访问参数。 设备当前正在持续进行本地控制的操作。"/>
+		<Text id="STD_TN_0x8022" value="服务暂时不可用 - 设备控制"/>
+		<Text id="STD_TD_0x8022" value="无法访问参数。 技术特定的应用程序当前处于远程触发的操作中。"/>
+		<Text id="STD_TN_0x8023" value="访问遭拒"/>
+		<Text id="STD_TD_0x8023" value="对只读参数的写入访问或对只写参数的读取访问。"/>
+		<Text id="STD_TN_0x8030" value="参数值超出范围"/>
+		<Text id="STD_TD_0x8030" value="写入的参数值超出了允许的值范围。"/>
+		<Text id="STD_TN_0x8031" value="参数值高于限制"/>
+		<Text id="STD_TD_0x8031" value="写入的参数值高于指定的值范围。"/>
+		<Text id="STD_TN_0x8032" value="参数值低于限制"/>
+		<Text id="STD_TD_0x8032" value="写入的参数值低于指定的值范围。"/>
+		<Text id="STD_TN_0x8033" value="参数长度过高"/>
+		<Text id="STD_TD_0x8033" value="写入参数长于指定范围。"/>
+		<Text id="STD_TN_0x8034" value="参数长度过低"/>
+		<Text id="STD_TD_0x8034" value="写入参数短于指定范围。"/>
+		<Text id="STD_TN_0x8035" value="功能不可用"/>
+		<Text id="STD_TD_0x8035" value="技术特定的应用程序不支持写入命令"/>
+		<Text id="STD_TN_0x8036" value="功能暂时不可用"/>
+		<Text id="STD_TD_0x8036" value="由于技术特定应用程序的当前状态，写入命令不可用。"/>
+		<Text id="STD_TN_0x8040" value="无效参数集"/>
+		<Text id="STD_TD_0x8040" value="写入的单个参数值与其他现有参数设置相冲突。"/>
+		<Text id="STD_TN_0x8041" value="参数集不一致"/>
+		<Text id="STD_TD_0x8041" value="分块参数传输结束时参数集不一致。 设备可靠性检查失败。"/>
+		<Text id="STD_TN_0x8082" value="应用程序未准备就绪"/>
+		<Text id="STD_TD_0x8082" value="读取或写入访问遭拒。 技术特定的应用程序暂时不可用。"/>
+		<!-- Events -->
+		<Text id="STD_TN_0x0000" value="无故障"/>
+		<Text id="STD_TN_0x1000" value="一般故障"/>
+		<Text id="STD_TD_0x1000" value="未知错误"/>
+		<Text id="STD_TN_0x4000" value="温度错误"/>
+		<Text id="STD_TD_0x4000" value="过载"/>
+		<Text id="STD_TN_0x4210" value="设备温度过高"/>
+		<Text id="STD_TD_0x4210" value="清除热源"/>
+		<Text id="STD_TN_0x4220" value="设备温度过低"/>
+		<Text id="STD_TD_0x4220" value="绝缘设备"/>
+		<Text id="STD_TN_0x5000" value="设备硬件故障"/>
+		<Text id="STD_TD_0x5000" value="更换设备"/>
+		<Text id="STD_TN_0x5010" value="组件故障"/>
+		<Text id="STD_TD_0x5010" value="修理或更换"/>
+		<Text id="STD_TN_0x5011" value="非易失性内存损失"/>
+		<Text id="STD_TD_0x5011" value="检查电池"/>
+		<Text id="STD_TN_0x5012" value="电池电量低"/>
+		<Text id="STD_TD_0x5012" value="更换电池"/>
+		<Text id="STD_TN_0x5100" value="一般电源故障"/>
+		<Text id="STD_TD_0x5100" value="检查可用性"/>
+		<Text id="STD_TN_0x5101" value="保险丝熔断或断开"/>
+		<Text id="STD_TD_0x5101" value="检查保险丝开关或更换保险丝"/>
+		<Text id="STD_TN_0x5110" value="主电源电压过高"/>
+		<Text id="STD_TD_0x5110" value="检查有效电压范围"/>
+		<Text id="STD_TN_0x5111" value="主电源电压过低"/>
+		<Text id="STD_TD_0x5111" value="检查有效电压范围"/>
+		<Text id="STD_TN_0x5112" value="次电源电压故障（B 级端口）"/>
+		<Text id="STD_TD_0x5112" value="检查有效电压范围"/>
+		<Text id="STD_TN_0x6000" value="设备软件故障"/>
+		<Text id="STD_TD_0x6000" value="检查固件版本"/>
+		<Text id="STD_TN_0x6320" value="参数错误"/>
+		<Text id="STD_TD_0x6320" value="检查技术资料和值"/>
+		<Text id="STD_TN_0x6321" value="参数缺失"/>
+		<Text id="STD_TD_0x6321" value="检查技术资料"/>
+		<!-- Event 6350 - reserved in IO-Link specification V1.1.3			
+		<Text id="STD_TN_0x6350" value="参数已更改"/>
+		<Text id="STD_TD_0x6350" value="检查配置"/> -->
+		<Text id="STD_TN_0x7700" value="下级设备断线"/>
+		<Text id="STD_TD_0x7700" value="检查安装"/>
+		<Text id="STD_TN_0x7701" value="下级设备 1 断线"/>
+		<Text id="STD_TD_0x7701" value="检查安装"/>
+		<Text id="STD_TN_0x7702" value="下级设备 2 断线"/>
+		<Text id="STD_TD_0x7702" value="检查安装"/>
+		<Text id="STD_TN_0x7703" value="下级设备 3 断线"/>
+		<Text id="STD_TD_0x7703" value="检查安装"/>
+		<Text id="STD_TN_0x7704" value="下级设备 4 断线"/>
+		<Text id="STD_TD_0x7704" value="检查安装"/>
+		<Text id="STD_TN_0x7705" value="下级设备 5 断线"/>
+		<Text id="STD_TD_0x7705" value="检查安装"/>
+		<Text id="STD_TN_0x7706" value="下级设备 6 断线"/>
+		<Text id="STD_TD_0x7706" value="检查安装"/>
+		<Text id="STD_TN_0x7707" value="下级设备 7 断线"/>
+		<Text id="STD_TD_0x7707" value="检查安装"/>
+		<Text id="STD_TN_0x7708" value="下级设备 8 断线"/>
+		<Text id="STD_TD_0x7708" value="检查安装"/>
+		<Text id="STD_TN_0x7709" value="下级设备 9 断线"/>
+		<Text id="STD_TD_0x7709" value="检查安装"/>
+		<Text id="STD_TN_0x770A" value="下级设备 10 断线"/>
+		<Text id="STD_TD_0x770A" value="检查安装"/>
+		<Text id="STD_TN_0x770B" value="下级设备 11 断线"/>
+		<Text id="STD_TD_0x770B" value="检查安装"/>
+		<Text id="STD_TN_0x770C" value="下级设备 12 断线"/>
+		<Text id="STD_TD_0x770C" value="检查安装"/>
+		<Text id="STD_TN_0x770D" value="下级设备 13 断线"/>
+		<Text id="STD_TD_0x770D" value="检查安装"/>
+		<Text id="STD_TN_0x770E" value="下级设备 14 断线"/>
+		<Text id="STD_TD_0x770E" value="检查安装"/>
+		<Text id="STD_TN_0x770F" value="下级设备 15 断线"/>
+		<Text id="STD_TD_0x770F" value="检查安装"/>
+		<Text id="STD_TN_0x7710" value="短路"/>
+		<Text id="STD_TD_0x7710" value="检查安装"/>
+		<Text id="STD_TN_0x7711" value="接地故障"/>
+		<Text id="STD_TD_0x7711" value="检查安装"/>
+		<Text id="STD_TN_0x8C00" value="技术特定应用故障"/>
+		<Text id="STD_TD_0x8C00" value="重置设备"/>
+		<Text id="STD_TN_0x8C01" value="模拟激活"/>
+		<Text id="STD_TD_0x8C01" value="检查工作模式"/>
+		<Text id="STD_TN_0x8C10" value="超出过程变量范围"/>
+		<Text id="STD_TD_0x8C10" value="过程数据不确定"/>
+		<Text id="STD_TN_0x8C20" value="超出测量范围"/>
+		<Text id="STD_TD_0x8C20" value="检查应用程序"/>
+		<Text id="STD_TN_0x8C30" value="过程变量范围过低"/>
+		<Text id="STD_TD_0x8C30" value="过程数据不确定"/>
+		<Text id="STD_TN_0x8C40" value="需要维护 - 清洁"/>
+		<Text id="STD_TD_0x8C40" value="清洁设备"/>
+		<Text id="STD_TN_0x8C41" value="需要维护 - 重新装填"/>
+		<Text id="STD_TD_0x8C41" value="重新装填设备"/>
+		<Text id="STD_TN_0x8C42" value="需要维护 - 磨损和损耗"/>
+		<Text id="STD_TD_0x8C42" value="更换磨损和损耗的部件"/>
+	</Language>
+	<Stamp crc="2010335538"><Checker name="IODD-Checker V1.1.5" version="V1.1.5.0"/></Stamp>
+</ExternalTextDocument>

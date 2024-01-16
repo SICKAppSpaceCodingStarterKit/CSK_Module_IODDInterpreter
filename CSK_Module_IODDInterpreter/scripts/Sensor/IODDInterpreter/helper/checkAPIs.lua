@@ -1,6 +1,5 @@
----@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
-
 -- Load all relevant APIs for this module
+-- By doing this the internal garbage collection will perform better
 --**************************************************************************
 
 local availableAPIs = {}

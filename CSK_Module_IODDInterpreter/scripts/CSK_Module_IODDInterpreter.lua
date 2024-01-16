@@ -20,29 +20,29 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 
----@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
--- CreationTemplateVersion: 3.6.0
+-- luacheck: no max line length
+-- CreationTemplateVersion: X.X.X
 --**************************************************************************
 --**********************Start Global Scope *********************************
 --**************************************************************************
 
--- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
+-- If App property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
 
---_G.availableAPIs = require('Sensors/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
+--_G.availableAPIs = require('Sensor/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
 -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
 _G.logHandle = Log.Handler.create()
 _G.logHandle:attachToSharedLogger('ModuleLogger')
-_G.logHandle:setConsoleSinkEnabled(false) --> Set to TRUE if CSK_Logger module is not used
+_G.logHandle:setConsoleSinkEnabled(false) --> Set to TRUE if LoggingModule is not used
 _G.logHandle:setLevel("ALL")
 _G.logHandle:applyConfig()
 -----------------------------------------------------------
 
 -- Loading script regarding IODDInterpreter_Model
 -- Check this script regarding IODDInterpreter_Model parameters and functions
-_G.iODDInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Model')
+_G.ioddInterpreter_Model = require('Sensor/IODDInterpreter/IODDInterpreter_Model')
 
 --**************************************************************************
 --**********************End Global Scope ***********************************
@@ -50,21 +50,24 @@ _G.iODDInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Mode
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
---- Function to react on startup event of the app
 local function main()
 
   ----------------------------------------------------------------------------------------
   -- INFO: Please check if module will eventually load inital configuration triggered via
   --       event CSK_PersistentData.OnInitialDataLoaded
-  --       (see internal variable _G.iODDInterpreter_Model.parameterLoadOnReboot)
+  --       (see internal variable _G.ioddInterpreter_Model.parameterLoadOnReboot)
   --       If so, the app will trigger the "OnDataLoadedOnReboot" event if ready after loading parameters
   --
   -- Can be used e.g. like this
   ----------------------------------------------------------------------------------------
-
-  -- _G.iODDInterpreter_Model.doSomething() -- if you want to start a function
+  
+  -- _G.ioddInterpreter_Model.doSomething() -- if you want to start a function
   -- ...
-  CSK_IODDInterpreter.pageCalled() -- Update UI
+  local json = require "Sensor.IODDInterpreter.helper.Json"
+  --local portsToCheck = {'S1', 'S2', 'S3'}
+  --CSK_IODDInterpreter.searchIOLinkDevices(json.encode(portsToCheck))
+  --CSK_IODDInterpreter.pageCalled() -- Update UI
+  
 
 end
 Script.register("Engine.OnStarted", main)

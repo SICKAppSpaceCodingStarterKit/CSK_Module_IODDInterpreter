@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD-Primitives1.1.xsd">
+	<DocumentInfo version="V1.1.3" releaseDate="2021-01-21" copyright="IO-Link Community"/>
+	<Language xml:lang="ja">
+		<Text id="STD_TN_Reserved" value="予約"/>
+		<!-- Variables -->
+		<Text id="STD_TN_V_DirectParameters_1" value="ダイレクトパラメータ －ページ1"/>
+		<Text id="STD_TD_V_DirectParameters_1" value="デバイス検証のための通信特性と識別子を定義する必須パラメータで構成されています。"/>
+		<Text id="STD_TN_MasterCycleTime" value="マスタサイクルタイム"/>
+		<Text id="STD_TD_MasterCycleTime" value="通信：マスタが使用している現在の通信サイクル期間。 この値はプロセスデータサイクルを定義します。"/>
+		<Text id="STD_TN_MinCycleTime" value="最小サイクルタイム"/>
+		<Text id="STD_TD_MinCycleTime" value="通信：デバイスがサポートしている最小通信サイクル期間。 この値は最小のプロセスデータサイクルを定義します。"/>
+		<Text id="STD_TN_M-SequenceCapability" value="M-シーケンス機能"/>
+		<Text id="STD_TD_M-SequenceCapability" value="通信：通信メッセージの構造とサポートされている機能に関する情報。"/>
+		<Text id="STD_TN_RevisionID" value="IO-LinkリビジョンID"/>
+		<Text id="STD_TD_RevisionID" value="通信：現在使用されている通信プロトコルのリビジョンの識別子。"/>
+		<Text id="STD_TN_ProcessDataIn" value="プロセス入力データ長"/>
+		<Text id="STD_TD_ProcessDataIn" value="通信：プロセス入力データ（デバイスからマスタへのプロセスデータ）の幅と機能に関する情報。"/>
+		<Text id="STD_TN_ProcessDataOut" value="プロセス出力データ長"/>
+		<Text id="STD_TD_ProcessDataOut" value="通信：プロセス出力データ（マスタからデバイスへのプロセスデータ）の幅に関する情報。"/>
+		<Text id="STD_TN_VendorID1" value="ベンダID 1"/>
+		<Text id="STD_TD_VendorID1" value="識別：ベンダIDの最上位オクテット。 パラメータのベンダ ID 2と組み合わせて、このパラメータはIO-Linkコミュニティによって割り当てられたユニークなベンダIDの16ビット値を定義します。"/>
+		<Text id="STD_TN_VendorID2" value="ベンダID 2"/>
+		<Text id="STD_TD_VendorID2" value="識別：ベンダIDの最下位オクテット。 パラメータのベンダ ID 1と組み合わせて、このパラメータはIO-Linkコミュニティによって割り当てられたユニークなベンダIDの16ビット値を定義します。"/>
+		<Text id="STD_TN_DeviceID1" value="デバイスID 1"/>
+		<Text id="STD_TD_DeviceID1" value="識別：デバイスIDの最上位オクテット。 パラメータのデバイスID 2および3と組み合わせて、このパラメータはベンダ固有のデバイスIDの24ビット値を定義します。"/>
+		<Text id="STD_TN_DeviceID2" value="デバイスID 2"/>
+		<Text id="STD_TD_DeviceID2" value="識別：デバイスIDの中位オクテット。 パラメータのデバイスID 1および3と組み合わせて、このパラメータはベンダ固有のデバイスIDの24ビット値を定義します。"/>
+		<Text id="STD_TN_DeviceID3" value="デバイスID 3"/>
+		<Text id="STD_TD_DeviceID3" value="識別：デバイスIDの最下位オクテット。 パラメータのデバイスID 1および2と組み合わせて、このパラメータはベンダ固有のデバイスIDの24ビット値を定義します。"/>
+		<Text id="STD_TN_V_DirectParameters_2" value="ダイレクトパラメータ －ページ2"/>
+		<Text id="STD_TD_V_DirectParameters_2" value="ISDUをサポートしていないデバイス用パラメータセット"/>
+		<Text id="STD_TN_DeviceSpecific_1" value="デバイス固有パラメータ 1"/>
+		<Text id="STD_TN_DeviceSpecific_2" value="デバイス固有パラメータ 2"/>
+		<Text id="STD_TN_DeviceSpecific_3" value="デバイス固有パラメータ 3"/>
+		<Text id="STD_TN_DeviceSpecific_4" value="デバイス固有パラメータ 4"/>
+		<Text id="STD_TN_DeviceSpecific_5" value="デバイス固有パラメータ 5"/>
+		<Text id="STD_TN_DeviceSpecific_6" value="デバイス固有パラメータ 6"/>
+		<Text id="STD_TN_DeviceSpecific_7" value="デバイス固有パラメータ 7"/>
+		<Text id="STD_TN_DeviceSpecific_8" value="デバイス固有パラメータ 8"/>
+		<Text id="STD_TN_DeviceSpecific_9" value="デバイス固有パラメータ 9"/>
+		<Text id="STD_TN_DeviceSpecific_10" value="デバイス固有パラメータ 10"/>
+		<Text id="STD_TN_DeviceSpecific_11" value="デバイス固有パラメータ 11"/>
+		<Text id="STD_TN_DeviceSpecific_12" value="デバイス固有パラメータ 12"/>
+		<Text id="STD_TN_DeviceSpecific_13" value="デバイス固有パラメータ 13"/>
+		<Text id="STD_TN_DeviceSpecific_14" value="デバイス固有パラメータ 14"/>
+		<Text id="STD_TN_DeviceSpecific_15" value="デバイス固有パラメータ 15"/>
+		<Text id="STD_TN_DeviceSpecific_16" value="デバイス固有パラメータ 16"/>
+		<Text id="STD_TN_SystemCommand_Sub16" value="システムコマンド"/>
+		<Text id="STD_TD_SystemCommand_Sub16" value="アプリケーション：ISDUをサポートしていないデバイス用のコマンドインタフェース。 コマンドの有効性と実行は確認されていません。"/>
+		<Text id="STD_TN_V_SystemCommand" value="システムコマンド"/>
+		<Text id="STD_TD_V_SystemCommand" value="アプリケーション用のコマンドインタフェース。肯定応答は、要求された機能が完全かつ正しく終了したことを示します。"/>
+		<Text id="STD_TN_SystemCommand_DeviceReset" value="デバイスリセット"/>
+		<Text id="STD_TN_SystemCommand_ApplicationReset" value="アプリケーションリセット"/>
+		<Text id="STD_TN_SystemCommand_RestoreFactorySettings" value="工場出荷時設定に再設定"/>
+		<Text id="STD_TN_SystemCommand_BackToBox" value="Back-to-box"/>
+		<Text id="STD_TN_V_DeviceAccessLocks" value="デバイスアクセスロック"/>
+		<Text id="STD_TD_V_DeviceAccessLocks" value="このパラメータ内で適切なフラグを設定することによって、デバイスパラメータへのアクセスを制限できます。"/>
+		<Text id="STD_TN_ParameterAccess" value="パラメータ書き込みアクセス"/>
+		<Text id="STD_TD_ParameterAccess" value="このロックにより、 「デバイスアクセスロック」パラメータを除く、デバイスのすべての読み取り/書き込みパラメータに対するすべてのパラメータへの書き込みアクセスを防止します。"/>
+		<Text id="STD_TN_DataStorage" value="データストレージ"/>
+		<Text id="STD_TD_DataStorage" value="このロックにより、データストレージメカニズムを介したデバイスパラメータへの書き込みアクセスを防止します。"/>
+		<Text id="STD_TN_LocalParameterization" value="ローカルパラメータ化"/>
+		<Text id="STD_TD_LocalParameterization" value="このロックにより、デバイス設定がデバイス上のローカル操作要素を介して変更されるのを防止します。"/>
+		<Text id="STD_TN_LocalUserInterface" value="ローカルユーザインタフェース"/>
+		<Text id="STD_TD_LocalUserInterface" value="このロックにより、ローカルユーザインタフェースを介したデバイス設定および表示へのアクセスを防ぎます。 ユーザインタフェースは無効です。"/>
+		<Text id="STD_TN_locked" value="ロック"/>
+		<Text id="STD_TN_unlocked" value="ロック解除"/>
+		<Text id="STD_TN_V_VendorName" value="ベンダ名"/>
+		<Text id="STD_TD_V_VendorName" value="ベンダIDに割り当てられているベンダー名。"/>
+		<Text id="STD_TN_V_VendorText" value="ベンダテキスト"/>
+		<Text id="STD_TD_V_VendorText" value="ベンダに関する追加情報。"/>
+		<Text id="STD_TN_V_ProductName" value="プロダクト名"/>
+		<Text id="STD_TD_V_ProductName" value="完全なプロダクト名"/>
+		<Text id="STD_TN_V_ProductID" value="プロダクトID"/>
+		<Text id="STD_TD_V_ProductID" value="ベンダ固有のプロダクトまたはタイプの識別（例えば、品番やモデル番号）"/>
+		<Text id="STD_TN_V_ProductText" value="プロダクトテキスト"/>
+		<Text id="STD_TD_V_ProductText" value="デバイスの追加プロダクト情報"/>
+		<Text id="STD_TN_V_SerialNumber" value="シリアル番号"/>
+		<Text id="STD_TD_V_SerialNumber" value="個々のデバイスのベンダ固有の一意の識別子。"/>
+		<Text id="STD_TN_V_HardwareRevision" value="ハードウェアリビジョン"/>
+		<Text id="STD_TD_V_HardwareRevision" value="個々のデバイスのハードウェアリビジョンのベンダ固有の一意の識別子。"/>
+		<Text id="STD_TN_V_FirmwareRevision" value="ファームウェアリビジョン"/>
+		<Text id="STD_TD_V_FirmwareRevision" value="個々のデバイスのファームウェアリビジョンのベンダ固有の一意の識別子。"/>
+		<Text id="STD_TN_V_ApplicationSpecificTag" value="アプリケーション固有タグ"/>
+		<Text id="STD_TD_V_ApplicationSpecificTag" value="ユーザまたはアプリケーション固有の情報をデバイスは持つことができます。"/>
+		<Text id="STD_TN_V_ErrorCount" value="エラーカウント"/>
+		<Text id="STD_TD_V_ErrorCount" value="電源投入または再起動以降に技術固有のアプリケーションで発生したエラーの数。"/>
+		<Text id="STD_TN_V_DeviceStatus" value="デバイスステータス"/>
+		<Text id="STD_TD_V_DeviceStatus" value="現在のデバイス状態と診断状態の表示。"/>
+		<Text id="STD_TN_DeviceStatus_OK" value="デバイスはOKです。"/>
+		<Text id="STD_TN_DeviceStatus_MaintenanceRequired" value="メンテナンス要求"/>
+		<Text id="STD_TN_DeviceStatus_OutOfSpecification" value="仕様外"/>
+		<Text id="STD_TN_DeviceStatus_FunctionalCheck" value="機能確認"/>
+		<Text id="STD_TN_DeviceStatus_Failure" value="故障"/>
+		<Text id="STD_TN_V_DetailedDeviceStatus" value="詳細デバイスステータス"/>
+		<Text id="STD_TD_V_DetailedDeviceStatus" value="デバイス内で現在保留中のすべてのイベントのリスト。"/>
+		<Text id="STD_TN_V_ProcessDataInput" value="プロセス入力データ"/>
+		<Text id="STD_TD_V_ProcessDataInput" value="デバイスの最後の有効なプロセス入力データ。"/>
+		<Text id="STD_TN_V_ProcessDataOutput" value="プロセス出力データ"/>
+		<Text id="STD_TD_V_ProcessDataOutput" value="デバイスに書き込まれた最後の有効なプロセス出力データ。"/>
+		<Text id="STD_TN_V_OffsetTime" value="オフセットタイム"/>
+		<Text id="STD_TD_V_OffsetTime" value="技術固有のアプリケーションを調整可能なオフセットタイムで通信サイクルに同期させます。 オフセットタイムは、サイクルタイム仕様（「最小サイクルタイム」パラメータ）に従って設定できます。"/>
+		<!-- ErrorTypes -->
+		<Text id="STD_TN_0x8000" value="デバイスアプリケーション異常 - 詳細なし"/>
+		<Text id="STD_TD_0x8000" value="サービスは技術固有のアプリケーションにより拒否されました。詳細な根本原因情報はありません。"/>
+		<Text id="STD_TN_0x8011" value="インデックス使用不可"/>
+		<Text id="STD_TD_0x8011" value="存在しないインデックスへの読み出しまたは書き込みアクセスです。"/>
+		<Text id="STD_TN_0x8012" value="サブインデックス使用不可"/>
+		<Text id="STD_TD_0x8012" value="存在するインデックスの存在しないサブインデックスへの読み出しまたは書き込みアクセスです。"/>
+		<Text id="STD_TN_0x8020" value="一時的にサービス使用不可"/>
+		<Text id="STD_TD_0x8020" value="技術固有のアプリケーションの現在の状態のため、パラメータにアクセスできません。"/>
+		<Text id="STD_TN_0x8021" value="一時的にサービス使用不可 - ローカル制御"/>
+		<Text id="STD_TD_0x8021" value="パラメータにアクセスできません。デバイスは現在ローカル制御動作中です。"/>
+		<Text id="STD_TN_0x8022" value="一時的にサービス使用不可 - デバイス制御"/>
+		<Text id="STD_TD_0x8022" value="パラメータにアクセスできません。技術固有のアプリケーションは現在リモートトリガ動作中です。"/>
+		<Text id="STD_TN_0x8023" value="アクセス拒否"/>
+		<Text id="STD_TD_0x8023" value="読み出し専用パラメータへの書き込みアクセスまたは書き込み専用パラメータへの読み出しアクセスです。"/>
+		<Text id="STD_TN_0x8030" value="範囲外パラメータ値"/>
+		<Text id="STD_TD_0x8030" value="書き込まれたパラメータ値は、許容値範囲外です。"/>
+		<Text id="STD_TN_0x8031" value="上限超えパラメータ値"/>
+		<Text id="STD_TD_0x8031" value="書き込まれたパラメータ値が、その指定値範囲を超えています。"/>
+		<Text id="STD_TN_0x8032" value="下限超えパラメータ値"/>
+		<Text id="STD_TD_0x8032" value="書き込まれたパラメータ値が、その指定値範囲を下回っています。"/>
+		<Text id="STD_TN_0x8033" value="パラメータ長の超過"/>
+		<Text id="STD_TD_0x8033" value="書き込まれたパラメータは、指定より長いです。"/>
+		<Text id="STD_TN_0x8034" value="パラメータ長の不足"/>
+		<Text id="STD_TD_0x8034" value="書き込まれたパラメータは、指定より短いです。"/>
+		<Text id="STD_TN_0x8035" value="機能使用不可"/>
+		<Text id="STD_TD_0x8035" value="書き込まれたコマンドは、技術固有のアプリケーションでサポートされていません。"/>
+		<Text id="STD_TN_0x8036" value="一時的に機能使用不可"/>
+		<Text id="STD_TD_0x8036" value="書き込まれたコマンドは、技術固有のアプリケーションの現在の状態のため使用できません。"/>
+		<Text id="STD_TN_0x8040" value="無効なパラメータセット"/>
+		<Text id="STD_TD_0x8040" value="書き込まれたパラメータ値の１つが、他の既存のパラメータ設定と相反しています。"/>
+		<Text id="STD_TN_0x8041" value="矛盾したパラメータセット"/>
+		<Text id="STD_TD_0x8041" value="ブロックパラメータ伝送の終了時に一連のパラメータが矛盾しています。デバイスの妥当性確認が失敗しました。"/>
+		<Text id="STD_TN_0x8082" value="アプリケーション未準備"/>
+		<Text id="STD_TD_0x8082" value="読み出しまたは書き込みアクセスが拒否されました。技術固有のアプリケーションが一時的に使用不可です。"/>
+		<!-- Events -->
+		<Text id="STD_TN_0x0000" value="誤動作なし"/>
+		<Text id="STD_TN_0x1000" value="一般的な誤動作"/>
+		<Text id="STD_TD_0x1000" value="不明な異常"/>
+		<Text id="STD_TN_0x4000" value="温度異常"/>
+		<Text id="STD_TD_0x4000" value="過負荷"/>
+		<Text id="STD_TN_0x4210" value="デバイス温度オーバｰラン"/>
+		<Text id="STD_TD_0x4210" value="熱源を取り除いてください。"/>
+		<Text id="STD_TN_0x4220" value="デバイス温度アンダーラン"/>
+		<Text id="STD_TD_0x4220" value="デバイスを断熱してください。"/>
+		<Text id="STD_TN_0x5000" value="デバイスハードウェア障害"/>
+		<Text id="STD_TD_0x5000" value="デバイスを交換してください。"/>
+		<Text id="STD_TN_0x5010" value="部品誤動作"/>
+		<Text id="STD_TD_0x5010" value="修理または交換してください。"/>
+		<Text id="STD_TN_0x5011" value="不揮発性メモリ消失"/>
+		<Text id="STD_TD_0x5011" value="バッテリを確認してください。"/>
+		<Text id="STD_TN_0x5012" value="バッテリ低下"/>
+		<Text id="STD_TD_0x5012" value="バッテリを交換してください。"/>
+		<Text id="STD_TN_0x5100" value="一般電源障害"/>
+		<Text id="STD_TD_0x5100" value="使用できることを確認してください。"/>
+		<Text id="STD_TN_0x5101" value="ヒューズ切れまたはオープン"/>
+		<Text id="STD_TD_0x5101" value="ヒューズスイッチを確認、またはヒューズを交換してください。"/>
+		<Text id="STD_TN_0x5110" value="一次側電源電圧オーバｰラン"/>
+		<Text id="STD_TD_0x5110" value="有効電圧範囲を確認してください。"/>
+		<Text id="STD_TN_0x5111" value="一次側電源電圧アンダーラン"/>
+		<Text id="STD_TD_0x5111" value="有効電圧範囲を確認してください。"/>
+		<Text id="STD_TN_0x5112" value="二次側電源電圧の障害 (ポートクラスB)"/>
+		<Text id="STD_TD_0x5112" value="有効電圧範囲を確認してください。"/>
+		<Text id="STD_TN_0x6000" value="デバイスソフトウェア障害"/>
+		<Text id="STD_TD_0x6000" value="ファームウェアリビジョンを確認してください。"/>
+		<Text id="STD_TN_0x6320" value="パラメータ異常"/>
+		<Text id="STD_TD_0x6320" value="データシートと値を確認してください。"/>
+		<Text id="STD_TN_0x6321" value="パラメータなし"/>
+		<Text id="STD_TD_0x6321" value="データシートを確認してください。"/>
+		<!-- Event 6350 - reserved in IO-Link specification V1.1.3			
+		<Text id="STD_TN_0x6350" value="パラメータ変更"/>
+		<Text id="STD_TD_0x6350" value="設定を確認してください。"/> -->
+		<Text id="STD_TN_0x7700" value="下位デバイスの断線"/>
+		<Text id="STD_TD_0x7700" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7701" value="下位デバイスの断線 1"/>
+		<Text id="STD_TD_0x7701" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7702" value="下位デバイスの断線 2"/>
+		<Text id="STD_TD_0x7702" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7703" value="下位デバイスの断線 3"/>
+		<Text id="STD_TD_0x7703" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7704" value="下位デバイスの断線 4"/>
+		<Text id="STD_TD_0x7704" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7705" value="下位デバイスの断線 5"/>
+		<Text id="STD_TD_0x7705" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7706" value="下位デバイスの断線 6"/>
+		<Text id="STD_TD_0x7706" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7707" value="下位デバイスの断線 7"/>
+		<Text id="STD_TD_0x7707" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7708" value="下位デバイスの断線 8"/>
+		<Text id="STD_TD_0x7708" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7709" value="下位デバイスの断線 9"/>
+		<Text id="STD_TD_0x7709" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770A" value="下位デバイスの断線 10"/>
+		<Text id="STD_TD_0x770A" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770B" value="下位デバイスの断線 11"/>
+		<Text id="STD_TD_0x770B" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770C" value="下位デバイスの断線 12"/>
+		<Text id="STD_TD_0x770C" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770D" value="下位デバイスの断線 13"/>
+		<Text id="STD_TD_0x770D" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770E" value="下位デバイスの断線 14"/>
+		<Text id="STD_TD_0x770E" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x770F" value="下位デバイスの断線 15"/>
+		<Text id="STD_TD_0x770F" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7710" value="短絡"/>
+		<Text id="STD_TD_0x7710" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x7711" value="地絡"/>
+		<Text id="STD_TD_0x7711" value="設置状態を確認してください。"/>
+		<Text id="STD_TN_0x8C00" value="技術固有のアプリケーション障害"/>
+		<Text id="STD_TD_0x8C00" value="デバイスをリセットしてください。"/>
+		<Text id="STD_TN_0x8C01" value="シミュレーション有効"/>
+		<Text id="STD_TD_0x8C01" value="動作モードを確認してください。"/>
+		<Text id="STD_TN_0x8C10" value="プロセス変数範囲オーバｰラン"/>
+		<Text id="STD_TD_0x8C10" value="プロセスデータ不確実"/>
+		<Text id="STD_TN_0x8C20" value="測定範囲超過"/>
+		<Text id="STD_TD_0x8C20" value="アプリケーションを確認してください。"/>
+		<Text id="STD_TN_0x8C30" value="プロセス変数範囲アンダーラン"/>
+		<Text id="STD_TD_0x8C30" value="プロセスデータ不確実"/>
+		<Text id="STD_TN_0x8C40" value="メンテナンス要求－ クリーニング"/>
+		<Text id="STD_TD_0x8C40" value="デバイスをクリーニングしてください。"/>
+		<Text id="STD_TN_0x8C41" value="メンテナンス要求　-　補充"/>
+		<Text id="STD_TD_0x8C41" value="デバイスを補充してください。"/>
+		<Text id="STD_TN_0x8C42" value="メンテナンス要求  － 消耗"/>
+		<Text id="STD_TD_0x8C42" value="消耗した部品を交換してください。"/>
+	</Language>
+	<Stamp crc="4184189602"><Checker name="IODD-Checker V1.1.5" version="V1.1.5.0"/></Stamp>
+</ExternalTextDocument>

@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD-Primitives1.1.xsd">
+	<DocumentInfo version="V1.1.3" releaseDate="2021-01-21" copyright="IO-Link Community"/>
+	<Language xml:lang="ru">
+		<Text id="STD_TN_Reserved" value="Зарезервирован"/>
+		<!-- Variables -->
+		<Text id="STD_TN_V_DirectParameters_1" value="Прямые параметры - Стр. 1"/>
+		<Text id="STD_TD_V_DirectParameters_1" value="Содержит необходимые параметры, определяющие характеристики коммуникации и идентификаторы для проверки прибора."/>
+		<Text id="STD_TN_MasterCycleTime" value="Время цикла мастера"/>
+		<Text id="STD_TD_MasterCycleTime" value="Коммуникация: Текущая продолжительность цикла связи, используемая мастером. Данное значение определяет цикл рабочих данных."/>
+		<Text id="STD_TN_MinCycleTime" value="Мин. время цикла"/>
+		<Text id="STD_TD_MinCycleTime" value="Коммуникация: Минимальная длительность цикла связи, поддерживаемая устройством. Это значение определяет минимальный возможный цикл данных процесса."/>
+		<Text id="STD_TN_M-SequenceCapability" value="Возможность М-последовательности"/>
+		<Text id="STD_TD_M-SequenceCapability" value="Коммуникация: Информация о структуре и поддерживаемых функциях коммуникационных сообщений."/>
+		<Text id="STD_TN_RevisionID" value="Идентификатор ревизии IO-Link"/>
+		<Text id="STD_TD_RevisionID" value="Коммуникация: Идентификатор используемой в настоящее время версии протокола связи."/>
+		<Text id="STD_TN_ProcessDataIn" value="Длина входных рабочих данных"/>
+		<Text id="STD_TD_ProcessDataIn" value="Коммуникация: Информация о ширине и характеристиках входных рабочих данных (рабочие данные и из прибора в мастер)."/>
+		<Text id="STD_TN_ProcessDataOut" value="Длина выхода рабочих данных"/>
+		<Text id="STD_TD_ProcessDataOut" value="Коммуникация: Информация о ширине выходных рабочих данных (Рабочие данные из мастера в прибор)"/>
+		<Text id="STD_TN_VendorID1" value="Идентификатор производителя 1"/>
+		<Text id="STD_TD_VendorID1" value="Идентификация: Самый высокий октет идентификатора производителя. В сочетании с параметром Vendor ID 2, данный параметр определяет 16-битное значение уникального идентификатора производителя, присвоенного сообществом IO-Link."/>
+		<Text id="STD_TN_VendorID2" value="Идентификатор производителя 2"/>
+		<Text id="STD_TD_VendorID2" value="Идентификация: Самый низкий октет идентификатора производителя. В сочетании с параметром Vendor ID 1, данный параметр определяет 16-битное значение уникального идентификатора производителя, присвоенного сообществом IO-Link."/>
+		<Text id="STD_TN_DeviceID1" value="Идентификатор прибора 1"/>
+		<Text id="STD_TD_DeviceID1" value="Идентификация: Самый высокий октет идентификатора прибора. В сочетании с параметрами Device ID 2 и 3, данный параметр определяет 24-битное значение идентификатора прибора конкретного поставщика."/>
+		<Text id="STD_TN_DeviceID2" value="Идентификатор прибора 2"/>
+		<Text id="STD_TD_DeviceID2" value="Идентификация: Средний октет идентификатора прибора. В сочетании с параметрами Device ID 1 и 3, этот параметр определяет 24-битное значение идентификатора прибора конкретного поставщика."/>
+		<Text id="STD_TN_DeviceID3" value="Идентификатор прибора 3"/>
+		<Text id="STD_TD_DeviceID3" value="Идентификация: Самый низкий октет идентификатора прибора. В сочетании с параметрами Device ID 1 и 2, этот параметр определяет 24-битное значение идентификатора прибора конкретного поставщика."/>
+		<Text id="STD_TN_V_DirectParameters_2" value="Прямые параметры - Стр. 2"/>
+		<Text id="STD_TD_V_DirectParameters_2" value="Набор параметров для приборов без поддержки ISDU."/>
+		<Text id="STD_TN_DeviceSpecific_1" value="Специфичный параметр прибора 1"/>
+		<Text id="STD_TN_DeviceSpecific_2" value="Специфичный параметр прибора 2"/>
+		<Text id="STD_TN_DeviceSpecific_3" value="Специфичный параметр прибора 3"/>
+		<Text id="STD_TN_DeviceSpecific_4" value="Специфичный параметр прибора 4"/>
+		<Text id="STD_TN_DeviceSpecific_5" value="Специфичный параметр прибора 5"/>
+		<Text id="STD_TN_DeviceSpecific_6" value="Специфичный параметр прибора 6"/>
+		<Text id="STD_TN_DeviceSpecific_7" value="Специфичный параметр прибора 7"/>
+		<Text id="STD_TN_DeviceSpecific_8" value="Специфичный параметр прибора 8"/>
+		<Text id="STD_TN_DeviceSpecific_9" value="Специфичный параметр прибора 9"/>
+		<Text id="STD_TN_DeviceSpecific_10" value="Специфичный параметр прибора 10"/>
+		<Text id="STD_TN_DeviceSpecific_11" value="Специфичный параметр прибора 11"/>
+		<Text id="STD_TN_DeviceSpecific_12" value="Специфичный параметр прибора 12"/>
+		<Text id="STD_TN_DeviceSpecific_13" value="Специфичный параметр прибора 13"/>
+		<Text id="STD_TN_DeviceSpecific_14" value="Специфичный параметр прибора 14"/>
+		<Text id="STD_TN_DeviceSpecific_15" value="Специфичный параметр прибора 15"/>
+		<Text id="STD_TN_DeviceSpecific_16" value="Специфичный параметр прибора 16"/>
+		<Text id="STD_TN_SystemCommand_Sub16" value="Системная команда"/>
+		<Text id="STD_TD_SystemCommand_Sub16" value="Применение: Командный интерфейс для устройств без поддержки ISDU. Срок действия и выполнение команд не подтверждены."/>
+		<Text id="STD_TN_V_SystemCommand" value="Системная команда"/>
+		<Text id="STD_TD_V_SystemCommand" value="Командный интерфейс для приложений. Положительное подтверждение подтверждает полное и правильное завершение запрошенной функции."/>
+		<Text id="STD_TN_SystemCommand_DeviceReset" value="Сброс прибора"/>
+		<Text id="STD_TN_SystemCommand_ApplicationReset" value="Сброс приложения"/>
+		<Text id="STD_TN_SystemCommand_RestoreFactorySettings" value="Возврат к заводским настройкам"/>
+		<Text id="STD_TN_SystemCommand_BackToBox" value="Back-to-box"/>
+		<Text id="STD_TN_V_DeviceAccessLocks" value="Блокировка доступа к прибору"/>
+		<Text id="STD_TD_V_DeviceAccessLocks" value="Доступ к параметрам устройства можно ограничить, установив соответствующие флаги в пределах этого параметра."/>
+		<Text id="STD_TN_ParameterAccess" value="Доступ к записи параметра"/>
+		<Text id="STD_TD_ParameterAccess" value="Эта блокировка запрещает доступ для записи ко всем параметрам чтения/записи, кроме параметра 'Device Access Locks'."/>
+		<Text id="STD_TN_DataStorage" value="Хранилище данных"/>
+		<Text id="STD_TD_DataStorage" value="Эта блокировка предотвращает доступ к записи параметров прибора через механизм хранения данных."/>
+		<Text id="STD_TN_LocalParameterization" value="Локальное параметрирование"/>
+		<Text id="STD_TD_LocalParameterization" value="Эта блокировка предотвращает изменение настроек устройства с помощью локальных элементов управления на устройстве."/>
+		<Text id="STD_TN_LocalUserInterface" value="Локальный интерфейс пользователя"/>
+		<Text id="STD_TD_LocalUserInterface" value="Эта блокировка предотвращает доступ к настройкам устройства и отображению через локальный интерфейс пользователя. Интерфейс пользователя отключен."/>
+		<Text id="STD_TN_locked" value="Заблокировано"/>
+		<Text id="STD_TN_unlocked" value="Без блокировки"/>
+		<Text id="STD_TN_V_VendorName" value="Название производителя"/>
+		<Text id="STD_TD_V_VendorName" value="Название производителя, присвоенное к Vendor ID."/>
+		<Text id="STD_TN_V_VendorText" value="Текст производителя"/>
+		<Text id="STD_TD_V_VendorText" value="Дополнительная информация о производителе."/>
+		<Text id="STD_TN_V_ProductName" value="Название продукта"/>
+		<Text id="STD_TD_V_ProductName" value="Полное название продукта."/>
+		<Text id="STD_TN_V_ProductID" value="ID продукта"/>
+		<Text id="STD_TD_V_ProductID" value="Идентификация продукта или типа для конкретного поставщика (напр. код товара или номер модели)."/>
+		<Text id="STD_TN_V_ProductText" value="Текст продукта"/>
+		<Text id="STD_TD_V_ProductText" value="Дополнительная информация о продукте для прибора."/>
+		<Text id="STD_TN_V_SerialNumber" value="Серийный номер"/>
+		<Text id="STD_TD_V_SerialNumber" value="Уникальный идентификатор производителя определенного прибора."/>
+		<Text id="STD_TN_V_HardwareRevision" value="Ревизия аппаратного обеспечения"/>
+		<Text id="STD_TD_V_HardwareRevision" value="Уникальный идентификатор производителя ревизии аппаратного обеспечения отдельного прибора."/>
+		<Text id="STD_TN_V_FirmwareRevision" value="Ревизия прошивки"/>
+		<Text id="STD_TD_V_FirmwareRevision" value="Уникальный идентификатор производителя ревизии прошивки отдельного прибора."/>
+		<Text id="STD_TN_V_ApplicationSpecificTag" value="Специфичный для приложения тег"/>
+		<Text id="STD_TD_V_ApplicationSpecificTag" value="Возможность пометить на устройстве пользовательскую или прикладную информацию."/>
+		<Text id="STD_TN_V_ErrorCount" value="Счётчик ошибок"/>
+		<Text id="STD_TD_V_ErrorCount" value="Количество ошибок, которые произошли в приложении для конкретной технологии с момента включения или перезапуска."/>
+		<Text id="STD_TN_V_DeviceStatus" value="Состояние прибора"/>
+		<Text id="STD_TD_V_DeviceStatus" value="Индикатор для текущего состояния прибора и диагностического состояния."/>
+		<Text id="STD_TN_DeviceStatus_OK" value="Прибор ОK"/>
+		<Text id="STD_TN_DeviceStatus_MaintenanceRequired" value="Необходимо техническое обслуживание"/>
+		<Text id="STD_TN_DeviceStatus_OutOfSpecification" value="Вне спецификации"/>
+		<Text id="STD_TN_DeviceStatus_FunctionalCheck" value="Функциональный контроль"/>
+		<Text id="STD_TN_DeviceStatus_Failure" value="Неисправность"/>
+		<Text id="STD_TN_V_DetailedDeviceStatus" value="Подробное состояние прибора"/>
+		<Text id="STD_TD_V_DetailedDeviceStatus" value="Список всех в настоящее время ожидающих событий в устройстве."/>
+		<Text id="STD_TN_V_ProcessDataInput" value="Вход PD"/>
+		<Text id="STD_TD_V_ProcessDataInput" value="Последний действительный процесс ввода данных устройства."/>
+		<Text id="STD_TN_V_ProcessDataOutput" value="Выход PD"/>
+		<Text id="STD_TD_V_ProcessDataOutput" value="Последние действительные выходные рабочие данные, записанные в прибор."/>
+		<Text id="STD_TN_V_OffsetTime" value="Время смещения"/>
+		<Text id="STD_TD_V_OffsetTime" value="Синхронизирует технологическое приложение для коммуникационных циклов с регулируемым временем смещения. Время смещения может быть установлено согласно спецификации времени цикла (параметр 'Min Cycle Time')."/>
+		<!-- ErrorTypes -->
+		<Text id="STD_TN_0x8000" value="Ошибка приложения прибора - нет подробностей"/>
+		<Text id="STD_TD_0x8000" value="Служба была отклонена приложением для конкретной технологии. Подробная информация о причинах недоступна."/>
+		<Text id="STD_TN_0x8011" value="Индекс недоступен"/>
+		<Text id="STD_TD_0x8011" value="Попытка доступа к чтению или записи в несуществующий индекс."/>
+		<Text id="STD_TN_0x8012" value="Субиндекс недоступен"/>
+		<Text id="STD_TD_0x8012" value="Попытка доступа к чтению или записи в несуществующий подиндекс существующего индекса."/>
+		<Text id="STD_TN_0x8020" value="Обслуживание временно недоступно"/>
+		<Text id="STD_TD_0x8020" value="Параметр недоступен из-за текущего состояния специфического приложения прибора."/>
+		<Text id="STD_TN_0x8021" value="Сервис временно недоступен - местное управление"/>
+		<Text id="STD_TD_0x8021" value="Параметр недоступен. В настоящее время устройство находится в постоянном локальном управлении."/>
+		<Text id="STD_TN_0x8022" value="Обслуживание временно недоступно - управление устройством"/>
+		<Text id="STD_TD_0x8022" value="Параметр недоступен. Специфичное для технологии приложение в данный момент находится в удаленном запуске."/>
+		<Text id="STD_TN_0x8023" value="Доступ запрещен"/>
+		<Text id="STD_TD_0x8023" value="Доступ для записи в параметр только для чтения или доступ для чтения в параметре только для записи."/>
+		<Text id="STD_TN_0x8030" value="Значение параметра вне диапазона"/>
+		<Text id="STD_TD_0x8030" value="Записанное значение параметра вне допустимого диапазона значений."/>
+		<Text id="STD_TN_0x8031" value="Значение параметра выше предела"/>
+		<Text id="STD_TD_0x8031" value="Записанное значение параметра выше определённого диапазона значений"/>
+		<Text id="STD_TN_0x8032" value="Значение параметра ниже предела"/>
+		<Text id="STD_TD_0x8032" value="Записанное значение параметра ниже определённого диапазона значений"/>
+		<Text id="STD_TN_0x8033" value="Длина параметра превышена"/>
+		<Text id="STD_TD_0x8033" value="Записанный параметр длиннее, чем указано."/>
+		<Text id="STD_TN_0x8034" value="Длина параметра слишком короткая"/>
+		<Text id="STD_TD_0x8034" value="Записанный параметр длиннее, чем указано."/>
+		<Text id="STD_TN_0x8035" value="Функция недоступна"/>
+		<Text id="STD_TD_0x8035" value="Записанная команда не поддерживается приложением прибора"/>
+		<Text id="STD_TN_0x8036" value="Функция временно недоступна"/>
+		<Text id="STD_TD_0x8036" value="Записанная команда недоступна из-за текущего состояния приложения для конкретной технологии."/>
+		<Text id="STD_TN_0x8040" value="Неверный набор параметров"/>
+		<Text id="STD_TD_0x8040" value="Записанный параметр конфликтует с другими имеющимися настройками параметров."/>
+		<Text id="STD_TN_0x8041" value="Несоответствующий набор параметров"/>
+		<Text id="STD_TD_0x8041" value="Несоответствия набора параметров в конце передачи параметров блока. Проверка достоверности устройства не удалась."/>
+		<Text id="STD_TN_0x8082" value="Приложение не готово к работе"/>
+		<Text id="STD_TD_0x8082" value="Доступ для чтения или записи запрещен. Приложение для конкретной технологии временно недоступно."/>
+		<!-- Events -->
+		<Text id="STD_TN_0x0000" value="Нет неисправности"/>
+		<Text id="STD_TN_0x1000" value="Основной отказ оборудования"/>
+		<Text id="STD_TD_0x1000" value="Неизвестная ошибка"/>
+		<Text id="STD_TN_0x4000" value="Ошибка температуры"/>
+		<Text id="STD_TD_0x4000" value="Перегрузка"/>
+		<Text id="STD_TN_0x4210" value="Превышена температура прибора"/>
+		<Text id="STD_TD_0x4210" value="Устраните источник тепла"/>
+		<Text id="STD_TN_0x4220" value="Низкая температура прибора"/>
+		<Text id="STD_TD_0x4220" value="Изолируйте прибор"/>
+		<Text id="STD_TN_0x5000" value="Ошибка аппаратного обеспечения"/>
+		<Text id="STD_TD_0x5000" value="Замена прибора"/>
+		<Text id="STD_TN_0x5010" value="Неисправность компонента"/>
+		<Text id="STD_TD_0x5010" value="Ремонт или замена"/>
+		<Text id="STD_TN_0x5011" value="Потери в энергонезависимой памяти"/>
+		<Text id="STD_TD_0x5011" value="Проверьте батарейки"/>
+		<Text id="STD_TN_0x5012" value="Батарейки разряжены"/>
+		<Text id="STD_TD_0x5012" value="Замените батарейки"/>
+		<Text id="STD_TN_0x5100" value="Неисправность источника питания"/>
+		<Text id="STD_TD_0x5100" value="Проверьте доступность"/>
+		<Text id="STD_TN_0x5101" value="Предохранитель перегорел или разомкнут"/>
+		<Text id="STD_TD_0x5101" value="Проверьте предохранитель или замените предохранитель"/>
+		<Text id="STD_TN_0x5110" value="Превышение первичного напряжения питания"/>
+		<Text id="STD_TD_0x5110" value="Проверьте допустимый диапазон напряжения"/>
+		<Text id="STD_TN_0x5111" value="Недостаточное напряжение первичного питания"/>
+		<Text id="STD_TD_0x5111" value="Проверьте допустимый диапазон напряжения"/>
+		<Text id="STD_TN_0x5112" value="Ошибка вторичного напряжения питания (Port Class B)"/>
+		<Text id="STD_TD_0x5112" value="Проверьте допустимый диапазон напряжения"/>
+		<Text id="STD_TN_0x6000" value="Ошибка программного обеспечения прибора"/>
+		<Text id="STD_TD_0x6000" value="Проверьте версию прошивки"/>
+		<Text id="STD_TN_0x6320" value="Ошибка параметра"/>
+		<Text id="STD_TD_0x6320" value="Проверьте таблицу данных и значения"/>
+		<Text id="STD_TN_0x6321" value="Параметр отсутствует"/>
+		<Text id="STD_TD_0x6321" value="Проверить технические данные"/>
+		<!-- Event 6350 - reserved in IO-Link specification V1.1.3			
+		<Text id="STD_TN_0x6350" value="Параметр изменён"/>
+		<Text id="STD_TD_0x6350" value="Проверьте конфигурацию"/> -->
+		<Text id="STD_TN_0x7700" value="Обрыв провода зависимого устройства"/>
+		<Text id="STD_TD_0x7700" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7701" value="Обрыв провода зависимого устройства 1"/>
+		<Text id="STD_TD_0x7701" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7702" value="Обрыв провода зависимого устройства 2"/>
+		<Text id="STD_TD_0x7702" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7703" value="Обрыв провода зависимого устройства 3"/>
+		<Text id="STD_TD_0x7703" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7704" value="Обрыв провода зависимого устройства 4"/>
+		<Text id="STD_TD_0x7704" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7705" value="Обрыв провода зависимого устройства 5"/>
+		<Text id="STD_TD_0x7705" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7706" value="Обрыв провода зависимого устройства 6"/>
+		<Text id="STD_TD_0x7706" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7707" value="Обрыв провода зависимого устройства 7"/>
+		<Text id="STD_TD_0x7707" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7708" value="Обрыв провода зависимого устройства 8"/>
+		<Text id="STD_TD_0x7708" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7709" value="Обрыв провода зависимого устройства 9"/>
+		<Text id="STD_TD_0x7709" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770A" value="Обрыв провода зависимого устройства 10"/>
+		<Text id="STD_TD_0x770A" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770B" value="Обрыв провода зависимого устройства 11"/>
+		<Text id="STD_TD_0x770B" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770C" value="Обрыв провода зависимого устройства 12"/>
+		<Text id="STD_TD_0x770C" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770D" value="Обрыв провода зависимого устройства 13"/>
+		<Text id="STD_TD_0x770D" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770E" value="Обрыв провода зависимого устройства 14"/>
+		<Text id="STD_TD_0x770E" value="Проверьте установку"/>
+		<Text id="STD_TN_0x770F" value="Обрыв провода зависимого устройства 15"/>
+		<Text id="STD_TD_0x770F" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7710" value="Короткое замыкание"/>
+		<Text id="STD_TD_0x7710" value="Проверьте установку"/>
+		<Text id="STD_TN_0x7711" value="Ошибка заземления"/>
+		<Text id="STD_TD_0x7711" value="Проверьте установку"/>
+		<Text id="STD_TN_0x8C00" value="Специфическая ошибка приложения"/>
+		<Text id="STD_TD_0x8C00" value="Сбросьте прибор"/>
+		<Text id="STD_TN_0x8C01" value="Моделирование активно"/>
+		<Text id="STD_TD_0x8C01" value="Проверка рабочего режима"/>
+		<Text id="STD_TN_0x8C10" value="Превышение диапазона переменной процесса"/>
+		<Text id="STD_TD_0x8C10" value="Неоднозначные рабочие данные"/>
+		<Text id="STD_TN_0x8C20" value="Превышен диапазон измерения"/>
+		<Text id="STD_TD_0x8C20" value="Проверьте приложение"/>
+		<Text id="STD_TN_0x8C30" value="Недостаток диапазона переменной процесса"/>
+		<Text id="STD_TD_0x8C30" value="Неоднозначные рабочие данные"/>
+		<Text id="STD_TN_0x8C40" value="Требуется техническое обслуживание - очистка"/>
+		<Text id="STD_TD_0x8C40" value="Очистите прибор"/>
+		<Text id="STD_TN_0x8C41" value="Требуется техническое обслуживание - заправка"/>
+		<Text id="STD_TD_0x8C41" value="Заправьте прибор"/>
+		<Text id="STD_TN_0x8C42" value="Требуется техническое обслуживание - износ компонентов"/>
+		<Text id="STD_TD_0x8C42" value="Замените изношенные компоненты"/>
+	</Language>
+	<Stamp crc="754042544"><Checker name="IODD-Checker V1.1.5" version="V1.1.5.0"/></Stamp>
+</ExternalTextDocument>

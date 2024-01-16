@@ -1,5 +1,113 @@
 <layout-row id="RowLayout1">
 	<layout-column id="ColumnLayout1" style="align-items:stretch">
+		<curie-callout id="DC_IoddUploadStatus">
+			<crown-edpws-binding property="type"
+				name="CSK_IODDInterpreter/OnNewCalloutType" update-on-resume>
+			</crown-edpws-binding>
+			<crown-edpws-binding property="value"
+				name="CSK_IODDInterpreter/OnNewCalloutValue" update-on-resume>
+			</crown-edpws-binding>
+		</curie-callout>
+		<layout-row id="RowLayout8">
+			<appspace-file-upload-button id="FUB_IoddUpload" button-type="primary"
+				path="public/tempIodd.xml" is-file>
+				<span>Upload IODD XML</span>
+				<crown-binding event="finished"
+					name="CSK_IODDInterpreter/uploadFinished"
+					path="param/args/uploadSuccess" auto-commit>
+				</crown-binding>
+			</appspace-file-upload-button>
+			<davinci-drop-down id="DD_IoddListToDelete"
+				label="Select IODD to delete">
+				<crown-on property="data"
+					crown-event="CSK_IODDInterpreter/OnNewListIodd"
+					converter="convertToList">
+				</crown-on>
+				<crown-on property="value"
+					crown-event="CSK_IODDInterpreter/OnNewSelectedIoddToHandle">
+				</crown-on>
+				<crown-set event="change"
+					crown-function="CSK_IODDInterpreter/setSelectedIoddToHandle"
+					protocol="crownMSGPACK" crown-path="newSelectedIoddToHandle">
+				</crown-set>
+			</davinci-drop-down>
+			<davinci-button id="B_DeleteIODD" type="primary"
+				icon-position="append">
+				<span>Delete Iodd</span>
+				<crown-set event="submit"
+					crown-function="CSK_IODDInterpreter/deleteIodd"
+					protocol="crownMSGPACK">
+				</crown-set>
+			</davinci-button>
+		</layout-row>
+		<davinci-button id="B_CreateInstance" type="primary"
+			icon-position="append">
+			<span>Create Instance</span>
+			<crown-set event="submit"
+				crown-function="CSK_IODDInterpreter/addInstance"
+				protocol="crownMSGPACK">
+			</crown-set>
+		</davinci-button>
+		<davinci-drop-down id="DD_InstanceList" label="Select Instance">
+			<crown-on property="data"
+				crown-event="CSK_IODDInterpreter/OnNewListIntances"
+				converter="convertToList">
+			</crown-on>
+			<crown-on property="value"
+				crown-event="CSK_IODDInterpreter/OnNewSelectedInstance">
+			</crown-on>
+			<crown-set event="change"
+				crown-function="CSK_IODDInterpreter/setSelectedInstance"
+				protocol="crownMSGPACK" crown-path="newSelectedInstance">
+			</crown-set>
+		</davinci-drop-down>
+		<stacked-view id="SV_isInstanceSelected">
+			<stacked-pane id="SP_instanceISSelected" value="true">
+				<layout-column id="ColumnLayout7">
+					<layout-row id="RowLayout6">
+						<davinci-text-field id="TF_InstanceId" type="text">
+							<crown-on property="value"
+								crown-event="CSK_IODDInterpreter/OnNewInstanceName">
+							</crown-on>
+							<crown-set event="change"
+								crown-function="CSK_IODDInterpreter/setInstanceName"
+								protocol="crownMSGPACK" crown-path="newInstanceName">
+							</crown-set>
+						</davinci-text-field>
+						<davinci-button id="B_DeleteInstance" type="primary"
+							icon-position="append">
+							<span>Delete Instance</span>
+							<crown-set event="submit"
+								crown-function="CSK_IODDInterpreter/deleteInstance"
+								protocol="crownMSGPACK">
+							</crown-set>
+						</davinci-button>
+					</layout-row>
+					<layout-row id="RowLayout5" style="width: 100%">
+						<davinci-drop-down id="DD_IoddListForInstace"
+							label="Select IODD to be used by instance" style="width: 50%">
+							<crown-on property="data"
+								crown-event="CSK_IODDInterpreter/OnNewListIodd"
+								converter="convertToList">
+							</crown-on>
+							<crown-on property="value"
+								crown-event="CSK_IODDInterpreter/OnNewSelectedIodd">
+							</crown-on>
+							<crown-set event="change"
+								crown-function="CSK_IODDInterpreter/setSelectedIodd"
+								protocol="crownMSGPACK" crown-path="ioddName">
+							</crown-set>
+						</davinci-drop-down>
+					</layout-row>
+				</layout-column>
+			</stacked-pane>
+			<stacked-pane id="SP_instanceIsNOTSelected" value="false">
+			</stacked-pane>
+			<crown-on property="value"
+				crown-event="CSK_IODDInterpreter/isInstanceSelected"
+				converter="bool2str">
+			</crown-on>
+		</stacked-view>
 		<stacked-view id="SV_Login">
 			<stacked-pane id="SP_LoginOK" value="true">
 				<layout-column id="Column_PersistentData"
@@ -95,12 +203,12 @@
 			</crown-edpws-binding>
 		</stacked-view>
 		<stacked-view id="SV_PageCalled">
-			<crown-binding property="value" name="CSK_IODDInterpreter/pageCalled"
+			<crown-binding property="value"
+				name="CSK_IODDInterpreter/pageCalledInstances"
 				path="result/data/empty" auto-update="0" update-on-resume>
 			</crown-binding>
 		</stacked-view>
 	</layout-column>
-	<layout-column id="ColumnLayout2" style="flex-grow:3">
-	</layout-column>
+	<layout-column id="ColumnLayout2"></layout-column>
   
 </layout-row>
