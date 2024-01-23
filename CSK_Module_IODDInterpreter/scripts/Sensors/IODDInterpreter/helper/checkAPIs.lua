@@ -1,11 +1,12 @@
+---@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
+
 -- Load all relevant APIs for this module
--- By doing this the internal garbage collection will perform better
 --**************************************************************************
 
 local availableAPIs = {}
 
 local function loadAPIs()
-  CSK_ModuleName = require 'API.CSK_ModuleName'
+  CSK_IODDInterpreter = require 'API.CSK_IODDInterpreter'
 
   Container = require 'API.Container'
   Engine = require 'API.Engine'

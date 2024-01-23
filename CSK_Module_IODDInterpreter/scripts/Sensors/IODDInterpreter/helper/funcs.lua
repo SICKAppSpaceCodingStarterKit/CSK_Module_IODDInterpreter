@@ -9,7 +9,7 @@
 
 local funcs = {}
 -- Providing standard JSON functions
-funcs.json = require('Sensor/IODDInterpreter/helper/Json')
+funcs.json = require('Sensors/IODDInterpreter/helper/Json')
 
 --**************************************************************************
 --********************** End Global Scope **********************************
@@ -188,6 +188,7 @@ local function createJsonList(data)
   return funcs.json.encode(sortedTable)
 end
 funcs.createJsonList = createJsonList
+
 -- Function to create a list from table
 --@createStringListBySimpleTable(content:table):string
 local function createStringListBySimpleTable(content)

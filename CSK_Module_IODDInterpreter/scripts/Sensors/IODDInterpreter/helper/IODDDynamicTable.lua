@@ -1,4 +1,4 @@
-local json = require "Sensor.IODDInterpreter.helper.Json"
+local json = require "Sensors.IODDInterpreter.helper.Json"
 
 local IODDDynamicTable = {}
 
@@ -230,7 +230,6 @@ local function makeProcessDataTableContent(preficesToInclude, parameterTable, se
       colPD3 = compileDataTypeInfo(parameterTable.Datatype),
       selected = false or selectedTable["0"]
     }
-    --table.insert(tableContent, FirstParam)
     table.insert(tableContent, addPrefixesToRowData(preficesToInclude, FirstParam))
     if parameterTable.Datatype['xsi:type'] == "ArrayT" then
       for i = 1, parameterTable.Datatype.count do
@@ -243,18 +242,12 @@ local function makeProcessDataTableContent(preficesToInclude, parameterTable, se
         elseif parameterTable.Datatype.DataTypeRef then
           singleSubindex.colPD3 = json.encode(parameterTable.Datatype.DataTypeRef)
         end
-        --table.insert(tableContent, singleSubindex)
         table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleSubindex))
       end
     elseif parameterTable.Datatype['xsi:type'] == "RecordT" then
-      --if #parameterTable.Datatype.RecordItem > 0 then
         for _, subindexInfo in ipairs(parameterTable.Datatype.RecordItem) do
-         -- table.insert(tableContent, makeSingleRowContent(subindexInfo, selectedTable))
-         table.insert(tableContent, addPrefixesToRowData(preficesToInclude, makeSingleRowContent(subindexInfo, selectedTable)))
+          table.insert(tableContent, addPrefixesToRowData(preficesToInclude, makeSingleRowContent(subindexInfo, selectedTable)))
         end
-      --else
-      --  table.insert(tableContent, makeSingleRowContent(parameterTable.Datatype.RecordItem, selectedTable))
-      --end
     end
   end
   return json.encode(tableContent)
