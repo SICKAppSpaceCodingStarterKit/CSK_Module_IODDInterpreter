@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="author" content="SICK AG">
-<title>Documentation - CSK_Module_IODDInterpreter 3.4.0</title>
+<title>Documentation - CSK_Module_IODDInterpreter 1.0.0</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
@@ -615,11 +615,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation - CSK_Module_IODDInterpreter 3.4.0</h1>
+<h1>Documentation - CSK_Module_IODDInterpreter 1.0.0</h1>
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
-<span id="revnumber">version 3.4.0,</span>
-<span id="revdate">2024-01-15</span>
+<span id="revnumber">version 1.0.0,</span>
+<span id="revdate">2024-01-23</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -634,14 +634,14 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#_functions">Functions</a>
 <ul class="sectlevel4">
 <li><a href="#API:Function:CSK_IODDInterpreter.addInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">addInstance()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.addIoddFile"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">addIoddFile()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.addIODDFile"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">addIODDFile()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.changeProcessDataStructureOptionName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">changeProcessDataStructureOptionName()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.changeProcessDataStructureOptionValue"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">changeProcessDataStructureOptionValue()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.deleteInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">deleteInstance()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.deleteIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">deleteIodd()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.findIoddMatchingProductName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIoddMatchingProductName()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.findIoddMatchingVendorIdDeviceIdVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIoddMatchingVendorIdDeviceIdVersion()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.getIoddList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIoddList()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.deleteIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">deleteIODD()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.findIODDMatchingProductName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIODDMatchingProductName()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIODDMatchingVendorIdDeviceIdVersion()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.getIODDList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIODDList()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getIsProcessDataVariable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIsProcessDataVariable()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getParameterDataPointInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getParameterDataPointInfo()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getProcessDataConditionInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionInfo()</span></a></li>
@@ -667,8 +667,8 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Function:CSK_IODDInterpreter.setParameterName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setParameterName()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.setReadSelectedData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setReadSelectedData()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.setSelectedInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedInstance()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.setSelectedIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIodd()</span></a></li>
-<li><a href="#API:Function:CSK_IODDInterpreter.setSelectedIoddToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIoddToHandle()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.setSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODD()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.setSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODDToHandle()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.setWriteSelectedData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setWriteSelectedData()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.updateSelectedParametersTable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">updateSelectedParametersTable()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.updateSelectedProcessDataTable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">updateSelectedProcessDataTable()</span></a></li>
@@ -681,12 +681,12 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Event:CSK_IODDInterpreter.isInstanceSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">isInstanceSelected</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.isProcessDataStructureVariable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">isProcessDataStructureVariable</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnDataLoadedOnReboot</span></a></li>
-<li><a href="#API:Event:CSK_IODDInterpreter.OnIoddListChanged"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnIoddListChanged</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnIODDListChanged"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnIODDListChanged</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewCalloutType"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewCalloutType</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewCalloutValue"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewCalloutValue</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewInstanceName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewInstanceName</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewListIntances"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIntances</span></a></li>
-<li><a href="#API:Event:CSK_IODDInterpreter.OnNewListIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIodd</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewListIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIODD</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewParameterName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewParameterName</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewProcessDataInTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewProcessDataInTableContent</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewProcessDataOutTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewProcessDataOutTableContent</span></a></li>
@@ -694,8 +694,8 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewReadDataJsonTemplateAndInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewReadDataJsonTemplateAndInfo</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewReadParametersTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewReadParametersTableContent</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedInstance</span></a></li>
-<li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIodd</span></a></li>
-<li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIoddToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIoddToHandle</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODD</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODDToHandle</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedProcessDataStructureOption"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedProcessDataStructureOption</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewWriteDataJsonTemplateAndInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewWriteDataJsonTemplateAndInfo</span></a></li>
@@ -735,11 +735,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Version</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.4.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0.0</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-01-15</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-01-23</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -775,54 +775,44 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <h4 id="_short_description">Short description</h4>
 <div class="paragraph">
 <p>Module to interpret IODD files for further use by CSK_Module_MultiIOLinkSMI, CSK_Module_MultiIOLinkRestMaster and for your customized app.<br>
----<br>
+<br>
 The main externally useful features are following:<br>
-<strong>
-1. IODD Files upload and interpretation<br>
-</strong>
-Use "addIoddFile" function to interpret the IODD XML file.<br>
+<br>
+<strong>1. IODD Files upload and interpretation</strong><br>
+Use "addIODDFile" function to interpret the IODD XML file.<br>
 Or use "Upload IODD XML" button in UI and select XML file to upload.<br>
 IODD Files (.xml) and their interpretations (.json) are stored in public/IODDFiles.<br>
-To delete IODD file from internal memory, use "newSelectedIoddToHandle" and "deleteIodd"<br>
-<strong>
-2. IODD Filee - device match check<br>
-</strong>
-Use "findIoddMatchingProductName" and "findIoddMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already.<br>
-<strong>
-3. Multiple instances handling<br>
-</strong>
+To delete IODD file from internal memory, use "setSelectedIODDToHandle" (TODO Please check) and "deleteIODD"<br>
+<br>
+<strong>2. IODD Filee - device match check</strong><br>
+Use "findIODDMatchingProductName" and "findIODDMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already.<br>
+<br>
+<strong>3. Multiple instances handling</strong><br>
 <strong>Instance ID is a string name</strong> to make it easier for external use since this module might be used by several other modules / applications.<br>
-Assign IODD file to be used by the instance via "setSelectedIodd". Use "addInstance", "setInstanceName" and "deleteInstance" to create, rename and delete the instance.<br>
-<strong>
-4. Dynamic tables representing process data and parameters<br>
-</strong>
+Assign IODD file to be used by the instance via "setSelectedIODD". Use "addInstance", "setInstanceName" and "deleteInstance" to create, rename and delete the instance.<br>
+<br>
+<strong>4. Dynamic tables representing process data and parameters</strong><br>
 All parameters and process data are devided in two sets:<br>
 a) Read Data - consists of Process Data In table and Parameters (read only + read/write) table<br>
 b) Write Data - consists of Process Data Out table and Parameters (write only + read/write) table<br>
+<br>
 The rows of the tables can be selected to form a set of data (<strong>message</strong>) to be read or written from/to the device.<br>
 When a row of the table is selected, the following events are triggered to provide new set of data externally:<br>
 a) Read Data - "OnNewReadDataJsonTemplateAndInfo"<br>
 b) Write Data - "OnNewWriteDataJsonTemplateAndInfo"<br>
-<strong>
-5. Process data structure selection<br>
-</strong>
+<br>
+<strong>5. Process data structure selection</strong><br>
 Process data structure of IOLink device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following:<br>
 - "getProcessDataConditionList" - to get list of possible options<br>
 - "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter&#8217;s<br>
 When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset.<br>
-<strong>
-6. Data point information<br>
-</strong>
+<br>
+<strong>6. Data point information</strong><br>
 Module can provide chunks of IODD file in JSON format to describe some datapoints you need. Use the following functions to get information about datapoints:<br>
 - "getProcessDataInInfo" - process data in (with current process data structure option)<br>
 - "getProcessDataOutInfo" - process data out (with current process data structure option)<br>
 - "getParameterDataPointInfo" - any parameter with specified index and subindex<br>
-- "getProcessDataConditionInfo" - parameter responsible for changing the process data structure (if it is variable)<br>
----<br>
-<strong>
-ToDo:<br>
-</strong>
-- Multiple languages support<br></p>
+- "getProcessDataConditionInfo" - parameter responsible for changing the process data structure (if it is variable)<br></p>
 </div>
 </div>
 <div class="sect3">
@@ -833,7 +823,7 @@ ToDo:<br>
 <p><a href="#API:Function:CSK_IODDInterpreter.addInstance">addInstance()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.addIoddFile">addIoddFile()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.addIODDFile">addIODDFile()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_IODDInterpreter.changeProcessDataStructureOptionName">changeProcessDataStructureOptionName()</a></p>
@@ -845,16 +835,16 @@ ToDo:<br>
 <p><a href="#API:Function:CSK_IODDInterpreter.deleteInstance">deleteInstance()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.deleteIodd">deleteIodd()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.deleteIODD">deleteIODD()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.findIoddMatchingProductName">findIoddMatchingProductName()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.findIODDMatchingProductName">findIODDMatchingProductName()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.findIoddMatchingVendorIdDeviceIdVersion">findIoddMatchingVendorIdDeviceIdVersion()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion">findIODDMatchingVendorIdDeviceIdVersion()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.getIoddList">getIoddList()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.getIODDList">getIODDList()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_IODDInterpreter.getIsProcessDataVariable">getIsProcessDataVariable()</a></p>
@@ -932,10 +922,10 @@ ToDo:<br>
 <p><a href="#API:Function:CSK_IODDInterpreter.setSelectedInstance">setSelectedInstance()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.setSelectedIodd">setSelectedIodd()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.setSelectedIODD">setSelectedIODD()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_IODDInterpreter.setSelectedIoddToHandle">setSelectedIoddToHandle()</a></p>
+<p><a href="#API:Function:CSK_IODDInterpreter.setSelectedIODDToHandle">setSelectedIODDToHandle()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_IODDInterpreter.setWriteSelectedData">setWriteSelectedData()</a></p>
@@ -962,7 +952,7 @@ ToDo:<br>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnDataLoadedOnReboot">OnDataLoadedOnReboot</a></p>
 </li>
 <li>
-<p><a href="#API:Event:CSK_IODDInterpreter.OnIoddListChanged">OnIoddListChanged</a></p>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnIODDListChanged">OnIODDListChanged</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewCalloutType">OnNewCalloutType</a></p>
@@ -977,7 +967,7 @@ ToDo:<br>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewListIntances">OnNewListIntances</a></p>
 </li>
 <li>
-<p><a href="#API:Event:CSK_IODDInterpreter.OnNewListIodd">OnNewListIodd</a></p>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewListIODD">OnNewListIODD</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewParameterName">OnNewParameterName</a></p>
@@ -1001,10 +991,10 @@ ToDo:<br>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedInstance">OnNewSelectedInstance</a></p>
 </li>
 <li>
-<p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIodd">OnNewSelectedIodd</a></p>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODD">OnNewSelectedIODD</a></p>
 </li>
 <li>
-<p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIoddToHandle">OnNewSelectedIoddToHandle</a></p>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODDToHandle">OnNewSelectedIODDToHandle</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedProcessDataStructureOption">OnNewSelectedProcessDataStructureOption</a></p>
@@ -1056,7 +1046,7 @@ ToDo:<br>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.addIoddFile"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">addIoddFile()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.addIODDFile"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">addIODDFile()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_3">Short description</h6>
 <div class="paragraph">
@@ -1127,7 +1117,7 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.addIoddFile(path)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.addIODDFile(path)</code></pre>
 </div>
 </div>
 </div>
@@ -1238,7 +1228,7 @@ ToDo:<br>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.deleteIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">deleteIodd()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.deleteIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">deleteIODD()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_7">Short description</h6>
 <div class="paragraph">
@@ -1282,13 +1272,13 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.deleteIodd()</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.deleteIODD()</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.findIoddMatchingProductName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIoddMatchingProductName()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.findIODDMatchingProductName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIODDMatchingProductName()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_8">Short description</h6>
 <div class="paragraph">
@@ -1359,13 +1349,13 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.findIoddMatchingProductName(productName)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.findIODDMatchingProductName(productName)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.findIoddMatchingVendorIdDeviceIdVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIoddMatchingVendorIdDeviceIdVersion()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">findIODDMatchingVendorIdDeviceIdVersion()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_9">Short description</h6>
 <div class="paragraph">
@@ -1448,13 +1438,13 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.findIoddMatchingVendorIdDeviceIdVersion(vendorId, deviceId, version)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">success, result = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion(vendorId, deviceId, version)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.getIoddList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIoddList()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.getIODDList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIODDList()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_10">Short description</h6>
 <div class="paragraph">
@@ -1492,7 +1482,7 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">ioddList = CSK_IODDInterpreter.getIoddList()</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">ioddList = CSK_IODDInterpreter.getIODDList()</code></pre>
 </div>
 </div>
 </div>
@@ -2123,7 +2113,7 @@ ToDo:<br>
 <div class="sect5">
 <h6 id="_short_description_23">Short description</h6>
 <div class="paragraph">
-<p>Load parameters for this module from the PersistentData CSK-module if possible and use them.</p>
+<p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2184,7 +2174,7 @@ ToDo:<br>
 <div class="sect5">
 <h6 id="_short_description_25">Short description</h6>
 <div class="paragraph">
-<p>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</p>
+<p>Function to register "On Resume" of the module UI (only as helper function).</p>
 </div>
 </div>
 <div class="sect5">
@@ -2209,7 +2199,7 @@ ToDo:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string (only needed to simplify binding).</p></td>
 </tr>
 </tbody>
 </table>
@@ -2404,7 +2394,7 @@ ToDo:<br>
 <div class="sect5">
 <h6 id="_short_description_30">Short description</h6>
 <div class="paragraph">
-<p>Send parameters to PersistentData CSK module if possible to save them</p>
+<p>Send parameters to CSK_PersistentData module if possible to save them.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2465,7 +2455,7 @@ ToDo:<br>
 <div class="sect5">
 <h6 id="_short_description_32">Short description</h6>
 <div class="paragraph">
-<p>Configure if this module should load its saved parameters at app- / device- boot up</p>
+<p>Configure if this module should load its saved parameters at app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2490,7 +2480,7 @@ ToDo:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Set status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
 </tr>
 </tbody>
 </table>
@@ -2509,7 +2499,7 @@ ToDo:<br>
 <div class="sect5">
 <h6 id="_short_description_33">Short description</h6>
 <div class="paragraph">
-<p>Function to set the name of the parameters if saved/loaded via the "PersistentData" CSK-module</p>
+<p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2534,7 +2524,7 @@ ToDo:<br>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the parameter</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of the parameter.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2658,7 +2648,7 @@ ToDo:<br>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.setSelectedIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIodd()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.setSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODD()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_35">Short description</h6>
 <div class="paragraph">
@@ -2696,13 +2686,13 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIodd(ioddName)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIODD(ioddName)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.setSelectedIoddToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIoddToHandle()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.setSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODDToHandle()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_36">Short description</h6>
 <div class="paragraph">
@@ -2728,7 +2718,7 @@ ToDo:<br>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">newSelectedIoddToHandle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">newSelectedIODDToHandle</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">IODD name.</p></td>
@@ -2740,7 +2730,7 @@ ToDo:<br>
 <h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIoddToHandle(newSelectedIoddToHandle)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIODDToHandle(newSelectedIODDToHandle)</code></pre>
 </div>
 </div>
 </div>
@@ -3152,7 +3142,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnIoddListChanged"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnIoddListChanged</span></h5>
+<h5 id="API:Event:CSK_IODDInterpreter.OnIODDListChanged"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnIODDListChanged</span></h5>
 <div class="sect5">
 <h6 id="_short_description_45">Short description</h6>
 <div class="paragraph">
@@ -3163,11 +3153,11 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnIoddListChanged</span>()
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnIODDListChanged</span>()
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnIoddListChanged</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnIoddListChanged</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnIODDListChanged</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnIODDListChanged</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
@@ -3365,7 +3355,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnNewListIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIodd</span></h5>
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewListIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIODD</span></h5>
 <div class="sect5">
 <h6 id="_short_description_50">Short description</h6>
 <div class="paragraph">
@@ -3391,7 +3381,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">jsonIoddList</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonIODDList</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">List of all names in JSON format.</p></td>
@@ -3403,11 +3393,11 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewListIodd</span>(jsonIoddList)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewListIODD</span>(jsonIODDList)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewListIodd</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewListIodd</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewListIODD</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewListIODD</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
@@ -3417,7 +3407,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect5">
 <h6 id="_short_description_51">Short description</h6>
 <div class="paragraph">
-<p>Notify name of persistent data parameter</p>
+<p>Notify name of persistent data parameter.</p>
 </div>
 </div>
 <div class="sect5">
@@ -3761,7 +3751,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIodd"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIodd</span></h5>
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODD</span></h5>
 <div class="sect5">
 <h6 id="_short_description_58">Short description</h6>
 <div class="paragraph">
@@ -3787,7 +3777,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">selectedIodd</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selectedIODD</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the IODD file.</p></td>
@@ -3799,17 +3789,17 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIodd</span>(selectedIodd)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIODD</span>(selectedIODD)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewSelectedIodd</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewSelectedIodd</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewSelectedIODD</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewSelectedIODD</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIoddToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIoddToHandle</span></h5>
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODDToHandle</span></h5>
 <div class="sect5">
 <h6 id="_short_description_59">Short description</h6>
 <div class="paragraph">
@@ -3835,7 +3825,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">selectedIoddToHandle</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selectedIODDToHandle</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Name of the IODD file.</p></td>
@@ -3847,11 +3837,11 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIoddToHandle</span>(selectedIoddToHandle)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIODDToHandle</span>(selectedIODDToHandle)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewSelectedIoddToHandle</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewSelectedIoddToHandle</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewSelectedIODDToHandle</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewSelectedIODDToHandle</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
@@ -3909,7 +3899,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect5">
 <h6 id="_short_description_61">Short description</h6>
 <div class="paragraph">
-<p>Notify status if parameters should be loaded on app-/device- boot up</p>
+<p>Notify status if parameters should be loaded on app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
@@ -4065,7 +4055,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect5">
 <h6 id="_short_description_64">Short description</h6>
 <div class="paragraph">
-<p>Notify status if features of PersistendData CSK module  are available</p>
+<p>Notify status if features of CSK_PersistendData module are available.</p>
 </div>
 </div>
 <div class="sect5">
@@ -4307,7 +4297,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect3">
 <h4 id="_short_description_69">Short description</h4>
 <div class="paragraph">
-<p>Auto generated Crown (not needed)</p>
+<p>This is an automatically generated CROWN (description not necessary).</p>
 </div>
 </div>
 </div>
@@ -4316,8 +4306,8 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 3.4.0<br>
-Last updated 2024-01-15 14:44:46 +0100
+Version 1.0.0<br>
+Last updated 2024-01-23 10:47:45 +0100
 </div>
 </div>
 <script type="text/javascript">

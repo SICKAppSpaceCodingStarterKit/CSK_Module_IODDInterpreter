@@ -1,5 +1,5 @@
-local xml2lua = require "Sensor.IODDInterpreter.helper.xml2lua"
-local json = require "Sensor.IODDInterpreter.helper.Json"
+local xml2lua = require "Sensors.IODDInterpreter.helper.xml2lua"
+local json = require "Sensors.IODDInterpreter.helper.Json"
 
 local IODDInterpreter = {}
 
@@ -122,7 +122,7 @@ local function modifyRecordOrArray(ParameterInfo, dataType2IdRefMap, ParamIndexS
 end
 
 local function addStandardDefinitions(stdReferences, variableTable, languageTable)
-  local standardDefinitionsFile = File.open('resources/IODD-StandardDefinitions1.1.xml', 'r')
+  local standardDefinitionsFile = File.open('resources/CSK_Module_IODDInterpreter/IODD-StandardDefinitions1.1.xml', 'r')
   local standardDefinitionsXml = standardDefinitionsFile:read()
   standardDefinitionsFile:close()
   local standardDefinitions = xml2lua.convert(standardDefinitionsXml)
@@ -140,8 +140,8 @@ local function addStandardDefinitions(stdReferences, variableTable, languageTabl
       for id, value in pairs(tableToAdd) do
         languageTable[language][id] = value
       end
-    elseif language ~= "Primary" and File.exists("resources/IODD-StandardDefinitions1.1-" .. language .. ".xml") then
-      local stdLanguagePackFile = File.open("resources/IODD-StandardDefinitions1.1-" .. language .. ".xml", 'r')
+    elseif language ~= "Primary" and File.exists("resources/CSK_Module_IODDInterpreter/IODD-StandardDefinitions1.1-" .. language .. ".xml") then
+      local stdLanguagePackFile = File.open("resources/CSK_Module_IODDInterpreter/IODD-StandardDefinitions1.1-" .. language .. ".xml", 'r')
       local stdLanguagePack = xml2lua.convert(stdLanguagePackFile:read())
       stdLanguagePackFile:close()
       local tableToAdd = makeIdValueMap(stdLanguagePack.ExternalTextDocument.Language.Text)

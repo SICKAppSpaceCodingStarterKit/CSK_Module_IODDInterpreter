@@ -1,4 +1,24 @@
 {
   "version": "1.0", 
-  "pages": []
+  "pages": [
+    {
+    "category": "My Category",
+      "pages": [
+        {
+          "path": "CSK_Module_IODDInterpreter/CSK_Module_IODDInterpreter.html",
+          "name": "IODDInterpreter"
+        },
+
+        {
+          "path": "CSK_Module_IODDInterpreter/CSK_Module_IODDInterpreter_ReadData.html",
+          "name": "IODDInterpreter_ReadData"
+        },
+
+        {
+          "path": "CSK_Module_IODDInterpreter/CSK_Module_IODDInterpreter_WriteData.html",
+          "name": "IODDInterpreter_WriteData"
+        }
+      ]
+    }
+  ]
 }

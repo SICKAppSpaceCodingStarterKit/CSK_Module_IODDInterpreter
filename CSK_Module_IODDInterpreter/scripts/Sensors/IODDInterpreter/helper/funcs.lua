@@ -9,7 +9,7 @@
 
 local funcs = {}
 -- Providing standard JSON functions
-funcs.json = require('Sensor/IODDInterpreter/helper/Json')
+funcs.json = require('Sensors/IODDInterpreter/helper/Json')
 
 --**************************************************************************
 --********************** End Global Scope **********************************

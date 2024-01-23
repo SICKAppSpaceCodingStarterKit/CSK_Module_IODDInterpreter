@@ -20,29 +20,28 @@
 --OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 --SOFTWARE.
 
--- luacheck: no max line length
--- CreationTemplateVersion: X.X.X
+---@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
 --**************************************************************************
 --**********************Start Global Scope *********************************
 --**************************************************************************
 
--- If App property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
+-- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
 
---_G.availableAPIs = require('Sensor/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
+--_G.availableAPIs = require('Sensors/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
 -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
 _G.logHandle = Log.Handler.create()
 _G.logHandle:attachToSharedLogger('ModuleLogger')
-_G.logHandle:setConsoleSinkEnabled(false) --> Set to TRUE if LoggingModule is not used
+_G.logHandle:setConsoleSinkEnabled(false) --> Set to TRUE if CSK_Logger module is not used
 _G.logHandle:setLevel("ALL")
 _G.logHandle:applyConfig()
 -----------------------------------------------------------
 
 -- Loading script regarding IODDInterpreter_Model
 -- Check this script regarding IODDInterpreter_Model parameters and functions
-_G.ioddInterpreter_Model = require('Sensor/IODDInterpreter/IODDInterpreter_Model')
+_G.ioddInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Model')
 
 --**************************************************************************
 --**********************End Global Scope ***********************************
@@ -60,22 +59,16 @@ local function main()
   --
   -- Can be used e.g. like this
   ----------------------------------------------------------------------------------------
-  
-  -- _G.ioddInterpreter_Model.doSomething() -- if you want to start a function
+
   -- ...
-  local json = require "Sensor.IODDInterpreter.helper.Json"
+  -- TODO
+  --local json = require "Sensors.IODDInterpreter.helper.Json"
   --local portsToCheck = {'S1', 'S2', 'S3'}
   --CSK_IODDInterpreter.searchIOLinkDevices(json.encode(portsToCheck))
-  --CSK_IODDInterpreter.pageCalled() -- Update UI
-  
+  CSK_IODDInterpreter.pageCalledInstances() -- Update UI
 
 end
 Script.register("Engine.OnStarted", main)
-
---OR
-
--- Call function after persistent data was loaded
---Script.register("CSK_IODDInterpreter.OnDataLoadedOnReboot", main)
 
 --**************************************************************************
 --**********************End Function Scope *********************************

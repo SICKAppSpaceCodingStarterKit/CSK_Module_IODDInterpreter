@@ -1,6 +1,6 @@
 <layout-row id="RowLayout1">
 	<layout-column id="ColumnLayout1" style="align-items:stretch">
-		<curie-callout id="DC_IoddUploadStatus">
+		<curie-callout id="DC_IODDUploadStatus">
 			<crown-edpws-binding property="type"
 				name="CSK_IODDInterpreter/OnNewCalloutType" update-on-resume>
 			</crown-edpws-binding>
@@ -9,33 +9,33 @@
 			</crown-edpws-binding>
 		</curie-callout>
 		<layout-row id="RowLayout8">
-			<appspace-file-upload-button id="FUB_IoddUpload" button-type="primary"
-				path="public/tempIodd.xml" is-file>
+			<appspace-file-upload-button id="FUB_IODDUpload" button-type="primary"
+				path="public/tempIODD.xml" is-file>
 				<span>Upload IODD XML</span>
 				<crown-binding event="finished"
 					name="CSK_IODDInterpreter/uploadFinished"
 					path="param/args/uploadSuccess" auto-commit>
 				</crown-binding>
 			</appspace-file-upload-button>
-			<davinci-drop-down id="DD_IoddListToDelete"
+			<davinci-drop-down id="DD_IODDListToDelete"
 				label="Select IODD to delete">
 				<crown-on property="data"
-					crown-event="CSK_IODDInterpreter/OnNewListIodd"
+					crown-event="CSK_IODDInterpreter/OnNewListIODD"
 					converter="convertToList">
 				</crown-on>
 				<crown-on property="value"
-					crown-event="CSK_IODDInterpreter/OnNewSelectedIoddToHandle">
+					crown-event="CSK_IODDInterpreter/OnNewSelectedIODDToHandle">
 				</crown-on>
 				<crown-set event="change"
-					crown-function="CSK_IODDInterpreter/setSelectedIoddToHandle"
-					protocol="crownMSGPACK" crown-path="newSelectedIoddToHandle">
+					crown-function="CSK_IODDInterpreter/setSelectedIODDToHandle"
+					protocol="crownMSGPACK" crown-path="newSelectedIODDToHandle">
 				</crown-set>
 			</davinci-drop-down>
 			<davinci-button id="B_DeleteIODD" type="primary"
 				icon-position="append">
-				<span>Delete Iodd</span>
+				<span>Delete IODD</span>
 				<crown-set event="submit"
-					crown-function="CSK_IODDInterpreter/deleteIodd"
+					crown-function="CSK_IODDInterpreter/deleteIODD"
 					protocol="crownMSGPACK">
 				</crown-set>
 			</davinci-button>
@@ -84,17 +84,17 @@
 						</davinci-button>
 					</layout-row>
 					<layout-row id="RowLayout5" style="width: 100%">
-						<davinci-drop-down id="DD_IoddListForInstace"
+						<davinci-drop-down id="DD_IODDListForInstace"
 							label="Select IODD to be used by instance" style="width: 50%">
 							<crown-on property="data"
-								crown-event="CSK_IODDInterpreter/OnNewListIodd"
+								crown-event="CSK_IODDInterpreter/OnNewListIODD"
 								converter="convertToList">
 							</crown-on>
 							<crown-on property="value"
-								crown-event="CSK_IODDInterpreter/OnNewSelectedIodd">
+								crown-event="CSK_IODDInterpreter/OnNewSelectedIODD">
 							</crown-on>
 							<crown-set event="change"
-								crown-function="CSK_IODDInterpreter/setSelectedIodd"
+								crown-function="CSK_IODDInterpreter/setSelectedIODD"
 								protocol="crownMSGPACK" crown-path="ioddName">
 							</crown-set>
 						</davinci-drop-down>

@@ -1,4 +1,4 @@
-local json = require "Sensor.IODDInterpreter.helper.Json"
+local json = require "Sensors.IODDInterpreter.helper.Json"
 
 local IODDDynamicTable = {}
 

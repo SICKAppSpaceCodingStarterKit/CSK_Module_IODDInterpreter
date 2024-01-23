@@ -2,73 +2,63 @@
 <manifest>
     <application name="CSK_Module_IODDInterpreter">
         <crown name="CSK_Module_IODDInterpreter">
-            <desc>Auto generated Crown (not needed)</desc>
+            <desc>This is an automatically generated CROWN (description not necessary).</desc>
         </crown>
         <crown name="CSK_IODDInterpreter">
             <trait>released</trait>
             <desc>Module to interpret IODD files for further use by CSK_Module_MultiIOLinkSMI, CSK_Module_MultiIOLinkRestMaster and for your customized app. +
---- +
+{empty} +
 The main externally useful features are following: +
-**
-1. IODD Files upload and interpretation +
-**
-Use "addIoddFile" function to interpret the IODD XML file. +
+{empty} +
+**1. IODD Files upload and interpretation** +
+Use "addIODDFile" function to interpret the IODD XML file. +
 Or use "Upload IODD XML" button in UI and select XML file to upload. +
 IODD Files (.xml) and their interpretations (.json) are stored in public/IODDFiles. +
-To delete IODD file from internal memory, use "newSelectedIoddToHandle" and "deleteIodd" +
-**
-2. IODD Filee - device match check +
-**
-Use "findIoddMatchingProductName" and "findIoddMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already. +
-**
-3. Multiple instances handling +
-**
+To delete IODD file from internal memory, use "setSelectedIODDToHandle" (TODO Please check) and "deleteIODD" +
+{empty} +
+**2. IODD Filee - device match check** +
+Use "findIODDMatchingProductName" and "findIODDMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already. +
+{empty} +
+**3. Multiple instances handling** +
 **Instance ID is a string name** to make it easier for external use since this module might be used by several other modules / applications. +
-Assign IODD file to be used by the instance via "setSelectedIodd". Use "addInstance", "setInstanceName" and "deleteInstance" to create, rename and delete the instance. +
-**
-4. Dynamic tables representing process data and parameters +
-**
+Assign IODD file to be used by the instance via "setSelectedIODD". Use "addInstance", "setInstanceName" and "deleteInstance" to create, rename and delete the instance. +
+{empty} +
+**4. Dynamic tables representing process data and parameters** +
 All parameters and process data are devided in two sets: +
 a) Read Data - consists of Process Data In table and Parameters (read only + read/write) table +
 b) Write Data - consists of Process Data Out table and Parameters (write only + read/write) table +
+{empty} +
 The rows of the tables can be selected to form a set of data (**message**) to be read or written from/to the device. +
 When a row of the table is selected, the following events are triggered to provide new set of data externally: +
 a) Read Data - "OnNewReadDataJsonTemplateAndInfo" +
 b) Write Data - "OnNewWriteDataJsonTemplateAndInfo" +
-**
-5. Process data structure selection +
-**
+{empty} +
+**5. Process data structure selection** +
 Process data structure of IOLink device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following: +
 - "getProcessDataConditionList" - to get list of possible options +
 - "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter's +
 When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset. +
-**
-6. Data point information +
-**
+{empty} +
+**6. Data point information** +
 Module can provide chunks of IODD file in JSON format to describe some datapoints you need. Use the following functions to get information about datapoints: +
 - "getProcessDataInInfo" - process data in (with current process data structure option) +
 - "getProcessDataOutInfo" - process data out (with current process data structure option) +
 - "getParameterDataPointInfo" - any parameter with specified index and subindex +
-- "getProcessDataConditionInfo" - parameter responsible for changing the process data structure (if it is variable) +
---- +
-**
-ToDo: +
-**
-- Multiple languages support +</desc>
+- "getProcessDataConditionInfo" - parameter responsible for changing the process data structure (if it is variable) +</desc>
             <serves>
                 <event name="OnNewStatusLoadParameterOnReboot">
-                    <desc>Notify status if parameters should be loaded on app-/device- boot up</desc>
+                    <desc>Notify status if parameters should be loaded on app/device boot up.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
                 <event name="OnPersistentDataModuleAvailable">
-                    <desc>Notify status if features of PersistendData CSK module  are available</desc>
+                    <desc>Notify status if features of CSK_PersistendData module are available.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
                 <event name="OnDataLoadedOnReboot">
                     <desc>Event to call if module tried to load parameters and should be ready.</desc>
                 </event>
                 <event name="OnNewParameterName">
-                    <desc>Notify name of persistent data parameter</desc>
+                    <desc>Notify name of persistent data parameter.</desc>
                     <param desc="Parameter name" multiplicity="1" name="name" type="string"/>
                 </event>
                 <event name="OnUserLevelOperatorActive">
@@ -143,20 +133,20 @@ ToDo: +
                     <desc>Event to show the name of selected instance in UI.</desc>
                     <param desc="Name of the instance." multiplicity="1" name="instanceName" type="string"/>
                 </event>
-                <event name="OnNewSelectedIoddToHandle">
+                <event name="OnNewSelectedIODDToHandle">
                     <trait>released</trait>
                     <desc>Event to notify the selected IODD name of a file to be edited (deleted).</desc>
-                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIoddToHandle" type="string"/>
+                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIODDToHandle" type="string"/>
                 </event>
-                <event name="OnNewListIodd">
+                <event name="OnNewListIODD">
                     <trait>released</trait>
                     <desc>Event to share list of all loaded IODD files.</desc>
-                    <param desc="List of all names in JSON format." multiplicity="1" name="jsonIoddList" type="string"/>
+                    <param desc="List of all names in JSON format." multiplicity="1" name="jsonIODDList" type="string"/>
                 </event>
-                <event name="OnNewSelectedIodd">
+                <event name="OnNewSelectedIODD">
                     <trait>released</trait>
                     <desc>Event to notify the IODD name used by selected instance.</desc>
-                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIodd" type="string"/>
+                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIODD" type="string"/>
                 </event>
                 <event name="OnNewReadDataJsonTemplateAndInfo">
                     <trait>released</trait>
@@ -172,23 +162,23 @@ ToDo: +
                     <param desc="JSON template of new combined write message." multiplicity="1" name="jsonTemplate" type="string"/>
                     <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </event>
-                <event name="OnIoddListChanged">
+                <event name="OnIODDListChanged">
                     <trait>released</trait>
                     <desc>Event to notify if IODD file was deleted or a new IODD file was successfully uploaded.</desc>
                 </event>
                 <function name="setParameterName">
-                    <desc>Function to set the name of the parameters if saved/loaded via the "PersistentData" CSK-module</desc>
-                    <param desc="Name of the parameter" multiplicity="1" name="name" type="string"/>
+                    <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
+                    <param desc="Name of the parameter." multiplicity="1" name="name" type="string"/>
                 </function>
                 <function name="sendParameters">
-                    <desc>Send parameters to PersistentData CSK module if possible to save them</desc>
+                    <desc>Send parameters to CSK_PersistentData module if possible to save them.</desc>
                 </function>
                 <function name="loadParameters">
-                    <desc>Load parameters for this module from the PersistentData CSK-module if possible and use them.</desc>
+                    <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
                 </function>
                 <function name="setLoadOnReboot">
-                    <desc>Configure if this module should load its saved parameters at app- / device- boot up</desc>
-                    <param desc="Set status" multiplicity="1" name="status" type="bool"/>
+                    <desc>Configure if this module should load its saved parameters at app/device boot up.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </function>
                 <function name="pageCalledInstances">
                     <desc>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</desc>
@@ -214,19 +204,19 @@ ToDo: +
                     <desc>Function to process the selected row in process data out dynamic table in UI.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                 </function>
-                <function name="addIoddFile">
+                <function name="addIODDFile">
                     <desc>Add a new IODD file to be interpreted. Returns success of interpretation and new internal  name of IODD file created according to IODD file name standard.</desc>
                     <param desc="Path to a temporary IODD file. The file will be deleted after interpretation attempt." multiplicity="1" name="path" type="string"/>
                     <return desc="Interpretation success." multiplicity="1" name="success" type="bool"/>
                     <return desc="If interpretation is successful, returns a standartized IODD file name that is used for the uploaded IODD file. Else returns a reason of interpretation failure." multiplicity="1" name="result" type="string"/>
                 </function>
-                <function name="findIoddMatchingProductName">
+                <function name="findIODDMatchingProductName">
                     <desc>Checks if there is a loaded IODD file for the device with matching product name.</desc>
                     <param desc="Product name of the device." multiplicity="1" name="productName" type="string"/>
                     <return desc="True if the matching file is found." multiplicity="1" name="success" type="bool"/>
                     <return desc="Name of IODD file if match is found." multiplicity="1" name="result" type="string"/>
                 </function>
-                <function name="findIoddMatchingVendorIdDeviceIdVersion">
+                <function name="findIODDMatchingVendorIdDeviceIdVersion">
                     <desc>Checks if there is a loaded IODD file for the device with matching vendor ID, device ID and (optional) IODD version.</desc>
                     <param desc="Vendor ID." multiplicity="1" name="vendorId" type="auto"/>
                     <param desc="Device ID." multiplicity="1" name="deviceId" type="auto"/>
@@ -261,7 +251,7 @@ ToDo: +
                     <desc>Function to change the instance id (name).</desc>
                     <param desc="New unique name of the selected instance." multiplicity="1" name="newInstanceName" type="string"/>
                 </function>
-                <function name="getIoddList">
+                <function name="getIODDList">
                     <desc>Get list of loaded IODD files.</desc>
                     <return desc="String array with names of loaded IODD files." multiplicity="*" name="ioddList" type="string"/>
                 </function>
@@ -286,25 +276,25 @@ ToDo: +
                     <trait>released</trait>
                     <desc>Create a new IODD instance with default instance ID (string name).</desc>
                 </function>
-                <function name="setSelectedIodd">
+                <function name="setSelectedIODD">
                     <desc>Set IODD file used in the selected instance.</desc>
                     <param desc="Standartised IODD name." multiplicity="1" name="ioddName" type="string"/>
                 </function>
-                <function name="deleteIodd">
+                <function name="deleteIODD">
                     <trait>released</trait>
                     <desc>Delete IODD file from internal memory. Deletes all IODD instances that use this file as well.</desc>
                     <return desc="Success of deleting." multiplicity="1" name="success" type="bool"/>
                     <return desc="Reason if deleting failed." multiplicity="1" name="result" type="string"/>
                 </function>
-                <function name="setSelectedIoddToHandle">
+                <function name="setSelectedIODDToHandle">
                     <trait>released</trait>
                     <desc>Set IODD to edit (delete).</desc>
-                    <param desc="IODD name." multiplicity="1" name="newSelectedIoddToHandle" type="string"/>
+                    <param desc="IODD name." multiplicity="1" name="newSelectedIODDToHandle" type="string"/>
                 </function>
                 <function name="pageCalledReadData">
                     <trait>released</trait>
-                    <desc>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</desc>
-                    <return desc="Empty string." multiplicity="1" name="empty" type="string"/>
+                    <desc>Function to register "On Resume" of the module UI (only as helper function).</desc>
+                    <return desc="Empty string (only needed to simplify binding)." multiplicity="1" name="empty" type="string"/>
                 </function>
                 <function name="pageCalledWriteData">
                     <trait>released</trait>
