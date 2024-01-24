@@ -14,9 +14,9 @@ The main externally useful features are following: +
 Use "addIODDFile" function to interpret the IODD XML file. +
 Or use "Upload IODD XML" button in UI and select XML file to upload. +
 IODD Files (.xml) and their interpretations (.json) are stored in public/IODDFiles. +
-To delete IODD file from internal memory, use "setSelectedIODDToHandle" (TODO Please check) and "deleteIODD" +
+To delete IODD file from internal memory, use "setSelectedIODDToHandle" and "deleteIODD" +
 {empty} +
-**2. IODD Filee - device match check** +
+**2. IODD File - device match check** +
 Use "findIODDMatchingProductName" and "findIODDMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already. +
 {empty} +
 **3. Multiple instances handling** +
@@ -36,7 +36,7 @@ b) Write Data - "OnNewWriteDataJsonTemplateAndInfo" +
 **5. Process data structure selection** +
 Process data structure of IOLink device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following: +
 - "getProcessDataConditionList" - to get list of possible options +
-- "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter's +
+- "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter's value +
 When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset. +
 {empty} +
 **6. Data point information** +

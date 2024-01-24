@@ -49,12 +49,6 @@ function IODDInterpreter:getSubIndexParameter(index, subindex)
   if self.ParamIndexMap[index] and self.ParamIndexSubindexMap[index][subindex] then
     local tempTable = copy(self.Variable[self.ParamIndexMap[index]].Datatype.RecordItem[self.ParamIndexSubindexMap[index][subindex]])
     changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
---[[    local tempTable = {}
-    for _, subIndexDescr in ipairs(parameterTable.Datatype.RecordItem) do
-      if subIndexDescr.subindex == subindex then
-        tempTable = subIndexDescr
-      end
-    end]]
     return tempTable
   else
     return false
@@ -470,6 +464,5 @@ function IODDInterpreter:getAllParameterInfo()
   changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
   return tempTable
 end
-
 
 return IODDInterpreter

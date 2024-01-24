@@ -782,9 +782,9 @@ The main externally useful features are following:<br>
 Use "addIODDFile" function to interpret the IODD XML file.<br>
 Or use "Upload IODD XML" button in UI and select XML file to upload.<br>
 IODD Files (.xml) and their interpretations (.json) are stored in public/IODDFiles.<br>
-To delete IODD file from internal memory, use "setSelectedIODDToHandle" (TODO Please check) and "deleteIODD"<br>
+To delete IODD file from internal memory, use "setSelectedIODDToHandle" and "deleteIODD"<br>
 <br>
-<strong>2. IODD Filee - device match check</strong><br>
+<strong>2. IODD File - device match check</strong><br>
 Use "findIODDMatchingProductName" and "findIODDMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already.<br>
 <br>
 <strong>3. Multiple instances handling</strong><br>
@@ -804,7 +804,7 @@ b) Write Data - "OnNewWriteDataJsonTemplateAndInfo"<br>
 <strong>5. Process data structure selection</strong><br>
 Process data structure of IOLink device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following:<br>
 - "getProcessDataConditionList" - to get list of possible options<br>
-- "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter&#8217;s<br>
+- "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter&#8217;s value<br>
 When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset.<br>
 <br>
 <strong>6. Data point information</strong><br>
@@ -4307,7 +4307,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div id="footer">
 <div id="footer-text">
 Version 1.0.0<br>
-Last updated 2024-01-23 10:47:45 +0100
+Last updated 2024-01-23 17:26:19 +0100
 </div>
 </div>
 <script type="text/javascript">

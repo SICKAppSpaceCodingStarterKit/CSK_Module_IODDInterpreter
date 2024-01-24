@@ -13,12 +13,10 @@ local nameOfModule = 'CSK_IODDInterpreter'
 -- Reference to global handle
 local ioddInterpreter_Model
 
-local selectedIODDToHandle = '' --TODO
-
-local currentCalloutType = 'info' --TODO
-local currentCalloutValue = 'Application started' --TODO
-local selectedInstance = '' --TODO
-local selectedIODD = '' --TODO
+local selectedIODDToHandle = '' -- IODD file that is selected in UI to be deleted
+local currentCalloutType = 'info' -- Type of the status callot in UI
+local currentCalloutValue = 'Application started' -- Callout message to be shown in UI
+local selectedInstance = '' -- Current selected instance
 
 -- Timer to update UI via events after page was loaded
 local tmrInstances = Timer.create()
@@ -26,7 +24,7 @@ tmrInstances:setExpirationTime(300)
 tmrInstances:setPeriodic(false)
 
 --************************** Read Data Scope *******************************
-local readPreficesToInclude = {"read_"} --TODO
+local readPreficesToInclude = {"read_"} -- prefix to be included in colum names of dynamic table content for read data
 
 -- Timer to update UI via events after page was loaded
 local tmrReadData = Timer.create()
@@ -34,7 +32,7 @@ tmrReadData:setExpirationTime(1000)
 tmrReadData:setPeriodic(false)
 
 --*************************** Write Data Scope *****************************
-local writePreficesToInclude = {"write_"} --TODO
+local writePreficesToInclude = {"write_"} -- prefix to be included in colum names of dynamic table content for write data
 
 -- Timer to update UI via events after page was loaded
 local tmrWriteData = Timer.create()
@@ -165,7 +163,9 @@ local function handleOnExpiredTmrInstances()
   Script.notifyEvent("IODDInterpreter_isInstanceSelected", isSelected)
   if isSelected then
     Script.notifyEvent("IODDInterpreter_OnNewInstanceName", selectedInstance)
-    Script.notifyEvent("IODDInterpreter_OnNewSelectedIODD", selectedIODD)
+    if ioddInterpreter_Model.parameters.instances[selectedInstance].ioddName then
+      Script.notifyEvent("IODDInterpreter_OnNewSelectedIODD", ioddInterpreter_Model.parameters.instances[selectedInstance].ioddName)
+    end
   end
 end
 Timer.register(tmrInstances, "OnExpired", handleOnExpiredTmrInstances)
@@ -235,7 +235,6 @@ end
 Script.serveFunction('CSK_IODDInterpreter.setSelectedInstance', setSelectedInstance)
 
 local function setSelectedIODD(ioddName)
-  selectedIODD = ioddName
   ioddInterpreter_Model.loadIODD(selectedInstance, ioddName)
   handleOnExpiredTmrInstances()
 end
@@ -449,7 +448,6 @@ Script.serveFunction('CSK_IODDInterpreter.processDataInRowSelected', processData
 
 local function readParameterRowSelected(jsonSelectedRow)
   jsonSelectedRow = ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, readPreficesToInclude[1])
-  print(jsonSelectedRow)
   ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters = ioddInterpreter_Model.json.decode(
     updateSelectedParametersTable(
       jsonSelectedRow,
@@ -698,42 +696,6 @@ local function getProcessDataOutInfo()
 end
 Script.serveFunction('CSK_IODDInterpreter.getProcessDataOutInfo', getProcessDataOutInfo)
 
---TODO
--- This function is never used?
---- Function to ...
----@param vendorId string --TODO
----@param deviceId string --TODO
----@return bool success 
-local function loadIODDFromInternetWithReturn(vendorId, deviceId)
-  local ioddFinderURL = "https://ioddfinder.io-link.com/api/ioddarchive?vendorId=%s&deviceId=%s&ioLinkRev=1.1&format=xml"
-  local request = HTTPClient.Request.create()
-  request:setMethod("GET")
-  request:setURL(
-    string.format(
-      ioddFinderURL,
-      tostring(vendorId),
-      tostring(deviceId)
-    )
-  )
-  request:addHeader("X-API-KEY", keyAPI)
-  local client = HTTPClient.create()
-  client:setHostnameVerification(false)
-  client:setPeerVerification(false)
-  local response = client:execute(request)
-  local success = response:getSuccess()
-  local statusCode = response:getStatusCode()
-  if success and tostring(statusCode) == "200" then
-    Script.notifyEvent('ioddInterpreter_announceNoInternetConnections', false)
-    local ioddContent = response:getContent()
-    local successLoad = ioddInterpreter_model:addIODDXmlString(ioddContent) -- TODO This function does not exists?
-    handleOnExpiredTmr()
-    return successLoad
-  else
-    Script.notifyEvent('ioddInterpreter_announceNoInternetConnections', true)
-  end
-  return false
-end
-
 --**************************************************************************
 --*********************** End external use Scope ***************************
 --**************************************************************************
@@ -772,11 +734,8 @@ local function loadParameters()
           ioddInterpreter_Model.changeProcessDataStructureOptionValue(instanceId, instanceInfo.currentProcessDataConditionValue)
         end
         for instanceParameter, instanceParameterInfo in pairs(instanceInfo) do
-            --print(ioddInterpreter_Model.json.encode(currentInstance.allReadParameterInfo))
-            --print(ioddInterpreter_Model.json.encode(currentInstance.selectedReadParameters))
           if instanceParameter ~= 'iodd' then
             ioddInterpreter_Model.parameters.instances[instanceId][instanceParameter] = instanceParameterInfo
-            --print(instanceParameter)
           end
         end
       end

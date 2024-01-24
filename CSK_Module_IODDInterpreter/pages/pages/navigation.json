@@ -2,7 +2,7 @@
   "version": "1.0", 
   "pages": [
     {
-    "category": "My Category",
+    "category": "IODDInterpreter page tree",
       "pages": [
         {
           "path": "CSK_Module_IODDInterpreter/CSK_Module_IODDInterpreter.html",

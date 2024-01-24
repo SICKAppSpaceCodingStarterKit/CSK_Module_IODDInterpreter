@@ -34,24 +34,14 @@ ioddInterpreter_Model.dynamicTableHelper = require "Sensors.IODDInterpreter.help
 ioddInterpreter_Model.json = require "Sensors.IODDInterpreter.helper.Json"
 
 -- Create parameters / instances for this module
-ioddInterpreter_Model.ioddFilesStorage = 'public/IODDFiles' -- TODO
-File.mkdir(ioddInterpreter_Model.ioddFilesStorage) -- TODO
-
--- TODO
-local defaultPortConfig = {
-  selectedReadParameters = {}, -- TODO
-  selectedWriteParameters = {}, -- TODO
-  selectedProcessDataIn = {}, -- TODO
-  selectedProcessDataOut = {}, -- TODO
-  deviceMatch = false, -- TODO
-  ioddName = nil -- TODO
-}
+ioddInterpreter_Model.ioddFilesStorage = 'public/IODDFiles' -- Default folder to store iodd .xml files and their .json interpretations 
+File.mkdir(ioddInterpreter_Model.ioddFilesStorage) -- creating the storage folder
 
 -- Parameters to be saved permanently if wanted
 ioddInterpreter_Model.parameters = {}
 ioddInterpreter_Model.parameters.instances = {}
 
-ioddInterpreter_Model.availableIODDs = {} -- TODO
+ioddInterpreter_Model.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
 local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
 for i, fileName in ipairs(ioddFilesStorageContent) do
   if string.sub(fileName, -5) == '.json' then
@@ -65,10 +55,11 @@ end
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
--- TODO
---- Function to ...
----@param ioddFilePath [type] ... --TODO
----@return success bool ... --TODO
+
+--- Function to check if loaded .xml IODD file can be interpreted. If yes, then file with standartized name and its .json interpetation are storred in IODD storage folder. The original file is deleted.
+---@param ioddFilePath string Path to a loaded .xml IODD file
+---@return bool loadSuccess Success of interpretation 
+---@return string ioddStandardFileName Standartised name of the IODD file generated according to IODD standard
 local function addNewIODDfile(ioddFilePath)
   local tempIODD = ioddInterpreter_Model.ioddInt:new()
   local callSuccess, loadSuccess = pcall(ioddInterpreter_Model.ioddInt.interpretXMLFile, tempIODD, ioddFilePath)
@@ -87,7 +78,6 @@ local function addNewIODDfile(ioddFilePath)
       return false, 'IODD is already loaded'
     end
   end
-
   local newioddFilePath = ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddStandardFileName
   table.insert(ioddInterpreter_Model.availableIODDs, ioddStandardFileName)
   tempIODD:saveAsJSON(ioddInterpreter_Model.ioddFilesStorage, ioddStandardFileName..'.json')
@@ -98,9 +88,8 @@ local function addNewIODDfile(ioddFilePath)
 end
 ioddInterpreter_Model.addNewIODDfile = addNewIODDfile
 
--- TODO
---- Function to ...
----@param ioddName [type] ... --TODO
+--- Delete IODD file from IODD storage.
+---@param ioddName string Name of the IODD file to be deleted
 local function deleteIODDFile(ioddName)
   File.del(ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddName .. '.xml')
   File.del(ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddName .. '.json')
@@ -114,11 +103,10 @@ local function deleteIODDFile(ioddName)
 end
 ioddInterpreter_Model.deleteIODDFile = deleteIODDFile
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@param processDataInfo [type] ... --TODO
-local function updateProcessDataInfo(instanceId, processDataInfo)
+--- Set default values to all tables concerning processa data
+---@param instanceId string Name of the instance
+---@param processDataInfo object Lua table with process data info (depends on the selected process data structure)
+local function setDefaultProcessDataInfo(instanceId, processDataInfo)
   local currentInstance = ioddInterpreter_Model.parameters.instances[instanceId]
   currentInstance.processDataInInfo = processDataInfo.ProcessDataIn
   currentInstance.processDataOutInfo = processDataInfo.ProcessDataOut
@@ -128,37 +116,30 @@ local function updateProcessDataInfo(instanceId, processDataInfo)
   currentInstance.selectedProcessDataOut = ioddInterpreter_Model.dynamicTableHelper.makeDefaultSelectedProcessDataTable(processDataInfo.ProcessDataOut)
 end
 
--- TODO
---- Function to ...
----@param someTable [type] ... --TODO
----@return size int ... --TODO
-local function getTableSize(someTable)
-  local size = 0
-  for _,_ in pairs(someTable) do
-    size = size + 1
-  end
-  return size
-end
-
--- TODO
---- Function to ...
----@return newInstanceId string ... --TODO
+--- Create a new instance with default name
+---@return string newInstanceId Name of the created instance
 local function createNewInstance()
-  local instanceNumber = getTableSize(ioddInterpreter_Model.parameters.instances)
+  local instanceNumber = ioddInterpreter_Model.helperFuncs.getTableSize(ioddInterpreter_Model.parameters.instances)
   local newInstanceId = 'newIntance' .. tostring(instanceNumber)
   while ioddInterpreter_Model.parameters.instances[newInstanceId] do
     instanceNumber = instanceNumber + 1
     newInstanceId = 'newIntance' .. tostring(instanceNumber)
   end
-  ioddInterpreter_Model.parameters.instances[newInstanceId] = ioddInterpreter_Model.helperFuncs.copy(defaultPortConfig)
+  ioddInterpreter_Model.parameters.instances[newInstanceId] = {
+    selectedReadParameters = {},
+    selectedWriteParameters = {},
+    selectedProcessDataIn = {},
+    selectedProcessDataOut = {},
+    deviceMatch = false,
+    ioddName = nil
+  }
   return newInstanceId
 end
 ioddInterpreter_Model.createNewInstance = createNewInstance
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@param ioddName [type] ... --TODO
+--- Start using the selected IODD in the selected instance
+---@param instanceId string Name of the instance
+---@param ioddName string Name of the IODD file to start using
 local function loadIODD(instanceId, ioddName)
   local currentInstance = ioddInterpreter_Model.parameters.instances[instanceId]
   currentInstance.ioddName = ioddName
@@ -175,14 +156,14 @@ local function loadIODD(instanceId, ioddName)
   end
   currentInstance.allReadParameterInfo = loadedIODD:getAllReadParameterInfo()
   currentInstance.allWriteParameterInfo = loadedIODD:getAllWriteParameterInfo()
-  updateProcessDataInfo(instanceId, loadedIODD:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
+  setDefaultProcessDataInfo(instanceId, loadedIODD:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
 end
 ioddInterpreter_Model.loadIODD = loadIODD
 
--- TODO
---- Function to ...
----@param vers [type] ... --TODO
----@return vers int[?] ... --TODO
+
+--- Function to derive the latest version between two
+---@param vers table Array of versions of IODD file 1 and file2
+---@return string? higherVersion Higher version of the two
 local function getHigherVersion(vers)
   local endings = {0,0}
   local inits = {0,0}
@@ -201,40 +182,41 @@ local function getHigherVersion(vers)
   return nil
 end
 
--- TODO
---- Function to ...
----@param vendorId [type] ... --TODO
----@param deviceId [type] ... --TODO
----@param version [type] ... --TODO
----@return bla bool ... --TODO
----@return blabla string ... --TODO
+--- Function to check if the currently used IODD file mathches needed venor ID, device ID and version. Used to check if this instance can still be used for connected IO-Link device.
+--- NOTE! Only vendor and device ID check currently work as it is not clear what to do if version is lower
+---@param vendorId string Vendor ID from device identification
+---@param deviceId string Device ID from device identification
+---@param version string Version from device identification
+---@return bool success True if the vendor ID, device ID match the used IODD file
+---@return string IODDname Name of the loaded IODD for external reference
 local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version)
   for _, loadedIODDName in ipairs(ioddInterpreter_Model.availableIODDs) do
     local tempIODD = ioddInterpreter_Model.ioddInt:new()
     tempIODD:loadFromJson(ioddInterpreter_Model.ioddFilesStorage, loadedIODDName..'.json')
     local tempVendorId, tempDeviceId, tempVersion = tempIODD:getVendorIdDeviceIdVersion()
     if vendorId == tempVendorId and tempDeviceId == deviceId then
-      if not version then
-        return true, loadedIODDName
-      end
-      if tempVersion == version then
-        return true, loadedIODDName
-      elseif getHigherVersion({tempVersion, version}) == tempVersion then
-        return true, loadedIODDName
-      else
-        return true, loadedIODDName
-      end
+      return true, loadedIODDName
+      -- As noted above, to be clarified in future
+      --if not version then
+      --  return true, loadedIODDName
+      --end
+      --if tempVersion == version then
+      --  return true, loadedIODDName
+      --elseif getHigherVersion({tempVersion, version}) == tempVersion then
+      --  return true, loadedIODDName
+      --else
+      --  return true, loadedIODDName
+      --end
     end
   end
   return false, "NO MATCH"
 end
 ioddInterpreter_Model.checkVendorIdDeviceIdVersionMatchIODD = checkVendorIdDeviceIdVersionMatchIODD
 
--- TODO
---- Function to ...
----@param productName [type] ... --TODO
----@return bla bool ... --TODO
----@return blabla string ... --TODO
+--- Function to check if the currently used IODD file mathches needed product name. Used to check if this instance can still be used for connected IO-Link device.
+---@param productName string Product name from device identification
+---@return bool success True if the vendor ID, device ID match the used IODD file
+---@return string IODDname Name of the loaded IODD for external reference
 local function checkProductNameMatchIODD(productName)
   for _, loadedIODDName in ipairs(ioddInterpreter_Model.availableIODDs) do
     local tempIODD = ioddInterpreter_Model.ioddInt:new()
@@ -251,42 +233,39 @@ local function checkProductNameMatchIODD(productName)
 end
 ioddInterpreter_Model.checkProductNameMatchIODD = checkProductNameMatchIODD
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@param newOptionName [type] ... --TODO
+--- Function to change the process data structure (update info tables) depending on the new option string name (parsed from IODD)
+---@param instanceId string ID of the instance
+---@param newOptionName string Name of the new option
 local function changeProcessDataStructureOptionName(instanceId, newOptionName)
   local currentInstance = ioddInterpreter_Model.parameters.instances[instanceId]
   local newOptionValue = currentInstance.iodd:getProcessDataConditionValueFromName(newOptionName)
   currentInstance.currentProcessDataConditionValue = newOptionValue
   currentInstance.currentProcessDataConditionName = newOptionName
-  updateProcessDataInfo(instanceId, currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
+  setDefaultProcessDataInfo(instanceId, currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
 end
 ioddInterpreter_Model.changeProcessDataStructureOptionName = changeProcessDataStructureOptionName
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@param newOptionValue [type] ... --TODO
+--- Function to change the process data structure (update info tables) depending on the new option string value
+---@param instanceId string ID of the instance
+---@param newOptionValue string Name of the new option
 local function changeProcessDataStructureOptionValue(instanceId, newOptionValue)
   local currentInstance = ioddInterpreter_Model.parameters.instances[instanceId]
   local newOptionName = currentInstance.iodd:getProcessDataConditionNameFromValue(newOptionValue)
   currentInstance.currentProcessDataConditionValue = newOptionValue
   currentInstance.currentProcessDataConditionName = newOptionName
-  updateProcessDataInfo(instanceId, currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
+  setDefaultProcessDataInfo(instanceId, currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
 end
 ioddInterpreter_Model.changeProcessDataStructureOptionValue = changeProcessDataStructureOptionValue
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@return blabla string ... --TODO
+--- Function to get JSON template and info of all datapoints selected on the read data page
+---@param instanceId string ID of the instance
+---@return string jsonTemplate JSON table with template generated according to IO-Link JSON standard
+---@return string jsonInfoTable JSON table with info about the selected data points
 local function getReadDataJsonTemplateAndInfo(instanceId)
   local compiledTableProcessData = ioddInterpreter_Model.helperFuncs.compileProcessDataTable(
     ioddInterpreter_Model.parameters.instances[instanceId].processDataInInfo,
     ioddInterpreter_Model.parameters.instances[instanceId].selectedProcessDataIn
   )
-
   local compiledTableParameters = ioddInterpreter_Model.helperFuncs.compileParametersTable(
     ioddInterpreter_Model.parameters.instances[instanceId].iodd,
     ioddInterpreter_Model.parameters.instances[instanceId].selectedReadParameters
@@ -306,14 +285,14 @@ local function getReadDataJsonTemplateAndInfo(instanceId)
   elseif compiledTableParameters then
     jsonTemplate = ioddInterpreter_Model.helperFuncs.makeExpectedPayload(compiledTableParameters)
   end
-  return ioddInterpreter_Model.json.encode(jsonTemplate), json.encode(infoTable)
+  return ioddInterpreter_Model.json.encode(jsonTemplate), ioddInterpreter_Model.json.encode(infoTable)
 end
 ioddInterpreter_Model.getReadDataJsonTemplateAndInfo = getReadDataJsonTemplateAndInfo
 
--- TODO
---- Function to ...
----@param instanceId [type] ... --TODO
----@return bla string ... --TODO
+--- Function to get JSON template and info of all datapoints selected on the write data page
+---@param instanceId string ID of the instance
+---@return string jsonTemplate JSON table with template generated according to IO-Link JSON standard
+---@return string jsonInfoTable JSON table with info about the selected data points
 local function getWriteDataJsonTemplateAndInfo(instanceId)
   local compiledTableProcessData = ioddInterpreter_Model.helperFuncs.compileProcessDataTable(
     ioddInterpreter_Model.parameters.instances[instanceId].processDataOutInfo,
