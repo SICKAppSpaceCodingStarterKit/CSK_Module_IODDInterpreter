@@ -58,13 +58,22 @@ local function main()
   --       If so, the app will trigger the "OnDataLoadedOnReboot" event if ready after loading parameters
   --
   -- Can be used e.g. like this
+  --[[
+  CSK_IODDInterpreter.addInstance()
+  CSK_IODDInterpreter.addIODDFile('IODD.xml')
+  CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
+  CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
+
+  -- Optional process data structure
+  local processDataStructure = CSK_IODDInterpreter.getProcessDataConditionList()
+
+  local processDataIn = CSK_IODDInterpreter.getProcessDataInInfo()
+  local processDataOut = CSK_IODDInterpreter.getProcessDataOutInfo()
+  local parameterData = CSK_IODDInterpreter.getParameterDataPointInfo('instanceID', 120, 0)
+  local processDataCondition = CSK_IODDInterpreter.getProcessDataConditionInfo()
+  ]]
   ----------------------------------------------------------------------------------------
 
-  -- ...
-  -- TODO
-  --local json = require "Sensors.IODDInterpreter.helper.Json"
-  --local portsToCheck = {'S1', 'S2', 'S3'}
-  --CSK_IODDInterpreter.searchIOLinkDevices(json.encode(portsToCheck))
   CSK_IODDInterpreter.pageCalledInstances() -- Update UI
 
 end

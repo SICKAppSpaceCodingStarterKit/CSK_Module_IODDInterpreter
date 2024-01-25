@@ -34,9 +34,10 @@ a) Read Data - "OnNewReadDataJsonTemplateAndInfo" +
 b) Write Data - "OnNewWriteDataJsonTemplateAndInfo" +
 {empty} +
 **5. Process data structure selection** +
-Process data structure of IOLink device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following: +
+Process data structure of IO-Link device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following: +
 - "getProcessDataConditionList" - to get list of possible options +
 - "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter's value +
+{empty} +
 When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset. +
 {empty} +
 **6. Data point information** +

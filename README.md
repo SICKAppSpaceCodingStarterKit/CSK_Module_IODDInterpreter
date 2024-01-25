@@ -31,6 +31,11 @@ Following CSK modules are mostly necessary to make use of the features of this m
 |CSK_1stModule_Logger|[V4.0.0](https://github.com/SICKAppSpaceCodingStarterKit/CSK_1stModule_Logger/releases/tag/v4.0.0)|Optional
 |CSK_Module_PersistentData|[V4.0.0](https://github.com/SICKAppSpaceCodingStarterKit/CSK_Module_PersistentData)|To persist data
 
+## Known issues
+
+### Open Todo
+- Multiple languages support.
+
 ## Information
 
 ### Tested on
