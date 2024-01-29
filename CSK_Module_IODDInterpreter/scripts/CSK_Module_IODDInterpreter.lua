@@ -60,17 +60,21 @@ local function main()
   -- Can be used e.g. like this
   --[[
   CSK_IODDInterpreter.addInstance()
-  CSK_IODDInterpreter.addIODDFile('IODD.xml')
-  CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
-  CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
 
-  -- Optional process data structure
-  local processDataStructure = CSK_IODDInterpreter.getProcessDataConditionList()
+  CSK_IODDInterpreter.addIODDFile('public/IODD.xml')
+  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
+  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
+  if success then
+    CSK_IODDInterpreter.setSelectedIODD(ioddName)
+	-- Optional process data structure
+    local processDataStructure = CSK_IODDInterpreter.getProcessDataConditionList()
+    local processDataIn = CSK_IODDInterpreter.getProcessDataInInfo()
+    local processDataOut = CSK_IODDInterpreter.getProcessDataOutInfo()
+    local parameterData = CSK_IODDInterpreter.getParameterDataPointInfo('instanceID', 120, 0)
+    local processDataCondition = CSK_IODDInterpreter.getProcessDataConditionInfo()
+  end
 
-  local processDataIn = CSK_IODDInterpreter.getProcessDataInInfo()
-  local processDataOut = CSK_IODDInterpreter.getProcessDataOutInfo()
-  local parameterData = CSK_IODDInterpreter.getParameterDataPointInfo('instanceID', 120, 0)
-  local processDataCondition = CSK_IODDInterpreter.getProcessDataConditionInfo()
+
   ]]
   ----------------------------------------------------------------------------------------
 
