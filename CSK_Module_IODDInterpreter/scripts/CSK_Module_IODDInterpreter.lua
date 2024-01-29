@@ -60,6 +60,7 @@ local function main()
   -- Can be used e.g. like this
   --[[
   CSK_IODDInterpreter.addInstance()
+
   CSK_IODDInterpreter.addIODDFile('public/IODD.xml')
   local success, ioddName = CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
   local success, ioddName = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
@@ -72,6 +73,7 @@ local function main()
     local parameterData = CSK_IODDInterpreter.getParameterDataPointInfo('instanceID', 120, 0)
     local processDataCondition = CSK_IODDInterpreter.getProcessDataConditionInfo()
   end
+
 
   ]]
   ----------------------------------------------------------------------------------------
