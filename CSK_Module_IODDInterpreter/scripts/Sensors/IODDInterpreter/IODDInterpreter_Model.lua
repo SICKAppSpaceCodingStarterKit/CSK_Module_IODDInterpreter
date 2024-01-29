@@ -37,7 +37,6 @@ ioddInterpreter_Model.json = require "Sensors.IODDInterpreter.helper.Json"
 ioddInterpreter_Model.ioddFilesStorage = 'public/IODDFiles' -- Default folder to store iodd .xml files and their .json interpretations 
 File.mkdir(ioddInterpreter_Model.ioddFilesStorage) -- creating the storage folder
 
-
 -- Parameters to be saved permanently if wanted
 ioddInterpreter_Model.parameters = {}
 ioddInterpreter_Model.parameters.instances = {}
@@ -197,6 +196,7 @@ local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version
     local tempVendorId, tempDeviceId, tempVersion = tempIODD:getVendorIdDeviceIdVersion()
     if vendorId == tempVendorId and tempDeviceId == deviceId then
       return true, loadedIODDName
+      -- As noted above, to be clarified in future
       --if not version then
       --  return true, loadedIODDName
       --end

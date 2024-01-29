@@ -57,7 +57,6 @@ local function copy(origTable, seen)
 end
 funcs.copy = copy
 
-
 local function renameDatatype(dataPointInfo)
     if dataPointInfo.SimpleDatatype then
       dataPointInfo.Datatype = copy(dataPointInfo.SimpleDatatype)
@@ -164,7 +163,6 @@ local function convertContainer2Table(cont)
 end
 funcs.convertContainer2Table = convertContainer2Table
 
-
 -- Function to get content list
 --@createContentList(data:table):string
 local function createContentList(data)
@@ -206,7 +204,6 @@ local function createStringListBySimpleTable(content)
 end
 funcs.createStringListBySimpleTable = createStringListBySimpleTable
 
-
 local function getDatatypeBitlength(datatypeInfo)
   if datatypeInfo.type == "BooleanT" then
     return 1
@@ -220,8 +217,6 @@ local function getDatatypeBitlength(datatypeInfo)
     return tonumber(datatypeInfo.count)*getDatatypeBitlength(datatypeInfo.Datatype)
   end
 end
-
-
 
 local defaultValueForSimpleType = {
   ['BooleanT'] = false,
@@ -318,7 +313,6 @@ local function compileProcessDataTable(processDataInfo, selectedTable)
 end
 funcs.compileProcessDataTable = compileProcessDataTable
 
-
 local function compileParametersTable(iodd, selectedTable)
   local compiledTable = {}
   for index, subindeces in pairs(selectedTable) do
@@ -360,19 +354,6 @@ local function compileParametersTable(iodd, selectedTable)
   return compiledTable
 end
 funcs.compileParametersTable = compileParametersTable
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 return funcs
 

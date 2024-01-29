@@ -188,23 +188,6 @@ local function makeDefaultSelectedProcessDataTable(processDataInfo)
 end
 IODDDynamicTable.makeDefaultSelectedProcessDataTable = makeDefaultSelectedProcessDataTable
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 local function makeSingleRowContent(subindexInfo, selectedTable)
   local singleSubindex = {
     colPD1 = subindexInfo.subindex,
@@ -254,14 +237,6 @@ local function makeProcessDataTableContent(preficesToInclude, parameterTable, se
 end
 IODDDynamicTable.makeProcessDataTableContent = makeProcessDataTableContent
 
-
-
-
-
-
-
-
-
 local function addPrefixToColumnNames(jsonTableContent, prefixToAdd)
   local newTableContent = {}
   local tableContent = json.decode(jsonTableContent)
@@ -292,12 +267,5 @@ local function removePrefixFromColumnNames(jsonRowContent, prefixToRemove)
   return json.encode(newRowContent)
 end
 IODDDynamicTable.removePrefixFromColumnNames = removePrefixFromColumnNames
-
-
-
-
-
-
-
 
 return IODDDynamicTable
