@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD-Primitives1.1.xsd">
+	<DocumentInfo version="V1.1.3" releaseDate="2021-01-21" copyright="IO-Link Community"/>
+	<Language xml:lang="es">
+		<Text id="STD_TN_Reserved" value="Reservado"/>
+		<!-- Variables -->
+		<Text id="STD_TN_V_DirectParameters_1" value="Parámetros directos - página 1"/>
+		<Text id="STD_TD_V_DirectParameters_1" value="Contiene los parámetros necesarios para las características de comunicación y los identificadores para la validación de equipos."/>
+		<Text id="STD_TN_MasterCycleTime" value="Tiempo de ciclo del maestro"/>
+		<Text id="STD_TD_MasterCycleTime" value="Comunicación: Tiempo de ciclo actual establecido por el maestro para la comunicación. Este valor determina el ciclo de datos del proceso."/>
+		<Text id="STD_TN_MinCycleTime" value="Tiempo de ciclo mínimo"/>
+		<Text id="STD_TD_MinCycleTime" value="Comunicación: Tiempo de ciclo mínimo de la comunicación que es admitido por el equipo. Este valor determina el ciclo de datos del proceso lo más pequeño posible."/>
+		<Text id="STD_TN_M-SequenceCapability" value="Formato de mensajes"/>
+		<Text id="STD_TD_M-SequenceCapability" value="Comunicación: Información sobre la estructura y las funciones admitidas de los mensajes de comunicación."/>
+		<Text id="STD_TN_RevisionID" value="ID de Revisión IO-Link"/>
+		<Text id="STD_TD_RevisionID" value="Comunicación: Identificador para la revisión actual del protocolo de comunicación."/>
+		<Text id="STD_TN_ProcessDataIn" value="Longitud de datos de entrada del proceso"/>
+		<Text id="STD_TD_ProcessDataIn" value="Comunicación: Información sobre la extensión y las características de los datos de entrada del proceso (datos del proceso del equipo al maestro)."/>
+		<Text id="STD_TN_ProcessDataOut" value="Longitud de datos de salida del proceso"/>
+		<Text id="STD_TD_ProcessDataOut" value="Comunicación: Información sobre la extensión de los datos de salida del proceso (datos del proceso del maestro al equipo)."/>
+		<Text id="STD_TN_VendorID1" value="ID del Fabricante 1"/>
+		<Text id="STD_TD_VendorID1" value="Identificación: Octeto más alto del ID del fabricante. En combinación con el parámetro ID del Fabricante 2, se define el valor de 16 bits del ID del fabricante único asignado por la comunidad IO-Link."/>
+		<Text id="STD_TN_VendorID2" value="ID del Fabricante 2"/>
+		<Text id="STD_TD_VendorID2" value="Identificación: Octeto más bajo del ID del fabricante. En combinación con el parámetro ID del Fabricante 1, se define el valor de 16 bits del ID del fabricante único asignado por la comunidad IO-Link."/>
+		<Text id="STD_TN_DeviceID1" value="ID del Equipo 1"/>
+		<Text id="STD_TD_DeviceID1" value="Identificación: Octeto más alto del ID del equipo. En combinación con los parámetros ID del Equipo 2 y 3, se define el valor de 24 bits del ID del equipo específico del fabricante."/>
+		<Text id="STD_TN_DeviceID2" value="ID del Equipo 2"/>
+		<Text id="STD_TD_DeviceID2" value="Identificación: Octeto medio del ID del equipo. En combinación con los parámetros ID del Equipo 1 y 3, se define el valor de 24 bits del ID del equipo específico del fabricante."/>
+		<Text id="STD_TN_DeviceID3" value="ID del Equipo 3"/>
+		<Text id="STD_TD_DeviceID3" value="Identificación: Octeto más bajo del ID del equipo. En combinación con los parámetros ID del Equipo 1 y 2, se define el valor de 24 bits del ID del equipo específico del fabricante."/>
+		<Text id="STD_TN_V_DirectParameters_2" value="Parámetros directos - página 2"/>
+		<Text id="STD_TD_V_DirectParameters_2" value="Conjuntos de parámetros para equipos sin soporte ISDU."/>
+		<Text id="STD_TN_DeviceSpecific_1" value="Parámetro específico del equipo 1"/>
+		<Text id="STD_TN_DeviceSpecific_2" value="Parámetro específico del equipo 2"/>
+		<Text id="STD_TN_DeviceSpecific_3" value="Parámetro específico del equipo 3"/>
+		<Text id="STD_TN_DeviceSpecific_4" value="Parámetro específico del equipo 4"/>
+		<Text id="STD_TN_DeviceSpecific_5" value="Parámetro específico del equipo 5"/>
+		<Text id="STD_TN_DeviceSpecific_6" value="Parámetro específico del equipo 6"/>
+		<Text id="STD_TN_DeviceSpecific_7" value="Parámetro específico del equipo 7"/>
+		<Text id="STD_TN_DeviceSpecific_8" value="Parámetro específico del equipo 8"/>
+		<Text id="STD_TN_DeviceSpecific_9" value="Parámetro específico del equipo 9"/>
+		<Text id="STD_TN_DeviceSpecific_10" value="Parámetro específico del equipo 10"/>
+		<Text id="STD_TN_DeviceSpecific_11" value="Parámetro específico del equipo 11"/>
+		<Text id="STD_TN_DeviceSpecific_12" value="Parámetro específico del equipo 12"/>
+		<Text id="STD_TN_DeviceSpecific_13" value="Parámetro específico del equipo 13"/>
+		<Text id="STD_TN_DeviceSpecific_14" value="Parámetro específico del equipo 14"/>
+		<Text id="STD_TN_DeviceSpecific_15" value="Parámetro específico del equipo 15"/>
+		<Text id="STD_TN_DeviceSpecific_16" value="Parámetro específico del equipo 16"/>
+		<Text id="STD_TN_SystemCommand_Sub16" value="Comando del sistema"/>
+		<Text id="STD_TD_SystemCommand_Sub16" value="Aplicación: Interfaz de comando para equipos sin soporte ISDU.  La validación y ejecución de comandos no están confirmadas."/>
+		<Text id="STD_TN_V_SystemCommand" value="Comando del sistema"/>
+		<Text id="STD_TD_V_SystemCommand" value="Interfaz de comando para aplicaciones. La respuesta positiva muestra la ejecución completa y correcta de la función solicitada."/>
+		<Text id="STD_TN_SystemCommand_DeviceReset" value="Resetear equipo"/>
+		<Text id="STD_TN_SystemCommand_ApplicationReset" value="Resetear aplicación"/>
+		<Text id="STD_TN_SystemCommand_RestoreFactorySettings" value="Restablecer a configuración de fábrica"/>
+		<Text id="STD_TN_SystemCommand_BackToBox" value="Back-to-box"/>
+		<Text id="STD_TN_V_DeviceAccessLocks" value="Bloqueo de acceso al equipo"/>
+		<Text id="STD_TD_V_DeviceAccessLocks" value="El acceso a los parámetros del equipo se puede limitar mediante los indicadores correspondientes en el parámetro."/>
+		<Text id="STD_TN_ParameterAccess" value="Acceso de escritura a los parámetros"/>
+		<Text id="STD_TD_ParameterAccess" value="Este bloqueo evita el acceso de escritura a todos los parámetros de lectura/escritura del equipo a excepción del parámetro 'Bloqueo de acceso al equipo'."/>
+		<Text id="STD_TN_DataStorage" value="Almacenamiento de datos"/>
+		<Text id="STD_TD_DataStorage" value="Este bloqueo evita el acceso de escritura a los parámetros del equipo por medio de mecanismos del almacenamiento de datos."/>
+		<Text id="STD_TN_LocalParameterization" value="Parametrización local"/>
+		<Text id="STD_TD_LocalParameterization" value="Este bloqueo evita que los ajustes del equipo sean modificados a través de los elementos locales de operación."/>
+		<Text id="STD_TN_LocalUserInterface" value="Interfaz Local de Usuario"/>
+		<Text id="STD_TD_LocalUserInterface" value="Éste bloqueo evita el acceso a los ajustes e indicadores del equipo a través de una interfaz local de usuario. La interfaz de usuario está desactivada."/>
+		<Text id="STD_TN_locked" value="Bloqueada"/>
+		<Text id="STD_TN_unlocked" value="Desbloqueada"/>
+		<Text id="STD_TN_V_VendorName" value="Nombre del fabricante"/>
+		<Text id="STD_TD_V_VendorName" value="Nombre del fabricante asignado a un ID del Fabricante."/>
+		<Text id="STD_TN_V_VendorText" value="Texto del fabricante"/>
+		<Text id="STD_TD_V_VendorText" value="Información adicional sobre el fabricante."/>
+		<Text id="STD_TN_V_ProductName" value="Nombre del producto"/>
+		<Text id="STD_TD_V_ProductName" value="Nombre completo del producto."/>
+		<Text id="STD_TN_V_ProductID" value="ID del producto"/>
+		<Text id="STD_TD_V_ProductID" value="Producto específico del fabricante o tipo de identificación (ej. nº de artículo o nº de modelo)."/>
+		<Text id="STD_TN_V_ProductText" value="Texto del producto"/>
+		<Text id="STD_TD_V_ProductText" value="Información adicional del producto."/>
+		<Text id="STD_TN_V_SerialNumber" value="Número de serie"/>
+		<Text id="STD_TD_V_SerialNumber" value="Identificador único y específico del fabricante del equipo individual."/>
+		<Text id="STD_TN_V_HardwareRevision" value="Revisión de hardware"/>
+		<Text id="STD_TD_V_HardwareRevision" value="Identificador único y específico del fabricante de la revisión de hardware del equipo individual."/>
+		<Text id="STD_TN_V_FirmwareRevision" value="Revisión de firmware"/>
+		<Text id="STD_TD_V_FirmwareRevision" value="Identificador único y específico del fabricante de la revisión de firmware del equipo individual."/>
+		<Text id="STD_TN_V_ApplicationSpecificTag" value="Etiqueta específica de la aplicación"/>
+		<Text id="STD_TD_V_ApplicationSpecificTag" value="Opción para etiquetar un equipo con información específica de la aplicación o del usuario."/>
+		<Text id="STD_TN_V_ErrorCount" value="Contador de errores"/>
+		<Text id="STD_TD_V_ErrorCount" value="Número de errores ocurridos en la aplicación tecnológica específica desde la última alimentación o reinicio."/>
+		<Text id="STD_TN_V_DeviceStatus" value="Estado del equipo"/>
+		<Text id="STD_TD_V_DeviceStatus" value="Indicador para la condición actual y estado de diagnóstico del equipo"/>
+		<Text id="STD_TN_DeviceStatus_OK" value="Equipo OK"/>
+		<Text id="STD_TN_DeviceStatus_MaintenanceRequired" value="Mantenimiento requerido"/>
+		<Text id="STD_TN_DeviceStatus_OutOfSpecification" value="Fuera de la especificación"/>
+		<Text id="STD_TN_DeviceStatus_FunctionalCheck" value="Comprobación de funcionamiento"/>
+		<Text id="STD_TN_DeviceStatus_Failure" value="Fallo"/>
+		<Text id="STD_TN_V_DetailedDeviceStatus" value="Estado detallado del equipo"/>
+		<Text id="STD_TD_V_DetailedDeviceStatus" value="Lista de incidencias del equipo pendientes actualmente."/>
+		<Text id="STD_TN_V_ProcessDataInput" value="PD Input"/>
+		<Text id="STD_TD_V_ProcessDataInput" value="Últimos datos válidos de entrada del proceso en el equipo."/>
+		<Text id="STD_TN_V_ProcessDataOutput" value="PD Output"/>
+		<Text id="STD_TD_V_ProcessDataOutput" value="Últimos datos válidos de salida del proceso escritos en el equipo"/>
+		<Text id="STD_TN_V_OffsetTime" value="Tiempo Offset"/>
+		<Text id="STD_TD_V_OffsetTime" value="Sincroniza la aplicación tecnológica específica en los ciclos de comunicación con un tiempo offset configurable. El tiempo offset se puede configurar según los requisitos del tiempo de ciclo (parámetro 'tiempo de ciclo mínimo')."/>
+		<!-- ErrorTypes -->
+		<Text id="STD_TN_0x8000" value="Error en la aplicación tecnológica específica: ningún detalle"/>
+		<Text id="STD_TD_0x8000" value="El mantenimiento ha sido denegado por la aplicación tecnológica específica. No hay más información disponible sobre las causas."/>
+		<Text id="STD_TN_0x8011" value="Índice no disponible"/>
+		<Text id="STD_TD_0x8011" value="Intento de acceso de lectura o escritura a un índice no disponible."/>
+		<Text id="STD_TN_0x8012" value="Subíndice no disponible"/>
+		<Text id="STD_TD_0x8012" value="Intento de acceso de lectura o escritura a un subíndice no disponible de un índice disponible."/>
+		<Text id="STD_TN_0x8020" value="Servicio no disponible actualmente"/>
+		<Text id="STD_TD_0x8020" value="Parámetro no accesible debido al estado actual de la aplicación tecnológica específica."/>
+		<Text id="STD_TN_0x8021" value="Servicio no disponible actualmente: funcionamiento controlado localmente"/>
+		<Text id="STD_TD_0x8021" value="Parámetro no accesible. El equipo está actualmente en el funcionamiento controlado localmente."/>
+		<Text id="STD_TN_0x8022" value="Servicio no disponible actualmente: funcionamiento controlado por el equipo"/>
+		<Text id="STD_TD_0x8022" value="Parámetro no accesible. La aplicación tecnológica específica está actualmente en el funcionamiento controlado externamente."/>
+		<Text id="STD_TN_0x8023" value="Acceso denegado"/>
+		<Text id="STD_TD_0x8023" value="Acceso de escritura a un parámetro de solo lectura o acceso de lectura a un parámetro de solo escritura."/>
+		<Text id="STD_TN_0x8030" value="Valor del parámetro fuera del rango válido"/>
+		<Text id="STD_TD_0x8030" value="El valor del parámetro escrito se encuentra fuera del rango de valores permitidos."/>
+		<Text id="STD_TN_0x8031" value="Valor del parámetro por encima del límite permitido"/>
+		<Text id="STD_TD_0x8031" value="El valor del parámetro escrito está por encima del rango de valores permitidos."/>
+		<Text id="STD_TN_0x8032" value="Valor del parámetro por debajo del límite permitido"/>
+		<Text id="STD_TD_0x8032" value="El valor del parámetro escrito está por debajo del rango de valores permitidos."/>
+		<Text id="STD_TN_0x8033" value="Longitud de parámetro excedida"/>
+		<Text id="STD_TD_0x8033" value="El parámetro escrito es más largo de lo permitido."/>
+		<Text id="STD_TN_0x8034" value="Longitud de parámetro no alcanzada"/>
+		<Text id="STD_TD_0x8034" value="El parámetro escrito es más corto de lo permitido."/>
+		<Text id="STD_TN_0x8035" value="Función no disponible"/>
+		<Text id="STD_TD_0x8035" value="El comando escrito no es admitido por la aplicación tecnológica específica."/>
+		<Text id="STD_TN_0x8036" value="Función no disponible actualmente"/>
+		<Text id="STD_TD_0x8036" value="El comando escrito no está disponible en el estado actual de la aplicación tecnológica específica."/>
+		<Text id="STD_TN_0x8040" value="Conjunto de parámetros no válido"/>
+		<Text id="STD_TD_0x8040" value="El valor del parámetro individual escrito está en conflicto con otros ajustes de parámetros existentes."/>
+		<Text id="STD_TN_0x8041" value="Conjunto de parámetros inconsistente"/>
+		<Text id="STD_TD_0x8041" value="Conjunto de parámetros inconsistente al final de la transmisión de parámetros del bloque. Error de comprobación de plausibilidad del equipo."/>
+		<Text id="STD_TN_0x8082" value="La aplicación no está lista"/>
+		<Text id="STD_TD_0x8082" value="Acceso de escritura o lectura denegado. La aplicación tecnológica específica no está disponible temporalmente."/>
+		<!-- Events -->
+		<Text id="STD_TN_0x0000" value="Ningún fallo de funcionamiento"/>
+		<Text id="STD_TN_0x1000" value="Fallo de funcionamiento general"/>
+		<Text id="STD_TD_0x1000" value="Error desconocido"/>
+		<Text id="STD_TN_0x4000" value="Error de temperatura"/>
+		<Text id="STD_TD_0x4000" value="Sobrecarga"/>
+		<Text id="STD_TN_0x4210" value="Temperatura del equipo por encima del valor máximo permitido"/>
+		<Text id="STD_TD_0x4210" value="Eliminar fuentes de calor"/>
+		<Text id="STD_TN_0x4220" value="Temperatura del equipo por debajo del valor mínimo permitido"/>
+		<Text id="STD_TD_0x4220" value="Aislar equipo"/>
+		<Text id="STD_TN_0x5000" value="Error de hardware en el equipo"/>
+		<Text id="STD_TD_0x5000" value="Sustituir equipo"/>
+		<Text id="STD_TN_0x5010" value="Fallo de funcionamiento de componentes"/>
+		<Text id="STD_TD_0x5010" value="Reparar o sustituir el equipo"/>
+		<Text id="STD_TN_0x5011" value="Pérdida de memoria no volátil"/>
+		<Text id="STD_TD_0x5011" value="Revisar batería"/>
+		<Text id="STD_TN_0x5012" value="Batería baja"/>
+		<Text id="STD_TD_0x5012" value="Cambiar batería"/>
+		<Text id="STD_TN_0x5100" value="Fallo general de la fuente de alimentación"/>
+		<Text id="STD_TD_0x5100" value="Comprobar disponibilidad"/>
+		<Text id="STD_TN_0x5101" value="Fusible fundido o abierto"/>
+		<Text id="STD_TD_0x5101" value="Comprobar interruptor del fusible o sustituir fusible"/>
+		<Text id="STD_TN_0x5110" value="Sobretensión en la alimentación principal"/>
+		<Text id="STD_TD_0x5110" value="Comprobar el rango de tensión permitido"/>
+		<Text id="STD_TN_0x5111" value="Subtensión en la alimentación principal"/>
+		<Text id="STD_TD_0x5111" value="Comprobar el rango de tensión permitido"/>
+		<Text id="STD_TN_0x5112" value="Fallo en la alimentación secundaria (puerto clase B)"/>
+		<Text id="STD_TD_0x5112" value="Comprobar el rango de tensión permitido"/>
+		<Text id="STD_TN_0x6000" value="Error de software en el equipo"/>
+		<Text id="STD_TD_0x6000" value="Comprobar la revisión de firmware"/>
+		<Text id="STD_TN_0x6320" value="Error de parámetro"/>
+		<Text id="STD_TD_0x6320" value="Comprobar ficha técnica y valores"/>
+		<Text id="STD_TN_0x6321" value="Falta de parámetro"/>
+		<Text id="STD_TD_0x6321" value="Comprobar ficha técnica"/>
+		<!-- Event 6350 - reserved in IO-Link specification V1.1.3			
+		<Text id="STD_TN_0x6350" value="Parámetro modificado"/>
+		<Text id="STD_TD_0x6350" value="Comprobar configuración"/> -->
+		<Text id="STD_TN_0x7700" value="Rotura de cable de un equipo subordinado"/>
+		<Text id="STD_TD_0x7700" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7701" value="Rotura de cable del equipo subordinado 1"/>
+		<Text id="STD_TD_0x7701" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7702" value="Rotura de cable del equipo subordinado 2"/>
+		<Text id="STD_TD_0x7702" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7703" value="Rotura de cable del equipo subordinado 3"/>
+		<Text id="STD_TD_0x7703" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7704" value="Rotura de cable del equipo subordinado 4"/>
+		<Text id="STD_TD_0x7704" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7705" value="Rotura de cable del equipo subordinado 5"/>
+		<Text id="STD_TD_0x7705" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7706" value="Rotura de cable del equipo subordinado 6"/>
+		<Text id="STD_TD_0x7706" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7707" value="Rotura de cable del equipo subordinado 7"/>
+		<Text id="STD_TD_0x7707" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7708" value="Rotura de cable del equipo subordinado 8"/>
+		<Text id="STD_TD_0x7708" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7709" value="Rotura de cable del equipo subordinado 9"/>
+		<Text id="STD_TD_0x7709" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770A" value="Rotura de cable del equipo subordinado 10"/>
+		<Text id="STD_TD_0x770A" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770B" value="Rotura de cable del equipo subordinado 11"/>
+		<Text id="STD_TD_0x770B" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770C" value="Rotura de cable del equipo subordinado 12"/>
+		<Text id="STD_TD_0x770C" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770D" value="Rotura de cable del equipo subordinado 13"/>
+		<Text id="STD_TD_0x770D" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770E" value="Rotura de cable del equipo subordinado 14"/>
+		<Text id="STD_TD_0x770E" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x770F" value="Rotura de cable del equipo subordinado 15"/>
+		<Text id="STD_TD_0x770F" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7710" value="Cortocircuito"/>
+		<Text id="STD_TD_0x7710" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x7711" value="Error de conexión a tierra"/>
+		<Text id="STD_TD_0x7711" value="Comprobar instalación"/>
+		<Text id="STD_TN_0x8C00" value="Error en la aplicación tecnológica específica"/>
+		<Text id="STD_TD_0x8C00" value="Resetear el equipo"/>
+		<Text id="STD_TN_0x8C01" value="Simulación activa"/>
+		<Text id="STD_TD_0x8C01" value="Revisar modo de funcionamiento"/>
+		<Text id="STD_TN_0x8C10" value="Valor del proceso por encima del rango válido"/>
+		<Text id="STD_TD_0x8C10" value="Valor del proceso incierto"/>
+		<Text id="STD_TN_0x8C20" value="Valor por encima del rango de medición"/>
+		<Text id="STD_TD_0x8C20" value="Comprobar aplicación"/>
+		<Text id="STD_TN_0x8C30" value="Valor del proceso por debajo del rango válido"/>
+		<Text id="STD_TD_0x8C30" value="Valor del proceso incierto"/>
+		<Text id="STD_TN_0x8C40" value="Mantenimiento requerido: limpieza"/>
+		<Text id="STD_TD_0x8C40" value="Limpiar equipo"/>
+		<Text id="STD_TN_0x8C41" value="Mantenimiento requerido: rellenar"/>
+		<Text id="STD_TD_0x8C41" value="Rellenar equipo"/>
+		<Text id="STD_TN_0x8C42" value="Mantenimiento requerido: desgaste"/>
+		<Text id="STD_TD_0x8C42" value="Sustituir las piezas de desgaste en el equipo"/>
+	</Language>
+	<Stamp crc="967442437"><Checker name="IODD-Checker V1.1.5" version="V1.1.5.0"/></Stamp>
+</ExternalTextDocument>

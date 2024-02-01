@@ -6,15 +6,46 @@
         </crown>
         <crown name="CSK_IODDInterpreter">
             <trait>released</trait>
-            <desc>Please fill in information regarding: What is the idea of this module and its features? +
-How to use this module in general.... like: + 
-{empty} + 
-Typically the features of this module are used like this (check also main script of this module): +
-**1) Setup** +
-ToDo +
-{empty} + 
-**2) Something else...** +
-</desc>
+            <desc>Module to interpret IODD files for further use by CSK_Module_MultiIOLinkSMI, CSK_Module_MultiIOLinkRestMaster and for your customized app. +
+{empty} +
+The main externally useful features are following: +
+{empty} +
+**1. IODD Files upload and interpretation** +
+Use "addIODDFile" function to interpret the IODD XML file. +
+Or use "Upload IODD XML" button in UI and select XML file to upload. +
+IODD Files (.xml) and their interpretations (.json) are stored in public/IODDFiles. +
+To delete IODD file from internal memory, use "setSelectedIODDToHandle" and "deleteIODD" +
+{empty} +
+**2. IODD File - device match check** +
+Use "findIODDMatchingProductName" and "findIODDMatchingVendorIdDeviceIdVersion" to check if there is a loaded IODD file that matches your device already. +
+{empty} +
+**3. Multiple instances handling** +
+**Instance ID is a string name** to make it easier for external use since this module might be used by several other modules / applications. +
+Assign IODD file to be used by the instance via "setSelectedIODD". Use "addInstance", "setInstanceName" and "deleteInstance" to create, rename and delete the instance. +
+{empty} +
+**4. Dynamic tables representing process data and parameters** +
+All parameters and process data are devided in two sets: +
+a) Read Data - consists of Process Data In table and Parameters (read only + read/write) table +
+b) Write Data - consists of Process Data Out table and Parameters (write only + read/write) table +
+{empty} +
+The rows of the tables can be selected to form a set of data (**message**) to be read or written from/to the device. +
+When a row of the table is selected, the following events are triggered to provide new set of data externally: +
+a) Read Data - "OnNewReadDataJsonTemplateAndInfo" +
+b) Write Data - "OnNewWriteDataJsonTemplateAndInfo" +
+{empty} +
+**5. Process data structure selection** +
+Process data structure of IO-Link device might be variable. The structure depends on a value of some parameter. In case process data is variable, use following: +
+- "getProcessDataConditionList" - to get list of possible options +
+- "changeProcessDataStructureOptionName" or "changeProcessDataStructureOptionValue" to change structure with string name or parameter's value +
+{empty} +
+When the process data structure is changed, the respective process data tables are updated and selected process data in the existing messages is reset. +
+{empty} +
+**6. Data point information** +
+Module can provide chunks of IODD file in JSON format to describe some datapoints you need. Use the following functions to get information about datapoints: +
+- "getProcessDataInInfo" - process data in (with current process data structure option) +
+- "getProcessDataOutInfo" - process data out (with current process data structure option) +
+- "getParameterDataPointInfo" - any parameter with specified index and subindex +
+- "getProcessDataConditionInfo" - parameter responsible for changing the process data structure (if it is variable) +</desc>
             <serves>
                 <event name="OnNewStatusLoadParameterOnReboot">
                     <desc>Notify status if parameters should be loaded on app/device boot up.</desc>
@@ -47,6 +78,95 @@ ToDo +
                     <desc>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </event>
+                <event name="OnNewCalloutValue">
+                    <desc>Event to notify a value of callout in UI.</desc>
+                    <param desc="Callout value." multiplicity="1" name="Value" type="string"/>
+                </event>
+                <event name="OnNewCalloutType">
+                    <desc>Event to notify a type of callout in UI.</desc>
+                    <param desc="Callout type," multiplicity="1" name="Type" type="string"/>
+                </event>
+                <event name="OnNewReadParametersTableContent">
+                    <desc>Event to fill the read parameters dynamic table in UI.</desc>
+                    <param desc="JSON object with table content." multiplicity="1" name="TableContent" type="string"/>
+                </event>
+                <event name="OnNewWriteParametersTableContent">
+                    <desc>Event to fill the write parameters dynamic table in UI.</desc>
+                    <param desc="JSON object with table content." multiplicity="1" name="WriteParametersTableContent" type="string"/>
+                </event>
+                <event name="OnNewProcessDataInTableContent">
+                    <desc>Event to fill the process data in dynamic table in UI.</desc>
+                    <param desc="JSON object with table content." multiplicity="1" name="ProcessDataInTableContent" type="string"/>
+                </event>
+                <event name="OnNewProcessDataOutTableContent">
+                    <desc>Event to fill the process data out dynamic table in UI.</desc>
+                    <param desc="JSON object with table content." multiplicity="1" name="ProcessDataOutTableContent" type="string"/>
+                </event>
+                <event name="OnNewProcessDataStructureOptionsDropdownContent">
+                    <desc>Event to share list of process data structure options if process data is variable.</desc>
+                    <param desc="JSON object with list of process data structure options." multiplicity="1" name="ProcessDataStructureOptionsDropdownContent" type="string"/>
+                </event>
+                <event name="OnNewSelectedProcessDataStructureOption">
+                    <desc>Event to notify the selected process data structure option if it is variable.</desc>
+                    <param desc="Name of the option." multiplicity="1" name="SelectedProcessDataStructureOption" type="string"/>
+                </event>
+                <event name="isProcessDataStructureVariable">
+                    <desc>Event to notify if process data is variable to show additional settings in UI.</desc>
+                    <param desc="True if process data is variable." multiplicity="1" name="IsProcessDataStructureVariable" type="bool"/>
+                </event>
+                <event name="OnNewListIntances">
+                    <trait>released</trait>
+                    <desc>Event to share the list of all instances names.</desc>
+                    <param desc="List of all names in JSON format." multiplicity="1" name="jsonIntancesList" type="string"/>
+                </event>
+                <event name="OnNewSelectedInstance">
+                    <trait>released</trait>
+                    <desc>Event to notify the selected instance name.</desc>
+                    <param desc="Instance name." multiplicity="1" name="selectedInstance" type="string"/>
+                </event>
+                <event name="isInstanceSelected">
+                    <trait>released</trait>
+                    <desc>Event to notify if any instance is selected to show additional settings in UI.</desc>
+                    <param desc="True if instance is selected." multiplicity="1" name="isSelected" type="bool"/>
+                </event>
+                <event name="OnNewInstanceName">
+                    <trait>released</trait>
+                    <desc>Event to show the name of selected instance in UI.</desc>
+                    <param desc="Name of the instance." multiplicity="1" name="instanceName" type="string"/>
+                </event>
+                <event name="OnNewSelectedIODDToHandle">
+                    <trait>released</trait>
+                    <desc>Event to notify the selected IODD name of a file to be edited (deleted).</desc>
+                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIODDToHandle" type="string"/>
+                </event>
+                <event name="OnNewListIODD">
+                    <trait>released</trait>
+                    <desc>Event to share list of all loaded IODD files.</desc>
+                    <param desc="List of all names in JSON format." multiplicity="1" name="jsonIODDList" type="string"/>
+                </event>
+                <event name="OnNewSelectedIODD">
+                    <trait>released</trait>
+                    <desc>Event to notify the IODD name used by selected instance.</desc>
+                    <param desc="Name of the IODD file." multiplicity="1" name="selectedIODD" type="string"/>
+                </event>
+                <event name="OnNewReadDataJsonTemplateAndInfo">
+                    <trait>released</trait>
+                    <desc>Event to notify when selected read datapoints (process data in and parameters) has changed. Might be useful externally.</desc>
+                    <param desc="Instance name." multiplicity="1" name="instanceId" type="string"/>
+                    <param desc="JSON template of new combined read message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </event>
+                <event name="OnNewWriteDataJsonTemplateAndInfo">
+                    <trait>released</trait>
+                    <desc>Event to notify when selected write datapoints (process data out and parameters) has changed. Might be useful externally.</desc>
+                    <param desc="Instance name." multiplicity="1" name="instanceId" type="string"/>
+                    <param desc="JSON template of new combined write message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </event>
+                <event name="OnIODDListChanged">
+                    <trait>released</trait>
+                    <desc>Event to notify if IODD file was deleted or a new IODD file was successfully uploaded.</desc>
+                </event>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter." multiplicity="1" name="name" type="string"/>
@@ -61,14 +181,187 @@ ToDo +
                     <desc>Configure if this module should load its saved parameters at app/device boot up.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
                 </function>
-                <function name="pageCalled">
-                    <desc>Function to register "OnResume" of the module UI (only as helper function).</desc>
+                <function name="pageCalledInstances">
+                    <desc>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</desc>
+                    <return desc="Empty string." multiplicity="1" name="empty" type="string"/>
+                </function>
+                <function name="uploadFinished">
+                    <desc>Function called when IODD file upload is finished in UI.</desc>
+                    <param desc="Upload success." multiplicity="1" name="uploadSuccess" type="bool"/>
+                </function>
+                <function name="readParameterRowSelected">
+                    <desc>Function to process the selected row in read parameters dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="writeParameterRowSelected">
+                    <desc>Function to process the selected row in write parameters dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="processDataInRowSelected">
+                    <desc>Function to process the selected row in process data in dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="processDataOutRowSelected">
+                    <desc>Function to process the selected row in process data out dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="addIODDFile">
+                    <desc>Add a new IODD file to be interpreted. Returns success of interpretation and new internal  name of IODD file created according to IODD file name standard.</desc>
+                    <param desc="Path to a temporary IODD file. The file will be deleted after interpretation attempt." multiplicity="1" name="path" type="string"/>
+                    <return desc="Interpretation success." multiplicity="1" name="success" type="bool"/>
+                    <return desc="If interpretation is successful, returns a standartized IODD file name that is used for the uploaded IODD file. Else returns a reason of interpretation failure." multiplicity="1" name="result" type="string"/>
+                </function>
+                <function name="findIODDMatchingProductName">
+                    <desc>Checks if there is a loaded IODD file for the device with matching product name.</desc>
+                    <param desc="Product name of the device." multiplicity="1" name="productName" type="string"/>
+                    <return desc="True if the matching file is found." multiplicity="1" name="success" type="bool"/>
+                    <return desc="Name of IODD file if match is found." multiplicity="1" name="result" type="string"/>
+                </function>
+                <function name="findIODDMatchingVendorIdDeviceIdVersion">
+                    <desc>Checks if there is a loaded IODD file for the device with matching vendor ID, device ID and (optional) IODD version.</desc>
+                    <param desc="Vendor ID." multiplicity="1" name="vendorId" type="auto"/>
+                    <param desc="Device ID." multiplicity="1" name="deviceId" type="auto"/>
+                    <param desc="Optional IODD version." multiplicity="?" name="version" type="auto"/>
+                    <return desc="True if matching IODD file is found." multiplicity="1" name="success" type="bool"/>
+                    <return desc="IODD file name if match is found." multiplicity="1" name="result" type="string"/>
+                </function>
+                <function name="changeProcessDataStructureOptionName">
+                    <desc>Change process data structure of IODD instance to start using new process data desciption internally.</desc>
+                    <param desc="String process data structure name option from IODD file." multiplicity="1" name="newPDStructureOptionName" type="string"/>
+                </function>
+                <function name="changeProcessDataStructureOptionValue">
+                    <desc>Change process data structure of IODD instance to start using new process data desciption internally.</desc>
+                    <param desc="Process data structure value option from IODD file." multiplicity="1" name="newPDStructureOptionValue" type="auto"/>
+                </function>
+                <function name="getProcessDataConditionInfo">
+                    <desc>Get IODD description of a parameter resposible for changing of process data structure if it is variable.</desc>
+                    <return desc="JSON object with description of index or subindex of the parameter." multiplicity="1" name="jsonProcessDataConditionInfo" type="string"/>
+                </function>
+                <function name="getProcessDataInInfo">
+                    <desc>Get IODD description of process data in (for reading from device).</desc>
+                    <return desc="JSON object with description of process data in." multiplicity="1" name="jsonProcessDataInInfo" type="string"/>
+                </function>
+                <function name="getProcessDataOutInfo">
+                    <desc>JSON object with description of process data out (for writing to device).</desc>
+                    <return desc="JSON object with description of process data out." multiplicity="1" name="jsonProcessDataOutInfo" type="string"/>
+                </function>
+                <function name="deleteInstance">
+                    <desc>Delete the selected IODD instance.</desc>
+                </function>
+                <function name="setInstanceName">
+                    <desc>Function to change the instance id (name).</desc>
+                    <param desc="New unique name of the selected instance." multiplicity="1" name="newInstanceName" type="string"/>
+                </function>
+                <function name="getIODDList">
+                    <desc>Get list of loaded IODD files.</desc>
+                    <return desc="String array with names of loaded IODD files." multiplicity="*" name="ioddList" type="string"/>
+                </function>
+                <function name="updateSelectedProcessDataTable">
+                    <desc>Function that returns the new selected process data table after processing of a selected row JSON data from dynamic table. </desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="JSON object with current selected process data table." multiplicity="1" name="jsonSelectedProcessDataTable" type="string"/>
+                    <return desc="JSON object with new selected process data table." multiplicity="1" name="newJsonSelectedProcessDataTable" type="string"/>
+                </function>
+                <function name="updateSelectedParametersTable">
+                    <desc>Function that returns the new selected parameters table after processing of a selected row JSON data from dynamic table. </desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="JSON object with current selected parameters table." multiplicity="1" name="jsonSelectedParametersTable" type="string"/>
+                    <return desc="JSON object with new selected parameters table." multiplicity="1" name="newJsonSelectedParametersTable" type="string"/>
+                </function>
+                <function name="setSelectedInstance">
+                    <trait>released</trait>
+                    <param desc="" multiplicity="1" name="newSelectedInstance" type="string"/>
+                    <return desc="" multiplicity="1" name="success" type="bool"/>
+                </function>
+                <function name="addInstance">
+                    <trait>released</trait>
+                    <desc>Create a new IODD instance with default instance ID (string name).</desc>
+                </function>
+                <function name="setSelectedIODD">
+                    <desc>Set IODD file used in the selected instance.</desc>
+                    <param desc="Standartised IODD name." multiplicity="1" name="ioddName" type="string"/>
+                </function>
+                <function name="deleteIODD">
+                    <trait>released</trait>
+                    <desc>Delete IODD file from internal memory. Deletes all IODD instances that use this file as well.</desc>
+                    <return desc="Success of deleting." multiplicity="1" name="success" type="bool"/>
+                    <return desc="Reason if deleting failed." multiplicity="1" name="result" type="string"/>
+                </function>
+                <function name="setSelectedIODDToHandle">
+                    <trait>released</trait>
+                    <desc>Set IODD to edit (delete).</desc>
+                    <param desc="IODD name." multiplicity="1" name="newSelectedIODDToHandle" type="string"/>
+                </function>
+                <function name="pageCalledReadData">
+                    <trait>released</trait>
+                    <desc>Function to register "On Resume" of the module UI (only as helper function).</desc>
                     <return desc="Empty string (only needed to simplify binding)." multiplicity="1" name="empty" type="string"/>
+                </function>
+                <function name="pageCalledWriteData">
+                    <trait>released</trait>
+                    <desc>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</desc>
+                    <return desc="Empty string." multiplicity="1" name="empty" type="string"/>
+                </function>
+                <function name="getSelectedReadParameters">
+                    <trait>released</trait>
+                    <desc>Get table with selected parameters datapoints for reading.</desc>
+                    <return desc="JSON object with information about selected datapoints." multiplicity="?" name="jsonSelectedReadParameters" type="string"/>
+                </function>
+                <function name="getSelectedWriteParameters">
+                    <trait>released</trait>
+                    <desc>Get table with selected parameters datapoints for writing.</desc>
+                    <return desc="JSON object with information about selected datapoints." multiplicity="?" name="jsonSelectedWriteParameters" type="string"/>
+                </function>
+                <function name="getSelectedProcessDataIn">
+                    <trait>released</trait>
+                    <desc>Get table with selected datapoints of process data in.</desc>
+                    <return desc="JSON object with information about selected datapoints." multiplicity="?" name="jsonSelectedProcessDataIn" type="string"/>
+                </function>
+                <function name="getSelectedProcessDataOut">
+                    <trait>released</trait>
+                    <desc>Get table with selected datapoints of process data out.</desc>
+                    <return desc="JSON object with information about selected datapoints." multiplicity="?" name="jsonSelectedProcessDataOut" type="string"/>
+                </function>
+                <function name="getIsProcessDataVariable">
+                    <desc>Check if process data structure of the selected IODD file is variable or not.</desc>
+                    <return desc="True if process data structure is variable." multiplicity="1" name="isVariable" type="bool"/>
+                </function>
+                <function name="getProcessDataConditionList">
+                    <desc>Get list of process data structure options.</desc>
+                    <return desc="JSON list of options." multiplicity="1" name="jsonProcessDataConditionList" type="string"/>
+                </function>
+                <function name="getProcessDataConditionNameFromValue">
+                    <desc>Get process data struccture option name matching the value of the parameter responsible for changing the structure.</desc>
+                    <param desc="Value of the parameter." multiplicity="1" name="conditionValue" type="string"/>
+                    <return desc="Name of the process data structure option." multiplicity="1" name="conditionName" type="string"/>
+                </function>
+                <function name="getProcessDataConditionValueFromName">
+                    <desc>Get  value of the parameter responsible for changing the structure matching the process data struccture option name.</desc>
+                    <param desc="Name of the process data structure option." multiplicity="1" name="conditionName" type="string"/>
+                    <return desc="Value of the parameter." multiplicity="1" name="conditionValue" type="string"/>
+                </function>
+                <function name="setReadSelectedData">
+                    <trait>released</trait>
+                    <desc>Set selected read data datapoints externally both for process data in and parameters.</desc>
+                    <param desc="JSON object with selected data points for process data (ProcessData) and for parameters (Parameters)." multiplicity="1" name="jsonReadDataInfo" type="string"/>
+                </function>
+                <function name="setWriteSelectedData">
+                    <trait>released</trait>
+                    <desc>Set selected read data datapoints externally both for process data out and parameters.</desc>
+                    <param desc="JSON object with selected data points for process data (ProcessData) and for parameters (Parameters)." multiplicity="1" name="jsonWriteDataInfo" type="string"/>
+                </function>
+                <function name="getParameterDataPointInfo">
+                    <trait>released</trait>
+                    <desc>Get IODD description of a single parameter.</desc>
+                    <param desc="Instance name." multiplicity="1" name="instanceId" type="string"/>
+                    <param desc="Index of the parameter." multiplicity="1" name="index" type="int"/>
+                    <param desc="Subindex of the parameter." multiplicity="1" name="subindex" type="int"/>
+                    <return desc="JSON object with description of index or subindex of the parameter. Nil if the parameter does not exist." multiplicity="?" name="jsonDataPointInfo" type="string"/>
                 </function>
             </serves>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">0.1.0</meta>
+        <meta key="version">1.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>

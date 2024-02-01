@@ -21,7 +21,6 @@
 --SOFTWARE.
 
 ---@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
--- CreationTemplateVersion: 3.6.0
 --**************************************************************************
 --**********************Start Global Scope *********************************
 --**************************************************************************
@@ -42,7 +41,7 @@ _G.logHandle:applyConfig()
 
 -- Loading script regarding IODDInterpreter_Model
 -- Check this script regarding IODDInterpreter_Model parameters and functions
-_G.iODDInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Model')
+_G.ioddInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Model')
 
 --**************************************************************************
 --**********************End Global Scope ***********************************
@@ -50,29 +49,39 @@ _G.iODDInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Mode
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
---- Function to react on startup event of the app
 local function main()
 
   ----------------------------------------------------------------------------------------
   -- INFO: Please check if module will eventually load inital configuration triggered via
   --       event CSK_PersistentData.OnInitialDataLoaded
-  --       (see internal variable _G.iODDInterpreter_Model.parameterLoadOnReboot)
+  --       (see internal variable _G.ioddInterpreter_Model.parameterLoadOnReboot)
   --       If so, the app will trigger the "OnDataLoadedOnReboot" event if ready after loading parameters
   --
   -- Can be used e.g. like this
+  --[[
+  CSK_IODDInterpreter.addInstance()
+
+  CSK_IODDInterpreter.addIODDFile('public/IODD.xml')
+  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
+  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
+  if success then
+    CSK_IODDInterpreter.setSelectedIODD(ioddName)
+	-- Optional process data structure
+    local processDataStructure = CSK_IODDInterpreter.getProcessDataConditionList()
+    local processDataIn = CSK_IODDInterpreter.getProcessDataInInfo()
+    local processDataOut = CSK_IODDInterpreter.getProcessDataOutInfo()
+    local parameterData = CSK_IODDInterpreter.getParameterDataPointInfo('instanceID', 120, 0)
+    local processDataCondition = CSK_IODDInterpreter.getProcessDataConditionInfo()
+  end
+
+
+  ]]
   ----------------------------------------------------------------------------------------
 
-  -- _G.iODDInterpreter_Model.doSomething() -- if you want to start a function
-  -- ...
-  CSK_IODDInterpreter.pageCalled() -- Update UI
+  CSK_IODDInterpreter.pageCalledInstances() -- Update UI
 
 end
 Script.register("Engine.OnStarted", main)
-
---OR
-
--- Call function after persistent data was loaded
---Script.register("CSK_IODDInterpreter.OnDataLoadedOnReboot", main)
 
 --**************************************************************************
 --**********************End Function Scope *********************************

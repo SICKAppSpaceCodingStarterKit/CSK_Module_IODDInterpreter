@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ExternalTextDocument xmlns="http://www.io-link.com/IODD/2010/10" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.io-link.com/IODD/2010/10 IODD-Primitives1.1.xsd">
+	<DocumentInfo version="V1.1.3" releaseDate="2022-03-15" copyright="IO-Link Community"/>
+	<Language xml:lang="ko">
+		<Text id="STD_TN_Reserved" value="예약됨"/>
+		<!-- Variables -->
+		<Text id="STD_TN_V_DirectParameters_1" value="파라메터로 직접가기 - 1 페이지"/>
+		<Text id="STD_TD_V_DirectParameters_1" value="디바이스 유효성 검증을 위한 커뮤니케이션 특성 및 식별자를 정의하는 필수적인  파라메터로 구성하십시오."/>
+		<Text id="STD_TN_MasterCycleTime" value="마스터 주기 시간"/>
+		<Text id="STD_TD_MasterCycleTime" value="커뮤니케이션: 마스터가 사용하는 현재 커뮤니케이션 주기 본 값은 프로세스 데이터 주기를 정의합니다."/>
+		<Text id="STD_TN_MinCycleTime" value="최소 주기 시간"/>
+		<Text id="STD_TD_MinCycleTime" value="커뮤니케이션: 디바이스에 의해 지원되는 최소 커뮤니케이션 주기 본 값은 가능한 가장 낮은 프로세스 데이터 주기를 정의합니다."/>
+		<Text id="STD_TN_M-SequenceCapability" value="M 시퀀스 능력"/>
+		<Text id="STD_TD_M-SequenceCapability" value="커뮤니케이션: 커뮤니케이션 메시지의 구조 및 지원되는 특징에 대한 정보"/>
+		<Text id="STD_TN_RevisionID" value="IO-Link 수정버전 ID"/>
+		<Text id="STD_TD_RevisionID" value="커뮤니케이션: 현재 사용중인 커뮤니케이션 프로토콜 수정버전의 식별자"/>
+		<Text id="STD_TN_ProcessDataIn" value="프로세스 데이터 입력 길이"/>
+		<Text id="STD_TD_ProcessDataIn" value="커뮤니케이션: 프로세스 입력 데이터의 너비 및 특징에 대한 정보 (디바이스에서 마스터로의 프로세스 데이터)"/>
+		<Text id="STD_TN_ProcessDataOut" value="프로세스 데이터 출력 길이"/>
+		<Text id="STD_TD_ProcessDataOut" value="커뮤니케이션: 프로세스 출력 데이터의 너비 정보 (마스터에서 디바이스로의 프로세스 데이터)"/>
+		<Text id="STD_TN_VendorID1" value="벤더 ID 1"/>
+		<Text id="STD_TD_VendorID1" value="식별: 벤더 ID의 최고 옥텟 (octet) 파라메터 벤더 ID 2와 결합된 본 파라메터는 IO-Link 커뮤니티가 할당한 고유한 벤더 ID의 16 비트 값을 정의합니다."/>
+		<Text id="STD_TN_VendorID2" value="벤더 ID 2"/>
+		<Text id="STD_TD_VendorID2" value="식별: 벤더 ID의 최저 옥텟 파라메터 벤더 ID 1와 결합된 본 파라메터는 IO-Link 커뮤니티가 할당한 고유한 벤더 ID의 16 비트 값을 정의합니다."/>
+		<Text id="STD_TN_DeviceID1" value="디바이스 ID 1"/>
+		<Text id="STD_TD_DeviceID1" value="식별: 디바이스 ID의 최고 옥텟 파라메터 디바이스 ID 2와 3으로 결합된 본 파라메터는 벤더 특정 디바이스 ID의 24 비트 값으로 정의합니다."/>
+		<Text id="STD_TN_DeviceID2" value="디바이스 ID 2"/>
+		<Text id="STD_TD_DeviceID2" value="식별: 디바이스 ID의 중간 옥텟 파라메터 디바이스 ID 1와 3으로 결합된 본 파라메터는 벤더 특정 디바이스 ID의 24 비트 값으로 정의합니다."/>
+		<Text id="STD_TN_DeviceID3" value="디바이스 ID 3"/>
+		<Text id="STD_TD_DeviceID3" value="식별: 디바이스 ID의 낮은 옥텟 파라메터 디바이스 ID 1과 2로 결합된 본 파라메터는 벤더 특정 디바이스 ID의 24 비트 값으로 정의합니다."/>
+		<Text id="STD_TN_V_DirectParameters_2" value="파라메터로 직접가기 - 2 페이지"/>
+		<Text id="STD_TD_V_DirectParameters_2" value="ISDU 지원이 없는 디바이스를 위한 파라메터 세트"/>
+		<Text id="STD_TN_DeviceSpecific_1" value="디바이스 특정  파라메터 1"/>
+		<Text id="STD_TN_DeviceSpecific_2" value="디바이스 특정  파라메터 2"/>
+		<Text id="STD_TN_DeviceSpecific_3" value="디바이스 특정  파라메터 3"/>
+		<Text id="STD_TN_DeviceSpecific_4" value="디바이스 특정  파라메터 4"/>
+		<Text id="STD_TN_DeviceSpecific_5" value="디바이스 특정  파라메터 5"/>
+		<Text id="STD_TN_DeviceSpecific_6" value="디바이스 특정  파라메터 6"/>
+		<Text id="STD_TN_DeviceSpecific_7" value="디바이스 특정  파라메터 7"/>
+		<Text id="STD_TN_DeviceSpecific_8" value="디바이스 특정  파라메터 8"/>
+		<Text id="STD_TN_DeviceSpecific_9" value="디바이스 특정  파라메터 9"/>
+		<Text id="STD_TN_DeviceSpecific_10" value="디바이스 특정  파라메터 10"/>
+		<Text id="STD_TN_DeviceSpecific_11" value="디바이스 특정  파라메터 11"/>
+		<Text id="STD_TN_DeviceSpecific_12" value="디바이스 특정  파라메터 12"/>
+		<Text id="STD_TN_DeviceSpecific_13" value="디바이스 특정  파라메터 13"/>
+		<Text id="STD_TN_DeviceSpecific_14" value="디바이스 특정  파라메터 14"/>
+		<Text id="STD_TN_DeviceSpecific_15" value="디바이스 특정  파라메터 15"/>
+		<Text id="STD_TN_DeviceSpecific_16" value="디바이스 특정  파라메터 16"/>
+		<Text id="STD_TN_SystemCommand_Sub16" value="시스템 명령"/>
+		<Text id="STD_TD_SystemCommand_Sub16" value="어플리케이션: ISDU 지원이 없는 디바이스를 위한 명령 인터페이스 명령의 유효성과 실행이 확인되지 않았습니다."/>
+		<Text id="STD_TN_V_SystemCommand" value="시스템 명령"/>
+		<Text id="STD_TD_V_SystemCommand" value="어플리케이션을 위한 명령 인터페이스  긍정적인 인식은 요구된 기능의 완전하고 정확한 완결을 나타냅니다."/>
+		<Text id="STD_TN_SystemCommand_DeviceReset" value="디바이스 리셋"/>
+		<Text id="STD_TN_SystemCommand_ApplicationReset" value="어플리케이션 리셋"/>
+		<Text id="STD_TN_SystemCommand_RestoreFactorySettings" value="공장설정상태로의 복귀"/>
+		<Text id="STD_TN_SystemCommand_BackToBox" value="Back-to-box"/>
+		<Text id="STD_TN_V_DeviceAccessLocks" value="디바이스 액세스 잠금"/>
+		<Text id="STD_TD_V_DeviceAccessLocks" value="디바이스 파라메터에 대한 액세스는 이 파라메터 내에서 적절한 플래그 세팅으로 제한될 수 있습니다."/>
+		<Text id="STD_TN_ParameterAccess" value="파라메터 쓰기 액세스"/>
+		<Text id="STD_TD_ParameterAccess" value="이 잠금은 '디바이스 액세스 잠금' 파라메터를 제외한 디바이스의 모든 읽기 / 쓰기 파라메터에 대한 쓰기 액세스를 금지합니다."/>
+		<Text id="STD_TN_DataStorage" value="데이터 저장"/>
+		<Text id="STD_TD_DataStorage" value="이 잠금은 데이터 저장 메커니즘을 통하여 디바이스 파라메터에 대한 쓰기 액세스를 방지합니다."/>
+		<Text id="STD_TN_LocalParameterization" value="로컬 파라메터화"/>
+		<Text id="STD_TD_LocalParameterization" value="이 잠금 장치로 인하여 디바이스의 로컬 작동요소를 통하여 디바이스 세팅이 변경되는 것을 방지합니다."/>
+		<Text id="STD_TN_LocalUserInterface" value="로컬 사용자 인터페이스"/>
+		<Text id="STD_TD_LocalUserInterface" value="이 잠금은 로컬 사용자 인터페이스를 통하여 디바이스 세팅 및 디스플레이에 대한 액세스를 방지합니다. 사용자 인터페이스가 사용불가능합니다."/>
+		<Text id="STD_TN_locked" value="잠금"/>
+		<Text id="STD_TN_unlocked" value="잠금해제"/>
+		<Text id="STD_TN_V_VendorName" value="벤더 이름"/>
+		<Text id="STD_TD_V_VendorName" value="벤더 이름은 벤더 ID에 할당되었습니다."/>
+		<Text id="STD_TN_V_VendorText" value="벤더 텍스트"/>
+		<Text id="STD_TD_V_VendorText" value="벤더에 관한 추가 정보"/>
+		<Text id="STD_TN_V_ProductName" value="제품명"/>
+		<Text id="STD_TD_V_ProductName" value="전체 제품명"/>
+		<Text id="STD_TN_V_ProductID" value="제품 ID"/>
+		<Text id="STD_TD_V_ProductID" value="벤더 특정 제품 또는 타입 식별 (항목 번호 또는 모델 번호)"/>
+		<Text id="STD_TN_V_ProductText" value="제품 텍스트"/>
+		<Text id="STD_TD_V_ProductText" value="디바이스를 위한 추가 제품 정보"/>
+		<Text id="STD_TN_V_SerialNumber" value="시리얼넘버"/>
+		<Text id="STD_TD_V_SerialNumber" value="개별 디바이스의 고유한 벤더 특정 식별자"/>
+		<Text id="STD_TN_V_HardwareRevision" value="하드웨어 수정버전"/>
+		<Text id="STD_TD_V_HardwareRevision" value="개별 디바이스 하드웨어 수정버전의 고유한 벤더 특정 식별자"/>
+		<Text id="STD_TN_V_FirmwareRevision" value="펌웨어 수정버전"/>
+		<Text id="STD_TD_V_FirmwareRevision" value="개별 디바이스 펌웨어 수정버전의 고유한 벤더 특정 식별자"/>
+		<Text id="STD_TN_V_ApplicationSpecificTag" value="어플리케이션 특정 태그"/>
+		<Text id="STD_TD_V_ApplicationSpecificTag" value="사용자 또는 어플리케이션 특정 정보로 디바이스를 표시 할 수 있습니다."/>
+		<Text id="STD_TN_V_ErrorCount" value="에러 카운트"/>
+		<Text id="STD_TD_V_ErrorCount" value="가동 또는 재시작한 후 기술 특정 어플리케이션에서 발생된 에러의 수"/>
+		<Text id="STD_TN_V_DeviceStatus" value="디바이스 상태"/>
+		<Text id="STD_TD_V_DeviceStatus" value="현재 디바이스 조건 및 진단 상태를 위한 표시기"/>
+		<Text id="STD_TN_DeviceStatus_OK" value="디바이스 OK"/>
+		<Text id="STD_TN_DeviceStatus_MaintenanceRequired" value="유지보수가 요구됨"/>
+		<Text id="STD_TN_DeviceStatus_OutOfSpecification" value="사양에 맞지 않음"/>
+		<Text id="STD_TN_DeviceStatus_FunctionalCheck" value="기능 확인"/>
+		<Text id="STD_TN_DeviceStatus_Failure" value="실패"/>
+		<Text id="STD_TN_V_DetailedDeviceStatus" value="상세한 디바이스 상태"/>
+		<Text id="STD_TD_V_DetailedDeviceStatus" value="디바이스에서 현재 보류중인 모든 이벤트 목록"/>
+		<Text id="STD_TN_V_ProcessDataInput" value="프로세스 데이터 입력"/>
+		<Text id="STD_TD_V_ProcessDataInput" value="디바이스의 최종 유효한 프로세스 입력 데이터"/>
+		<Text id="STD_TN_V_ProcessDataOutput" value="프로세스 데이터 출력"/>
+		<Text id="STD_TD_V_ProcessDataOutput" value="디바이스에 기록된 최종 유효한 프로세스 출력 데이터"/>
+		<Text id="STD_TN_V_OffsetTime" value="옵셋 시간"/>
+		<Text id="STD_TD_V_OffsetTime" value="커뮤니케이션 주기에서 기술 특정 어플리케이션을 조정 가능한 오프셋 시간과 동기화합니다. 오프셋 시간은 주기 시간 사양 (파라메터 '최소 주기시간')에 따라 세팅될 수 있습니다."/>
+		<!-- ErrorTypes -->
+		<Text id="STD_TN_0x8000" value="디바이스 어플리케이션 에러 - 세부사항 없음"/>
+		<Text id="STD_TD_0x8000" value="서비스는 테크놀러지 특정 어플리케이션에 의하여 거부되었습니다. 상세한 근본 원인 정보는 없습니다."/>
+		<Text id="STD_TN_0x8011" value="인덱스가 존재하지 않음"/>
+		<Text id="STD_TD_0x8011" value="존재하지 않는 인덱스에 대한 읽기 또는 쓰기 액세스 시도"/>
+		<Text id="STD_TN_0x8012" value="서브 인덱스가 사용 가능하지 않음"/>
+		<Text id="STD_TD_0x8012" value="기존 인덱스의 존재하지 않는 서브인덱스에 대한 읽기 또는 쓰기 액세스 시도"/>
+		<Text id="STD_TN_0x8020" value="일시적으로 서비스가 제공되지 않습니다."/>
+		<Text id="STD_TD_0x8020" value="테크놀러지 특정 어플리케이션이 현재 상태로 인하여 파라메터에 대한 액세스가 가능하지 않습니다."/>
+		<Text id="STD_TN_0x8021" value="서비스를 일시적으로 사용할 수 없음 - 로컬 제어"/>
+		<Text id="STD_TD_0x8021" value="파라메터에 액세스 할 수 없습니다. 디바이스는 현재 지속적으로 로컬로 제어되어 작동됩니다."/>
+		<Text id="STD_TN_0x8022" value="서비스를 일시적으로 사용할 수 없음 - 디바이스 제어"/>
+		<Text id="STD_TD_0x8022" value="파라메터에 액세스 할 수 없습니다. 테크놀러지 특정  어플리케이션은 현재 원격으로 트리거 된 작동상태입니다."/>
+		<Text id="STD_TN_0x8023" value="액세스 거부됨"/>
+		<Text id="STD_TD_0x8023" value="읽기 전용 파라메터에 대한 쓰기 액세스 또는 쓰기 전용 파라메터에 대한 읽기 액세스"/>
+		<Text id="STD_TN_0x8030" value="유효 영역을 벗어난 파라메터 값"/>
+		<Text id="STD_TD_0x8030" value="쓰여진 파라메터 값이 허용 값 범위를 벗어났습니다."/>
+		<Text id="STD_TN_0x8031" value="파라메터 값이 한계값 이상입니다."/>
+		<Text id="STD_TD_0x8031" value="쓰여진 파라메터 값이 지정된 값 영역 이상입니다."/>
+		<Text id="STD_TN_0x8032" value="파라메터 값이 한계값 이하입니다."/>
+		<Text id="STD_TD_0x8032" value="쓰여진 파라메터 값이 지정된 값 영역 미만입니다."/>
+		<Text id="STD_TN_0x8033" value="파라메터 길이 초과"/>
+		<Text id="STD_TD_0x8033" value="쓰여진 파라메터가 지정된 것보다 더 깁니다."/>
+		<Text id="STD_TN_0x8034" value="파라메터 길이 미달"/>
+		<Text id="STD_TD_0x8034" value="쓰여진 파라메터가 지정된 것보다 더 짧습니다."/>
+		<Text id="STD_TN_0x8035" value="사용 불가능한 기능"/>
+		<Text id="STD_TD_0x8035" value="쓰여진 명령은 테크놀러지 특정 어플리케이션에 의하여 지원되지 않습니다."/>
+		<Text id="STD_TN_0x8036" value="일시적으로 사용가능하지 않은 기능"/>
+		<Text id="STD_TD_0x8036" value="쓰여진 명령은 테크놀러지 특정 어플리케이션의 현재 상태로 인하여 사용이 가능하지 않습니다."/>
+		<Text id="STD_TN_0x8040" value="무효한 파라메터 세트"/>
+		<Text id="STD_TD_0x8040" value="기록된 각각의 파라메터 값이 다른 기존 파라메터 세팅과 충돌합니다."/>
+		<Text id="STD_TN_0x8041" value="일관성 없는 파라메터 세트"/>
+		<Text id="STD_TD_0x8041" value="블록 파라메터 전송 종단의 파라메터가 일치하지 않습니다. 디바이스 타당성 체크 실패됨"/>
+		<Text id="STD_TN_0x8082" value="어플리케이션이 준비되지 않았습니다."/>
+		<Text id="STD_TD_0x8082" value="읽기 또는 쓰기 액세스 거부됨 테크놀러지 특정 어플리케이션이 일시적으로 사용될 수 없습니다."/>
+		<!-- Events -->
+		<Text id="STD_TN_0x0000" value="오작동 없음"/>
+		<Text id="STD_TN_0x1000" value="일반적인 오작동"/>
+		<Text id="STD_TD_0x1000" value="알려지지 않은 오류"/>
+		<Text id="STD_TN_0x4000" value="온도 오류"/>
+		<Text id="STD_TD_0x4000" value="과부하"/>
+		<Text id="STD_TN_0x4210" value="디바이스 온도 초과"/>
+		<Text id="STD_TD_0x4210" value="열 원천을 삭제하십시오."/>
+		<Text id="STD_TN_0x4220" value="디바이스 온도 미달"/>
+		<Text id="STD_TD_0x4220" value="디바이스를 절연처리 하십시오."/>
+		<Text id="STD_TN_0x5000" value="디바이스에 하드웨어 오류 있음"/>
+		<Text id="STD_TD_0x5000" value="디바이스 교환"/>
+		<Text id="STD_TN_0x5010" value="구성요소 고장"/>
+		<Text id="STD_TD_0x5010" value="수리하거나 또는 교환하십시오."/>
+		<Text id="STD_TN_0x5011" value="비 휘발성 메모리 손실"/>
+		<Text id="STD_TD_0x5011" value="배터리를 확인하십시오."/>
+		<Text id="STD_TN_0x5012" value="배터리가 약합니다."/>
+		<Text id="STD_TD_0x5012" value="배터리를 교환하십시오."/>
+		<Text id="STD_TN_0x5100" value="일반적인 공급전압 오류"/>
+		<Text id="STD_TD_0x5100" value="가용성을 확인하십시오."/>
+		<Text id="STD_TN_0x5101" value="퓨즈 다운 또는 오픈"/>
+		<Text id="STD_TD_0x5101" value="퓨즈 스위치를 점검하거나 퓨즈를 교환하십시오."/>
+		<Text id="STD_TN_0x5110" value="1 차 전원 전압 초과"/>
+		<Text id="STD_TD_0x5110" value="유효한 전압 레인지를 확인하십시오."/>
+		<Text id="STD_TN_0x5111" value="1 차 전원 전압 미달"/>
+		<Text id="STD_TD_0x5111" value="유효한 전압 레인지를 확인하십시오."/>
+		<Text id="STD_TN_0x5112" value="보조 전원 공급 오류 (포트 클래스 B)"/>
+		<Text id="STD_TD_0x5112" value="유효한 전압 레인지를 확인하십시오."/>
+		<Text id="STD_TN_0x6000" value="디바이스 소프트웨어 오류"/>
+		<Text id="STD_TD_0x6000" value="펌웨어 수정버전을 확인하십시오."/>
+		<Text id="STD_TN_0x6320" value="파라메터 에러"/>
+		<Text id="STD_TD_0x6320" value="데이터시트 및 값을 확인하십시오."/>
+		<Text id="STD_TN_0x6321" value="파라메터 없음"/>
+		<Text id="STD_TD_0x6321" value="데이터시트 확인하십시오."/>
+		<!-- Event 6350 - reserved in IO-Link specification V1.1.3			
+		<Text id="STD_TN_0x6350" value="파라메터가 변경됨"/>
+		<Text id="STD_TD_0x6350" value="설정을 확인하십시오."/> -->
+		<Text id="STD_TN_0x7700" value="서브 디바이스의 단선"/>
+		<Text id="STD_TD_0x7700" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7701" value="서브 디바이스 1의 단선"/>
+		<Text id="STD_TD_0x7701" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7702" value="서브 디바이스 2의 단선"/>
+		<Text id="STD_TD_0x7702" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7703" value="서브 디바이스 3의 단선"/>
+		<Text id="STD_TD_0x7703" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7704" value="서브 디바이스 4의 단선"/>
+		<Text id="STD_TD_0x7704" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7705" value="서브 디바이스 5의 단선"/>
+		<Text id="STD_TD_0x7705" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7706" value="서브 디바이스 6의 단선"/>
+		<Text id="STD_TD_0x7706" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7707" value="서브 디바이스 7의 단선"/>
+		<Text id="STD_TD_0x7707" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7708" value="서브 디바이스 8의 단선"/>
+		<Text id="STD_TD_0x7708" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7709" value="서브 디바이스 9의 단선"/>
+		<Text id="STD_TD_0x7709" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770A" value="서브 디바이스 10의 단선"/>
+		<Text id="STD_TD_0x770A" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770B" value="서브 디바이스 11의 단선"/>
+		<Text id="STD_TD_0x770B" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770C" value="서브 디바이스 12의 단선"/>
+		<Text id="STD_TD_0x770C" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770D" value="서브 디바이스 13의 단선"/>
+		<Text id="STD_TD_0x770D" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770E" value="서브 디바이스 14의 단선"/>
+		<Text id="STD_TD_0x770E" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x770F" value="서브 디바이스 15의 단선"/>
+		<Text id="STD_TD_0x770F" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7710" value="쇼트"/>
+		<Text id="STD_TD_0x7710" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x7711" value="접지 오류"/>
+		<Text id="STD_TD_0x7711" value="설치를 확인하십시오."/>
+		<Text id="STD_TN_0x8C00" value="기술적으로 특정 어플리케이션 오류"/>
+		<Text id="STD_TD_0x8C00" value="디바이스를 리셋하십시오."/>
+		<Text id="STD_TN_0x8C01" value="시뮬레이션 활성화됨"/>
+		<Text id="STD_TD_0x8C01" value="동작모드를 확인하십시오."/>
+		<Text id="STD_TN_0x8C10" value="프로세스 변수 레인지 초과 실행"/>
+		<Text id="STD_TD_0x8C10" value="프로세스 데이터 불확실"/>
+		<Text id="STD_TN_0x8C20" value="측정 레인지 초과됨"/>
+		<Text id="STD_TD_0x8C20" value="어플리케이션을 확인하십시오."/>
+		<Text id="STD_TN_0x8C30" value="프로세스 변수 레인지 미달"/>
+		<Text id="STD_TD_0x8C30" value="프로세스 데이터 불확실"/>
+		<Text id="STD_TN_0x8C40" value="유지보수가 요구됩니다 - 세척"/>
+		<Text id="STD_TD_0x8C40" value="디바이스를 세척하십시오."/>
+		<Text id="STD_TN_0x8C41" value="유지보수가 요구됩니다 - 리필"/>
+		<Text id="STD_TD_0x8C41" value="디바이스 리필"/>
+		<Text id="STD_TN_0x8C42" value="유지보수가 요구됩니다 – 마모됨"/>
+		<Text id="STD_TD_0x8C42" value="마모된 부품을 교환하십시오."/>
+	</Language>
+	<Stamp crc="3442892605"><Checker name="IODD-Checker V1.1.5" version="V1.1.5.0"/></Stamp>
+</ExternalTextDocument>
