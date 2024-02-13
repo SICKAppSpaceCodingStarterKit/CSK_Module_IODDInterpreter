@@ -711,7 +711,7 @@ Script.serveFunction("CSK_IODDInterpreter.setParameterName", setParameterName)
 
 local function sendParameters()
   if ioddInterpreter_Model.persistentModuleAvailable then
-    CSK_PersistentData.addParameter(ioddInterpreter_Model.ioddInterpreter_Model.helperFuncs.convertTable2Container(ioddInterpreter_Model.parameters), ioddInterpreter_Model.parametersName)
+    CSK_PersistentData.addParameter(ioddInterpreter_Model.helperFuncs.convertTable2Container(ioddInterpreter_Model.parameters), ioddInterpreter_Model.parametersName)
     CSK_PersistentData.setModuleParameterName(nameOfModule, ioddInterpreter_Model.parametersName, ioddInterpreter_Model.parameterLoadOnReboot)
     _G.logger:info(nameOfModule .. ": Send IODDInterpreter parameters with name '" .. ioddInterpreter_Model.parametersName .. "' to CSK_PersistentData module.")
     CSK_PersistentData.saveData()
@@ -726,7 +726,7 @@ local function loadParameters()
     local data = CSK_PersistentData.getParameter(ioddInterpreter_Model.parametersName)
     if data then
       _G.logger:info(nameOfModule .. ": Loaded parameters from CSK_PersistentData module.")
-      local parameterSet = ioddInterpreter_Model.ioddInterpreter_Model.helperFuncs.convertContainer2Table(data)
+      local parameterSet = ioddInterpreter_Model.helperFuncs.convertContainer2Table(data)
       for instanceId, instanceInfo in pairs(parameterSet.instances) do
         ioddInterpreter_Model.parameters.instances[instanceId] = {}
         ioddInterpreter_Model.loadIODD(instanceId, instanceInfo.ioddName)
