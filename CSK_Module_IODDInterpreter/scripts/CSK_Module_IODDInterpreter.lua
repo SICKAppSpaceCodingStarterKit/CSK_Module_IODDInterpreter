@@ -62,9 +62,9 @@ local function main()
   CSK_IODDInterpreter.addInstance()
 
   CSK_IODDInterpreter.addIODDFile('public/IODD.xml')
-  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
-  local success, ioddName = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
-  if success then
+  local success1, ioddName1 = CSK_IODDInterpreter.findIODDMatchingProductName('Productname')
+  local success2, ioddName2 = CSK_IODDInterpreter.findIODDMatchingVendorIdDeviceIdVersion('VendorID', 'DeviceID', 'Version')
+  if success1 and success1 then
     CSK_IODDInterpreter.setSelectedIODD(ioddName)
 	-- Optional process data structure
     local processDataStructure = CSK_IODDInterpreter.getProcessDataConditionList()

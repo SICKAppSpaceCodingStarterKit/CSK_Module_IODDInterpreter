@@ -42,6 +42,10 @@ Following CSK modules are mostly necessary to make use of the features of this m
 |Device|Firmware version|Module version|
 |--|--|--|
 |SIM1012|v2.3.0|v1.0.0|
+|SIM1012|v2.3.0|v1.0.1|
+|SIM1012|v2.4.1|v1.0.0|
+|SIM1012|v2.4.1|v1.0.1|
+
 
 This application / module is part of the SICK AppSpace Coding Starter Kit developing approach.  
 It is programmed in an object-oriented way. Some of the modules use kind of "classes" in Lua to make it possible to reuse code / classes in other projects.  
