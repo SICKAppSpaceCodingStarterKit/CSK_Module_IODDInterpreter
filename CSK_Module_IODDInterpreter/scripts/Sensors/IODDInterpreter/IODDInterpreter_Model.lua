@@ -33,6 +33,9 @@ ioddInterpreter_Model.ioddInt = require "Sensors.IODDInterpreter.helper.IODDInte
 ioddInterpreter_Model.dynamicTableHelper = require "Sensors.IODDInterpreter.helper.IODDDynamicTable"
 ioddInterpreter_Model.json = require "Sensors.IODDInterpreter.helper.Json"
 
+ioddInterpreter_Model.styleForUI = 'None' -- Optional parameter to set UI style
+ioddInterpreter_Model.version = Engine.getCurrentAppVersion() -- Version of module
+
 -- Create parameters / instances for this module
 ioddInterpreter_Model.ioddFilesStorage = 'public/IODDFiles' -- Default folder to store iodd .xml files and their .json interpretations 
 File.mkdir(ioddInterpreter_Model.ioddFilesStorage) -- creating the storage folder
@@ -55,6 +58,12 @@ end
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
+--- Function to react on UI style change
+local function handleOnStyleChanged(theme)
+  ioddInterpreter_Model.styleForUI = theme
+  Script.notifyEvent("IODDInterpreter_OnNewStatusCSKStyle", ioddInterpreter_Model.styleForUI)
+end
+Script.register('CSK_PersistentData.OnNewStatusCSKStyle', handleOnStyleChanged)
 
 --- Function to check if loaded .xml IODD file can be interpreted. If yes, then file with standartized name and its .json interpetation are storred in IODD storage folder. The original file is deleted.
 ---@param ioddFilePath string Path to a loaded .xml IODD file

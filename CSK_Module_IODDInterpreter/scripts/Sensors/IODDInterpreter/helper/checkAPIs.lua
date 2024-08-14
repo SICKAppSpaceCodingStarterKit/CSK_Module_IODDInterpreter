@@ -5,14 +5,16 @@
 
 local availableAPIs = {}
 
+-- Function to load all default APIs
 local function loadAPIs()
   CSK_IODDInterpreter = require 'API.CSK_IODDInterpreter'
 
-  Container = require 'API.Container'
-  Engine = require 'API.Engine'
   Log = require 'API.Log'
   Log.Handler = require 'API.Log.Handler'
   Log.SharedLogger = require 'API.Log.SharedLogger'
+
+  Container = require 'API.Container'
+  Engine = require 'API.Engine'  
   Object = require 'API.Object'
   Timer = require 'API.Timer'
 
@@ -27,6 +29,7 @@ local function loadAPIs()
   end
 end
 
+-- Function to load specific APIs
 local function loadSpecificAPIs()
   -- If you want to check for specific APIs/functions supported on the device the module is running, place relevant APIs here
   -- e.g.:

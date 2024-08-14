@@ -41,6 +41,10 @@ tmrWriteData:setPeriodic(false)
 
 -- ************************ UI Events Start ********************************
 
+Script.serveEvent('CSK_IODDInterpreter.OnNewStatusModuleVersion', 'IODDInterpreter_OnNewStatusModuleVersion')
+Script.serveEvent('CSK_IODDInterpreter.OnNewStatusCSKStyle', 'IODDInterpreter_OnNewStatusCSKStyle')
+Script.serveEvent('CSK_IODDInterpreter.OnNewStatusModuleIsActive', 'IODDInterpreter_OnNewStatusModuleIsActive')
+
 Script.serveEvent("CSK_IODDInterpreter.OnNewStatusLoadParameterOnReboot", "IODDInterpreter_OnNewStatusLoadParameterOnReboot")
 Script.serveEvent("CSK_IODDInterpreter.OnPersistentDataModuleAvailable", "IODDInterpreter_OnPersistentDataModuleAvailable")
 Script.serveEvent("CSK_IODDInterpreter.OnNewParameterName", "IODDInterpreter_OnNewParameterName")
@@ -145,6 +149,13 @@ end
 
 --- Function to send all relevant values to UI on resume
 local function handleOnExpiredTmrInstances()
+
+  updateUserLevel()
+
+  Script.notifyEvent("IODDInterpreter_OnNewStatusModuleVersion", ioddInterpreter_Model.version)
+  Script.notifyEvent("IODDInterpreter_OnNewStatusCSKStyle", ioddInterpreter_Model.styleForUI)
+  Script.notifyEvent("IODDInterpreter_OnNewStatusModuleIsActive", _G.availableAPIs.default)
+
   Script.notifyEvent('IODDInterpreter_OnNewCalloutType', currentCalloutType)
   Script.notifyEvent('IODDInterpreter_OnNewCalloutValue', currentCalloutValue)
   Script.notifyEvent("IODDInterpreter_OnNewListIODD", ioddInterpreter_Model.json.encode(ioddInterpreter_Model.availableIODDs))
@@ -355,6 +366,7 @@ Script.serveFunction('CSK_IODDInterpreter.getParameterDataPointInfo', getParamet
 
 --- Function to send all relevant values to UI on resume
 local function handleOnExpiredTmrReadData()
+  Script.notifyEvent("IODDInterpreter_OnNewStatusCSKStyle", ioddInterpreter_Model.styleForUI)
   Script.notifyEvent("IODDInterpreter_OnNewSelectedInstance", selectedInstance)
   local isSelected = (selectedInstance ~= '')
   Script.notifyEvent("IODDInterpreter_isInstanceSelected", isSelected)
@@ -468,6 +480,7 @@ Script.serveFunction('CSK_IODDInterpreter.readParameterRowSelected', readParamet
 
 -- Function to send all relevant values to UI on resume
 local function handleOnExpiredTmrWriteData()
+  Script.notifyEvent("IODDInterpreter_OnNewStatusCSKStyle", ioddInterpreter_Model.styleForUI)
   Script.notifyEvent("IODDInterpreter_OnNewSelectedInstance", selectedInstance)
   local isSelected = (selectedInstance ~= '')
   Script.notifyEvent("IODDInterpreter_isInstanceSelected", isSelected)
@@ -696,6 +709,16 @@ local function getProcessDataOutInfo()
 end
 Script.serveFunction('CSK_IODDInterpreter.getProcessDataOutInfo', getProcessDataOutInfo)
 
+local function getStatusModuleActive()
+  return _G.availableAPIs.default
+end
+Script.serveFunction('CSK_IODDInterpreter.getStatusModuleActive', getStatusModuleActive)
+
+local function getParameters()
+  return ioddInterpreter_Model.json.encode(ioddInterpreter_Model.parameters)
+end
+Script.serveFunction('CSK_IODDInterpreter.getParameters', getParameters)
+
 --**************************************************************************
 --*********************** End external use Scope ***************************
 --**************************************************************************
@@ -704,17 +727,19 @@ Script.serveFunction('CSK_IODDInterpreter.getProcessDataOutInfo', getProcessData
 -- *****************************************************************
 
 local function setParameterName(name)
-  _G.logger:info(nameOfModule .. ": Set parameter name: " .. tostring(name))
+  _G.logger:fine(nameOfModule .. ": Set parameter name: " .. tostring(name))
   ioddInterpreter_Model.parametersName = name
 end
 Script.serveFunction("CSK_IODDInterpreter.setParameterName", setParameterName)
 
-local function sendParameters()
+local function sendParameters(noDataSave)
   if ioddInterpreter_Model.persistentModuleAvailable then
     CSK_PersistentData.addParameter(ioddInterpreter_Model.helperFuncs.convertTable2Container(ioddInterpreter_Model.parameters), ioddInterpreter_Model.parametersName)
     CSK_PersistentData.setModuleParameterName(nameOfModule, ioddInterpreter_Model.parametersName, ioddInterpreter_Model.parameterLoadOnReboot)
-    _G.logger:info(nameOfModule .. ": Send IODDInterpreter parameters with name '" .. ioddInterpreter_Model.parametersName .. "' to CSK_PersistentData module.")
-    CSK_PersistentData.saveData()
+    _G.logger:fine(nameOfModule .. ": Send IODDInterpreter parameters with name '" .. ioddInterpreter_Model.parametersName .. "' to CSK_PersistentData module.")
+    if not noDataSave then
+      CSK_PersistentData.saveData()
+    end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
   end
@@ -741,42 +766,46 @@ local function loadParameters()
       end
 
       CSK_IODDInterpreter.pageCalledInstances()
+      return true
     else
       _G.logger:warning(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
+      return false
     end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData Module not available.")
+    return false
   end
 end
 Script.serveFunction("CSK_IODDInterpreter.loadParameters", loadParameters)
 
 local function setLoadOnReboot(status)
   ioddInterpreter_Model.parameterLoadOnReboot = status
-  _G.logger:info(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
+  _G.logger:fine(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
 end
 Script.serveFunction("CSK_IODDInterpreter.setLoadOnReboot", setLoadOnReboot)
 
 --- Function to react on initial load of persistent parameters
 local function handleOnInitialDataLoaded()
+  if _G.availableAPIs.default then
+    if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
 
-  if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
+      _G.logger:warning(nameOfModule .. ': CSK_PersistentData module is too old and will not work. Please update CSK_PersistentData module.')
 
-    _G.logger:warning(nameOfModule .. ': CSK_PersistentData module is too old and will not work. Please update CSK_PersistentData module.')
+      ioddInterpreter_Model.persistentModuleAvailable = false
+    else
 
-    ioddInterpreter_Model.persistentModuleAvailable = false
-  else
+      local parameterName, loadOnReboot = CSK_PersistentData.getModuleParameterName(nameOfModule)
 
-    local parameterName, loadOnReboot = CSK_PersistentData.getModuleParameterName(nameOfModule)
+      if parameterName then
+        ioddInterpreter_Model.parametersName = parameterName
+        ioddInterpreter_Model.parameterLoadOnReboot = loadOnReboot
+      end
 
-    if parameterName then
-      ioddInterpreter_Model.parametersName = parameterName
-      ioddInterpreter_Model.parameterLoadOnReboot = loadOnReboot
+      if ioddInterpreter_Model.parameterLoadOnReboot then
+        loadParameters()
+      end
+      Script.notifyEvent('IODDInterpreter_OnDataLoadedOnReboot')
     end
-
-    if ioddInterpreter_Model.parameterLoadOnReboot then
-      loadParameters()
-    end
-    Script.notifyEvent('IODDInterpreter_OnDataLoadedOnReboot')
   end
 end
 Script.register("CSK_PersistentData.OnInitialDataLoaded", handleOnInitialDataLoaded)

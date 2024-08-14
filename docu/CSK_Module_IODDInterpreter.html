@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="author" content="SICK AG">
-<title>Documentation - CSK_Module_IODDInterpreter 1.0.1</title>
+<title>Documentation - CSK_Module_IODDInterpreter 1.1.0</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
@@ -615,11 +615,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation - CSK_Module_IODDInterpreter 1.0.1</h1>
+<h1>Documentation - CSK_Module_IODDInterpreter 1.1.0</h1>
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
-<span id="revnumber">version 1.0.1,</span>
-<span id="revdate">2024-02-13</span>
+<span id="revnumber">version 1.1.0,</span>
+<span id="revdate">2024-07-31</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -644,6 +644,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Function:CSK_IODDInterpreter.getIODDList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIODDList()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getIsProcessDataVariable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getIsProcessDataVariable()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getParameterDataPointInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getParameterDataPointInfo()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.getParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getParameters()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getProcessDataConditionInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionInfo()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getProcessDataConditionList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionList()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getProcessDataConditionNameFromValue"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionNameFromValue()</span></a></li>
@@ -654,6 +655,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Function:CSK_IODDInterpreter.getSelectedProcessDataOut"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedProcessDataOut()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getSelectedReadParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedReadParameters()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.getSelectedWriteParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedWriteParameters()</span></a></li>
+<li><a href="#API:Function:CSK_IODDInterpreter.getStatusModuleActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getStatusModuleActive()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.loadParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">loadParameters()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.pageCalledInstances"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledInstances()</span></a></li>
 <li><a href="#API:Function:CSK_IODDInterpreter.pageCalledReadData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledReadData()</span></a></li>
@@ -697,7 +699,10 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODD</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODDToHandle</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedProcessDataStructureOption"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedProcessDataStructureOption</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusCSKStyle</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusModuleIsActive</span></a></li>
+<li><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusModuleVersion</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewWriteDataJsonTemplateAndInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewWriteDataJsonTemplateAndInfo</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnNewWriteParametersTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewWriteParametersTableContent</span></a></li>
 <li><a href="#API:Event:CSK_IODDInterpreter.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnPersistentDataModuleAvailable</span></a></li>
@@ -711,7 +716,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 <li><a href="#API:Crown:CSK_Module_IODDInterpreter"><span class="api-crown">CSK_Module_IODDInterpreter</span></a>
 <ul class="sectlevel3">
-<li><a href="#_short_description_69">Short description</a></li>
+<li><a href="#_short_description_74">Short description</a></li>
 </ul>
 </li>
 </ul>
@@ -735,11 +740,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Version</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1.0.1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.1.0</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-02-13</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-07-31</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -854,6 +859,9 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <p><a href="#API:Function:CSK_IODDInterpreter.getParameterDataPointInfo">getParameterDataPointInfo()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_IODDInterpreter.getParameters">getParameters()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_IODDInterpreter.getProcessDataConditionInfo">getProcessDataConditionInfo()</a></p>
 </li>
 <li>
@@ -882,6 +890,9 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </li>
 <li>
 <p><a href="#API:Function:CSK_IODDInterpreter.getSelectedWriteParameters">getSelectedWriteParameters()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_IODDInterpreter.getStatusModuleActive">getStatusModuleActive()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_IODDInterpreter.loadParameters">loadParameters()</a></p>
@@ -1001,7 +1012,16 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewSelectedProcessDataStructureOption">OnNewSelectedProcessDataStructureOption</a></p>
 </li>
 <li>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusCSKStyle">OnNewStatusCSKStyle</a></p>
+</li>
+<li>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusLoadParameterOnReboot">OnNewStatusLoadParameterOnReboot</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusModuleIsActive">OnNewStatusModuleIsActive</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_IODDInterpreter.OnNewStatusModuleVersion">OnNewStatusModuleVersion</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_IODDInterpreter.OnNewWriteDataJsonTemplateAndInfo">OnNewWriteDataJsonTemplateAndInfo</a></p>
@@ -1616,15 +1636,59 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.getProcessDataConditionInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionInfo()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.getParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getParameters()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_13">Short description</h6>
+<div class="paragraph">
+<p>Function to get all parameters of the client in JSON format.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_return_values_8">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">jsonParameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">JSON string with all parameters.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">jsonParameters = CSK_IODDInterpreter.getParameters()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_IODDInterpreter.getProcessDataConditionInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionInfo()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_14">Short description</h6>
 <div class="paragraph">
 <p>Get IODD description of a parameter resposible for changing of process data structure if it is variable.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_8">Return values</h6>
+<h6 id="_return_values_9">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1651,7 +1715,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonProcessDataConditionInfo = CSK_IODDInterpreter.getProcessDataConditionInfo()</code></pre>
@@ -1662,13 +1726,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getProcessDataConditionList"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionList()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_14">Short description</h6>
+<h6 id="_short_description_15">Short description</h6>
 <div class="paragraph">
 <p>Get list of process data structure options.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_9">Return values</h6>
+<h6 id="_return_values_10">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1695,7 +1759,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonProcessDataConditionList = CSK_IODDInterpreter.getProcessDataConditionList()</code></pre>
@@ -1706,7 +1770,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getProcessDataConditionNameFromValue"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionNameFromValue()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_15">Short description</h6>
+<h6 id="_short_description_16">Short description</h6>
 <div class="paragraph">
 <p>Get process data struccture option name matching the value of the parameter responsible for changing the structure.</p>
 </div>
@@ -1739,7 +1803,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_10">Return values</h6>
+<h6 id="_return_values_11">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1766,7 +1830,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">conditionName = CSK_IODDInterpreter.getProcessDataConditionNameFromValue(conditionValue)</code></pre>
@@ -1777,7 +1841,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getProcessDataConditionValueFromName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataConditionValueFromName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_16">Short description</h6>
+<h6 id="_short_description_17">Short description</h6>
 <div class="paragraph">
 <p>Get  value of the parameter responsible for changing the structure matching the process data struccture option name.</p>
 </div>
@@ -1810,7 +1874,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_11">Return values</h6>
+<h6 id="_return_values_12">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1837,7 +1901,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">conditionValue = CSK_IODDInterpreter.getProcessDataConditionValueFromName(conditionName)</code></pre>
@@ -1848,13 +1912,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getProcessDataInInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataInInfo()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_17">Short description</h6>
+<h6 id="_short_description_18">Short description</h6>
 <div class="paragraph">
 <p>Get IODD description of process data in (for reading from device).</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_12">Return values</h6>
+<h6 id="_return_values_13">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1881,7 +1945,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonProcessDataInInfo = CSK_IODDInterpreter.getProcessDataInInfo()</code></pre>
@@ -1892,13 +1956,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getProcessDataOutInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getProcessDataOutInfo()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_18">Short description</h6>
+<h6 id="_short_description_19">Short description</h6>
 <div class="paragraph">
 <p>JSON object with description of process data out (for writing to device).</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_13">Return values</h6>
+<h6 id="_return_values_14">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1925,7 +1989,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonProcessDataOutInfo = CSK_IODDInterpreter.getProcessDataOutInfo()</code></pre>
@@ -1936,13 +2000,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getSelectedProcessDataIn"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedProcessDataIn()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_19">Short description</h6>
+<h6 id="_short_description_20">Short description</h6>
 <div class="paragraph">
 <p>Get table with selected datapoints of process data in.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_14">Return values</h6>
+<h6 id="_return_values_15">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1969,7 +2033,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonSelectedProcessDataIn = CSK_IODDInterpreter.getSelectedProcessDataIn()</code></pre>
@@ -1980,13 +2044,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getSelectedProcessDataOut"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedProcessDataOut()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_20">Short description</h6>
+<h6 id="_short_description_21">Short description</h6>
 <div class="paragraph">
 <p>Get table with selected datapoints of process data out.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_15">Return values</h6>
+<h6 id="_return_values_16">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2013,7 +2077,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonSelectedProcessDataOut = CSK_IODDInterpreter.getSelectedProcessDataOut()</code></pre>
@@ -2024,13 +2088,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getSelectedReadParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedReadParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_21">Short description</h6>
+<h6 id="_short_description_22">Short description</h6>
 <div class="paragraph">
 <p>Get table with selected parameters datapoints for reading.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_16">Return values</h6>
+<h6 id="_return_values_17">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2057,7 +2121,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonSelectedReadParameters = CSK_IODDInterpreter.getSelectedReadParameters()</code></pre>
@@ -2068,13 +2132,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.getSelectedWriteParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getSelectedWriteParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_22">Short description</h6>
+<h6 id="_short_description_23">Short description</h6>
 <div class="paragraph">
 <p>Get table with selected parameters datapoints for writing.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_17">Return values</h6>
+<h6 id="_return_values_18">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2101,7 +2165,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">jsonSelectedWriteParameters = CSK_IODDInterpreter.getSelectedWriteParameters()</code></pre>
@@ -2110,72 +2174,11 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.loadParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">loadParameters()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_23">Short description</h6>
-<div class="paragraph">
-<p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.loadParameters()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.pageCalledInstances"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledInstances()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.getStatusModuleActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">getStatusModuleActive()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_24">Short description</h6>
 <div class="paragraph">
-<p>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_return_values_18">Return values</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_IODDInterpreter.pageCalledInstances()</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.pageCalledReadData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledReadData()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_25">Short description</h6>
-<div class="paragraph">
-<p>Function to register "On Resume" of the module UI (only as helper function).</p>
+<p>Function to get status if module is active.</p>
 </div>
 </div>
 <div class="sect5">
@@ -2197,10 +2200,54 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string (only needed to simplify binding).</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">status = CSK_IODDInterpreter.getStatusModuleActive()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_IODDInterpreter.loadParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">loadParameters()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_25">Short description</h6>
+<div class="paragraph">
+<p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_return_values_20">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">success</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Success to load parameters.</p></td>
 </tr>
 </tbody>
 </table>
@@ -2209,13 +2256,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_IODDInterpreter.pageCalledReadData()</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">success = CSK_IODDInterpreter.loadParameters()</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_IODDInterpreter.pageCalledWriteData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledWriteData()</span></h5>
+<h5 id="API:Function:CSK_IODDInterpreter.pageCalledInstances"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledInstances()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_26">Short description</h6>
 <div class="paragraph">
@@ -2223,7 +2270,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </div>
 </div>
 <div class="sect5">
-<h6 id="_return_values_20">Return values</h6>
+<h6 id="_return_values_21">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2253,6 +2300,94 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_IODDInterpreter.pageCalledInstances()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_IODDInterpreter.pageCalledReadData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledReadData()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_27">Short description</h6>
+<div class="paragraph">
+<p>Function to register "On Resume" of the module UI (only as helper function).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_return_values_22">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string (only needed to simplify binding).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_IODDInterpreter.pageCalledReadData()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_IODDInterpreter.pageCalledWriteData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">pageCalledWriteData()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_28">Short description</h6>
+<div class="paragraph">
+<p>Function to register "On Resume" of the ModuleName_Model UI ( (only helper function).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_return_values_23">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty string.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_IODDInterpreter.pageCalledWriteData()</code></pre>
 </div>
 </div>
@@ -2261,7 +2396,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.processDataInRowSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">processDataInRowSelected()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_27">Short description</h6>
+<h6 id="_short_description_29">Short description</h6>
 <div class="paragraph">
 <p>Function to process the selected row in process data in dynamic table in UI.</p>
 </div>
@@ -2294,7 +2429,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.processDataInRowSelected(jsonSelectedRow)</code></pre>
@@ -2305,7 +2440,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.processDataOutRowSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">processDataOutRowSelected()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_28">Short description</h6>
+<h6 id="_short_description_30">Short description</h6>
 <div class="paragraph">
 <p>Function to process the selected row in process data out dynamic table in UI.</p>
 </div>
@@ -2338,7 +2473,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.processDataOutRowSelected(jsonSelectedRow)</code></pre>
@@ -2349,7 +2484,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.readParameterRowSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">readParameterRowSelected()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_29">Short description</h6>
+<h6 id="_short_description_31">Short description</h6>
 <div class="paragraph">
 <p>Function to process the selected row in read parameters dynamic table in UI.</p>
 </div>
@@ -2382,7 +2517,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.readParameterRowSelected(jsonSelectedRow)</code></pre>
@@ -2393,16 +2528,43 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.sendParameters"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">sendParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_30">Short description</h6>
+<h6 id="_short_description_32">Short description</h6>
 <div class="paragraph">
 <p>Send parameters to CSK_PersistentData module if possible to save them.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
+<h6 id="_parameters_12">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">noDataSave</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[Optional] Set to TRUE if the data should NOT be saved immediately after sending.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.sendParameters()</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.sendParameters(noDataSave)</code></pre>
 </div>
 </div>
 </div>
@@ -2410,13 +2572,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setInstanceName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setInstanceName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_31">Short description</h6>
+<h6 id="_short_description_33">Short description</h6>
 <div class="paragraph">
 <p>Function to change the instance id (name).</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_12">Parameters</h6>
+<h6 id="_parameters_13">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2443,7 +2605,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setInstanceName(newInstanceName)</code></pre>
@@ -2454,13 +2616,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setLoadOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setLoadOnReboot()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_32">Short description</h6>
+<h6 id="_short_description_34">Short description</h6>
 <div class="paragraph">
 <p>Configure if this module should load its saved parameters at app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_13">Parameters</h6>
+<h6 id="_parameters_14">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2487,7 +2649,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setLoadOnReboot(status)</code></pre>
@@ -2498,13 +2660,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setParameterName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setParameterName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_33">Short description</h6>
+<h6 id="_short_description_35">Short description</h6>
 <div class="paragraph">
 <p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_14">Parameters</h6>
+<h6 id="_parameters_15">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2531,7 +2693,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setParameterName(name)</code></pre>
@@ -2542,13 +2704,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setReadSelectedData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setReadSelectedData()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_34">Short description</h6>
+<h6 id="_short_description_36">Short description</h6>
 <div class="paragraph">
 <p>Set selected read data datapoints externally both for process data in and parameters.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_15">Parameters</h6>
+<h6 id="_parameters_16">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2575,7 +2737,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setReadSelectedData(jsonReadDataInfo)</code></pre>
@@ -2586,7 +2748,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setSelectedInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedInstance()</span></h5>
 <div class="sect5">
-<h6 id="_parameters_16">Parameters</h6>
+<h6 id="_parameters_17">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2613,7 +2775,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_21">Return values</h6>
+<h6 id="_return_values_24">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2640,7 +2802,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">success = CSK_IODDInterpreter.setSelectedInstance(newSelectedInstance)</code></pre>
@@ -2651,13 +2813,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODD()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_35">Short description</h6>
+<h6 id="_short_description_37">Short description</h6>
 <div class="paragraph">
 <p>Set IODD file used in the selected instance.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_17">Parameters</h6>
+<h6 id="_parameters_18">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2684,7 +2846,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIODD(ioddName)</code></pre>
@@ -2695,13 +2857,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setSelectedIODDToHandle()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_36">Short description</h6>
+<h6 id="_short_description_38">Short description</h6>
 <div class="paragraph">
 <p>Set IODD to edit (delete).</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_18">Parameters</h6>
+<h6 id="_parameters_19">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2728,7 +2890,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setSelectedIODDToHandle(newSelectedIODDToHandle)</code></pre>
@@ -2739,13 +2901,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.setWriteSelectedData"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">setWriteSelectedData()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_37">Short description</h6>
+<h6 id="_short_description_39">Short description</h6>
 <div class="paragraph">
 <p>Set selected read data datapoints externally both for process data out and parameters.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_19">Parameters</h6>
+<h6 id="_parameters_20">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2772,7 +2934,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.setWriteSelectedData(jsonWriteDataInfo)</code></pre>
@@ -2783,13 +2945,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.updateSelectedParametersTable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">updateSelectedParametersTable()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_38">Short description</h6>
+<h6 id="_short_description_40">Short description</h6>
 <div class="paragraph">
 <p>Function that returns the new selected parameters table after processing of a selected row JSON data from dynamic table.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_20">Parameters</h6>
+<h6 id="_parameters_21">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2822,7 +2984,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_22">Return values</h6>
+<h6 id="_return_values_25">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2849,7 +3011,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">newJsonSelectedParametersTable = CSK_IODDInterpreter.updateSelectedParametersTable(jsonSelectedRow, jsonSelectedParametersTable)</code></pre>
@@ -2860,13 +3022,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.updateSelectedProcessDataTable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">updateSelectedProcessDataTable()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_39">Short description</h6>
+<h6 id="_short_description_41">Short description</h6>
 <div class="paragraph">
 <p>Function that returns the new selected process data table after processing of a selected row JSON data from dynamic table.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_21">Parameters</h6>
+<h6 id="_parameters_22">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2899,7 +3061,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_23">Return values</h6>
+<h6 id="_return_values_26">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2926,7 +3088,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">newJsonSelectedProcessDataTable = CSK_IODDInterpreter.updateSelectedProcessDataTable(jsonSelectedRow, jsonSelectedProcessDataTable)</code></pre>
@@ -2937,13 +3099,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.uploadFinished"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">uploadFinished()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_40">Short description</h6>
+<h6 id="_short_description_42">Short description</h6>
 <div class="paragraph">
 <p>Function called when IODD file upload is finished in UI.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_22">Parameters</h6>
+<h6 id="_parameters_23">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2970,7 +3132,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.uploadFinished(uploadSuccess)</code></pre>
@@ -2981,13 +3143,13 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Function:CSK_IODDInterpreter.writeParameterRowSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-function">writeParameterRowSelected()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_41">Short description</h6>
+<h6 id="_short_description_43">Short description</h6>
 <div class="paragraph">
 <p>Function to process the selected row in write parameters dynamic table in UI.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_23">Parameters</h6>
+<h6 id="_parameters_24">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3014,7 +3176,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.writeParameterRowSelected(jsonSelectedRow)</code></pre>
@@ -3028,7 +3190,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.isInstanceSelected"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">isInstanceSelected</span></h5>
 <div class="sect5">
-<h6 id="_short_description_42">Short description</h6>
+<h6 id="_short_description_44">Short description</h6>
 <div class="paragraph">
 <p>Event to notify if any instance is selected to show additional settings in UI.</p>
 </div>
@@ -3061,7 +3223,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleisInstanceSelected</span>(isSelected)
@@ -3076,7 +3238,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.isProcessDataStructureVariable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">isProcessDataStructureVariable</span></h5>
 <div class="sect5">
-<h6 id="_short_description_43">Short description</h6>
+<h6 id="_short_description_45">Short description</h6>
 <div class="paragraph">
 <p>Event to notify if process data is variable to show additional settings in UI.</p>
 </div>
@@ -3109,7 +3271,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleisProcessDataStructureVariable</span>(IsProcessDataStructureVariable)
@@ -3124,13 +3286,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnDataLoadedOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_44">Short description</h6>
+<h6 id="_short_description_46">Short description</h6>
 <div class="paragraph">
 <p>Event to call if module tried to load parameters and should be ready.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnDataLoadedOnReboot</span>()
@@ -3145,13 +3307,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnIODDListChanged"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnIODDListChanged</span></h5>
 <div class="sect5">
-<h6 id="_short_description_45">Short description</h6>
+<h6 id="_short_description_47">Short description</h6>
 <div class="paragraph">
 <p>Event to notify if IODD file was deleted or a new IODD file was successfully uploaded.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_47">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnIODDListChanged</span>()
@@ -3166,7 +3328,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewCalloutType"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewCalloutType</span></h5>
 <div class="sect5">
-<h6 id="_short_description_46">Short description</h6>
+<h6 id="_short_description_48">Short description</h6>
 <div class="paragraph">
 <p>Event to notify a type of callout in UI.</p>
 </div>
@@ -3199,7 +3361,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_48">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewCalloutType</span>(Type)
@@ -3214,7 +3376,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewCalloutValue"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewCalloutValue</span></h5>
 <div class="sect5">
-<h6 id="_short_description_47">Short description</h6>
+<h6 id="_short_description_49">Short description</h6>
 <div class="paragraph">
 <p>Event to notify a value of callout in UI.</p>
 </div>
@@ -3247,7 +3409,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_47">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_49">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewCalloutValue</span>(Value)
@@ -3262,7 +3424,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewInstanceName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewInstanceName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_48">Short description</h6>
+<h6 id="_short_description_50">Short description</h6>
 <div class="paragraph">
 <p>Event to show the name of selected instance in UI.</p>
 </div>
@@ -3295,7 +3457,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_48">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewInstanceName</span>(instanceName)
@@ -3310,7 +3472,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewListIntances"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIntances</span></h5>
 <div class="sect5">
-<h6 id="_short_description_49">Short description</h6>
+<h6 id="_short_description_51">Short description</h6>
 <div class="paragraph">
 <p>Event to share the list of all instances names.</p>
 </div>
@@ -3343,7 +3505,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_49">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_51">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewListIntances</span>(jsonIntancesList)
@@ -3358,7 +3520,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewListIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewListIODD</span></h5>
 <div class="sect5">
-<h6 id="_short_description_50">Short description</h6>
+<h6 id="_short_description_52">Short description</h6>
 <div class="paragraph">
 <p>Event to share list of all loaded IODD files.</p>
 </div>
@@ -3391,7 +3553,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_52">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewListIODD</span>(jsonIODDList)
@@ -3406,7 +3568,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewParameterName"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewParameterName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_51">Short description</h6>
+<h6 id="_short_description_53">Short description</h6>
 <div class="paragraph">
 <p>Notify name of persistent data parameter.</p>
 </div>
@@ -3439,7 +3601,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_51">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_53">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewParameterName</span>(name)
@@ -3454,7 +3616,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewProcessDataInTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewProcessDataInTableContent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_52">Short description</h6>
+<h6 id="_short_description_54">Short description</h6>
 <div class="paragraph">
 <p>Event to fill the process data in dynamic table in UI.</p>
 </div>
@@ -3487,7 +3649,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_52">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_54">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewProcessDataInTableContent</span>(ProcessDataInTableContent)
@@ -3502,7 +3664,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewProcessDataOutTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewProcessDataOutTableContent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_53">Short description</h6>
+<h6 id="_short_description_55">Short description</h6>
 <div class="paragraph">
 <p>Event to fill the process data out dynamic table in UI.</p>
 </div>
@@ -3535,7 +3697,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_53">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_55">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewProcessDataOutTableContent</span>(ProcessDataOutTableContent)
@@ -3550,7 +3712,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewProcessDataStructureOptionsDropdownContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewProcessDataStructureOptionsDropdownContent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_54">Short description</h6>
+<h6 id="_short_description_56">Short description</h6>
 <div class="paragraph">
 <p>Event to share list of process data structure options if process data is variable.</p>
 </div>
@@ -3583,7 +3745,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_54">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_56">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewProcessDataStructureOptionsDropdownContent</span>(ProcessDataStructureOptionsDropdownContent)
@@ -3598,7 +3760,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewReadDataJsonTemplateAndInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewReadDataJsonTemplateAndInfo</span></h5>
 <div class="sect5">
-<h6 id="_short_description_55">Short description</h6>
+<h6 id="_short_description_57">Short description</h6>
 <div class="paragraph">
 <p>Event to notify when selected read datapoints (process data in and parameters) has changed. Might be useful externally.</p>
 </div>
@@ -3643,7 +3805,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_55">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewReadDataJsonTemplateAndInfo</span>(instanceId, jsonTemplate, jsonDataInfo)
@@ -3658,7 +3820,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewReadParametersTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewReadParametersTableContent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_56">Short description</h6>
+<h6 id="_short_description_58">Short description</h6>
 <div class="paragraph">
 <p>Event to fill the read parameters dynamic table in UI.</p>
 </div>
@@ -3691,7 +3853,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_56">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewReadParametersTableContent</span>(TableContent)
@@ -3706,7 +3868,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedInstance"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedInstance</span></h5>
 <div class="sect5">
-<h6 id="_short_description_57">Short description</h6>
+<h6 id="_short_description_59">Short description</h6>
 <div class="paragraph">
 <p>Event to notify the selected instance name.</p>
 </div>
@@ -3739,7 +3901,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedInstance</span>(selectedInstance)
@@ -3754,7 +3916,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIODD"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODD</span></h5>
 <div class="sect5">
-<h6 id="_short_description_58">Short description</h6>
+<h6 id="_short_description_60">Short description</h6>
 <div class="paragraph">
 <p>Event to notify the IODD name used by selected instance.</p>
 </div>
@@ -3787,7 +3949,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_60">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIODD</span>(selectedIODD)
@@ -3802,7 +3964,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedIODDToHandle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedIODDToHandle</span></h5>
 <div class="sect5">
-<h6 id="_short_description_59">Short description</h6>
+<h6 id="_short_description_61">Short description</h6>
 <div class="paragraph">
 <p>Event to notify the selected IODD name of a file to be edited (deleted).</p>
 </div>
@@ -3835,7 +3997,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_61">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedIODDToHandle</span>(selectedIODDToHandle)
@@ -3850,7 +4012,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewSelectedProcessDataStructureOption"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewSelectedProcessDataStructureOption</span></h5>
 <div class="sect5">
-<h6 id="_short_description_60">Short description</h6>
+<h6 id="_short_description_62">Short description</h6>
 <div class="paragraph">
 <p>Event to notify the selected process data structure option if it is variable.</p>
 </div>
@@ -3883,7 +4045,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_60">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_62">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedProcessDataStructureOption</span>(SelectedProcessDataStructureOption)
@@ -3896,15 +4058,63 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewStatusCSKStyle"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusCSKStyle</span></h5>
+<div class="sect5">
+<h6 id="_short_description_63">Short description</h6>
+<div class="paragraph">
+<p>Notify UI style to use for CSK modules.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_18">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">theme</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UI style</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_63">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusCSKStyle</span>(theme)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewStatusCSKStyle</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusCSKStyle</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_61">Short description</h6>
+<h6 id="_short_description_64">Short description</h6>
 <div class="paragraph">
 <p>Notify status if parameters should be loaded on app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_18">Callback arguments</h6>
+<h6 id="_callback_arguments_19">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3931,7 +4141,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_61">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_64">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
@@ -3944,15 +4154,111 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewStatusModuleIsActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusModuleIsActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_65">Short description</h6>
+<div class="paragraph">
+<p>Notify if module can be used on device.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_20">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_65">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleIsActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleIsActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnNewStatusModuleVersion"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewStatusModuleVersion</span></h5>
+<div class="sect5">
+<h6 id="_short_description_66">Short description</h6>
+<div class="paragraph">
+<p>Notify version of module.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_21">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">version</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Version</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_66">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusModuleVersion</span>(version)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewStatusModuleVersion</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewWriteDataJsonTemplateAndInfo"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewWriteDataJsonTemplateAndInfo</span></h5>
 <div class="sect5">
-<h6 id="_short_description_62">Short description</h6>
+<h6 id="_short_description_67">Short description</h6>
 <div class="paragraph">
 <p>Event to notify when selected write datapoints (process data out and parameters) has changed. Might be useful externally.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_19">Callback arguments</h6>
+<h6 id="_callback_arguments_22">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3991,7 +4297,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_62">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_67">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewWriteDataJsonTemplateAndInfo</span>(instanceId, jsonTemplate, jsonDataInfo)
@@ -4006,13 +4312,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnNewWriteParametersTableContent"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnNewWriteParametersTableContent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_63">Short description</h6>
+<h6 id="_short_description_68">Short description</h6>
 <div class="paragraph">
 <p>Event to fill the write parameters dynamic table in UI.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_20">Callback arguments</h6>
+<h6 id="_callback_arguments_23">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -4039,7 +4345,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_63">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_68">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewWriteParametersTableContent</span>(WriteParametersTableContent)
@@ -4054,153 +4360,9 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_IODDInterpreter.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
 <div class="sect5">
-<h6 id="_short_description_64">Short description</h6>
+<h6 id="_short_description_69">Short description</h6>
 <div class="paragraph">
 <p>Notify status if features of CSK_PersistendData module are available.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_21">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_64">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelAdminActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_65">Short description</h6>
-<div class="paragraph">
-<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_22">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_65">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_66">Short description</h6>
-<div class="paragraph">
-<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_callback_arguments_23">Callback arguments</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_66">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
-  <span class="comment">-- Do something</span>
-<span class="keyword">end</span>
-
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
-<div class="sect5">
-<h6 id="_short_description_67">Short description</h6>
-<div class="paragraph">
-<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
@@ -4231,24 +4393,24 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_67">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_69">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnPersistentDataModuleAvailable</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelServiceActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelAdminActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_68">Short description</h6>
+<h6 id="_short_description_70">Short description</h6>
 <div class="paragraph">
-<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+<p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
@@ -4279,7 +4441,151 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_68">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_70">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelAdminActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_71">Short description</h6>
+<div class="paragraph">
+<p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_26">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_71">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelMaintenanceActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_72">Short description</h6>
+<div class="paragraph">
+<p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_27">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_72">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_IODDInterpreter.OnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnUserLevelOperatorActive</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_IODDInterpreter.OnUserLevelServiceActive"><span class="breadcrumb">CSK_IODDInterpreter.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
+<div class="sect5">
+<h6 id="_short_description_73">Short description</h6>
+<div class="paragraph">
+<p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_28">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_73">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelServiceActive</span>(status)
@@ -4296,7 +4602,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect2">
 <h3 id="API:Crown:CSK_Module_IODDInterpreter"><span class="api-crown">CSK_Module_IODDInterpreter</span></h3>
 <div class="sect3">
-<h4 id="_short_description_69">Short description</h4>
+<h4 id="_short_description_74">Short description</h4>
 <div class="paragraph">
 <p>This is an automatically generated CROWN (description not necessary).</p>
 </div>
@@ -4307,8 +4613,8 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 1.0.1<br>
-Last updated 2024-02-13 16:06:06 +0100
+Version 1.1.0<br>
+Last updated 2024-07-31 16:13:31 +0200
 </div>
 </div>
 <script type="text/javascript">
