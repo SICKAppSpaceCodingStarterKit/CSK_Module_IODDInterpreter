@@ -51,10 +51,10 @@
                             </curie-table-column>
                             <crown-on property="data" crown-event="CSK_IODDInterpreter/OnNewProcessDataOutTableContent">
                             </crown-on>
-                            <crown-set event="row-selected"
-                                crown-function="CSK_IODDInterpreter/processDataOutRowSelected" protocol="crownMSGPACK"
-                                crown-path="jsonSelectedRow">
-                            </crown-set>
+							<crown-set event="row-selected"
+								crown-function="CSK_IODDInterpreter/processDataOutRowSelectedUI"
+								protocol="crownMSGPACK" crown-path="jsonSelectedRow">
+							</crown-set>
                         </curie-table>
                         <curie-table id="DT_WriteParametersTable" selectable title="Write Parameters Table"
                             style="width: 80%">
@@ -75,10 +75,10 @@
                             <crown-on property="data"
                                 crown-event="CSK_IODDInterpreter/OnNewWriteParametersTableContent">
                             </crown-on>
-                            <crown-set event="row-selected"
-                                crown-function="CSK_IODDInterpreter/writeParameterRowSelected" protocol="crownMSGPACK"
-                                crown-path="jsonSelectedRow">
-                            </crown-set>
+							<crown-set event="row-selected"
+								crown-function="CSK_IODDInterpreter/writeParameterRowSelectedUI"
+								protocol="crownMSGPACK" crown-path="jsonSelectedRow">
+							</crown-set>
                         </curie-table>
                     </layout-column>
                 </layout-row>

@@ -32,6 +32,7 @@ ioddInterpreter_Model.helperFuncs = require('Sensors/IODDInterpreter/helper/func
 ioddInterpreter_Model.ioddInt = require "Sensors.IODDInterpreter.helper.IODDInterpreter"
 ioddInterpreter_Model.dynamicTableHelper = require "Sensors.IODDInterpreter.helper.IODDDynamicTable"
 ioddInterpreter_Model.json = require "Sensors.IODDInterpreter.helper.Json"
+ioddInterpreter_Model.tableCompiler = require "Sensors.IODDInterpreter.helper.tableCompiler"
 
 ioddInterpreter_Model.styleForUI = 'None' -- Optional parameter to set UI style
 ioddInterpreter_Model.version = Engine.getCurrentAppVersion() -- Version of module
@@ -43,14 +44,16 @@ File.mkdir(ioddInterpreter_Model.ioddFilesStorage) -- creating the storage folde
 -- Parameters to be saved permanently if wanted
 ioddInterpreter_Model.parameters = {}
 ioddInterpreter_Model.parameters.instances = {}
+ioddInterpreter_Model.parameters.activeIODDs = {} -- list of active iodds to keep lua tables in cash
+ioddInterpreter_Model.parameters.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
 
-ioddInterpreter_Model.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
-local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
-for i, fileName in ipairs(ioddFilesStorageContent) do
-  if string.sub(fileName, -5) == '.json' then
-    table.insert(ioddInterpreter_Model.availableIODDs, string.sub(fileName, 1, -6))
-  end
-end
+--ioddInterpreter_Model.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
+--local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
+--for i, fileName in ipairs(ioddFilesStorageContent) do
+--  if string.sub(fileName, -5) == '.json' then
+--    table.insert(ioddInterpreter_Model.availableIODDs, string.sub(fileName, 1, -6))
+--  end
+--end
 
 --**************************************************************************
 --********************** End Global Scope **********************************
@@ -65,6 +68,68 @@ local function handleOnStyleChanged(theme)
 end
 Script.register('CSK_PersistentData.OnNewStatusCSKStyle', handleOnStyleChanged)
 
+--- Function to derive the latest version between two (For future use)
+---@param vers table Array of versions of IODD file 1 and file2
+---@return string? higherVersion Higher version of the two
+local function getHigherVersion(vers)
+  local endings = {0,0}
+  local inits = {0,0}
+  while endings[1] do
+    inits[1],endings[1] = string.find(vers[1], "%d+", endings[1]+1)
+    inits[2],endings[2] = string.find(vers[2], "%d+", endings[2]+1)
+    if not inits[1] then
+      break
+    end
+    if tonumber(string.sub(vers[1], inits[1], endings[1])) > tonumber(string.sub(vers[2], inits[2], endings[2])) then
+      return vers[1]
+    elseif tonumber(string.sub(vers[1], inits[1], endings[1])) < tonumber(string.sub(vers[2], inits[2], endings[2])) then
+      return vers[2]
+    end
+  end
+  return nil
+end
+
+--- Function to check if the currently used IODD file mathches needed venor ID, device ID and version. Used to check if this instance can still be used for connected IO-Link device.
+--- NOTE! Only vendor and device ID check currently work as it is not clear what to do if version is lower
+---@param vendorId string Vendor ID from device identification
+---@param deviceId string Device ID from device identification
+---@param version string Version from device identification
+---@return bool success True if the vendor ID, device ID match the used IODD file
+---@return string IODDname Name of the loaded IODD for external reference
+local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version)
+  for loadedIODDName, loadedIODDInfo in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+    if loadedIODDInfo.vendorId == vendorId and loadedIODDInfo.deviceId == deviceId then
+      return true, loadedIODDName
+      --TODO: decide what to do in case a newer IODD version is loaded
+      --if not version then
+      --  return true, loadedIODDName
+      --end
+      --if tempVersion == version then
+      --  return true, loadedIODDName
+      --elseif getHigherVersion({tempVersion, version}) == tempVersion then
+      --  return true, loadedIODDName
+      --else
+      --  return true, loadedIODDName
+      --end
+    end
+  end
+  return false, "NO MATCH"
+end
+ioddInterpreter_Model.checkVendorIdDeviceIdVersionMatchIODD = checkVendorIdDeviceIdVersionMatchIODD
+
+local function deactivateNotUsedActiveIodds()
+  for ioddName, _ in pairs(ioddInterpreter_Model.parameters.activeIODDs) do
+    for _, instanceConfig in pairs(ioddInterpreter_Model.parameters.instances) do
+      if instanceConfig.ioddName == ioddName then
+        goto nextActiveIodd
+      end
+    end
+    ioddInterpreter_Model.parameters.activeIODDs[ioddName] = nil
+    ::nextActiveIodd::
+  end
+end
+ioddInterpreter_Model.deactivateNotUsedActiveIodds = deactivateNotUsedActiveIodds
+
 --- Function to check if loaded .xml IODD file can be interpreted. If yes, then file with standartized name and its .json interpetation are storred in IODD storage folder. The original file is deleted.
 ---@param ioddFilePath string Path to a loaded .xml IODD file
 ---@return bool loadSuccess Success of interpretation 
@@ -78,17 +143,20 @@ local function addNewIODDfile(ioddFilePath)
     _G.logger:warning(_APPNAME..': failed to interpret iodd file: ' .. tostring(ioddFilePath) .. '; error caught: ' .. tostring(loadSuccess))
     return false, 'IODD interpretation failed'
   end
+  local tempVendorId, tempDeviceId, tempVersion = tempIODD:getVendorIdDeviceIdVersion()
+  if checkVendorIdDeviceIdVersionMatchIODD(tempVendorId, tempDeviceId) == true then
+    File.del(ioddFilePath)
+    tempIODD = nil
+    return false, 'IODD is already loaded'
+  end
   local ioddStandardFileName = tempIODD:getStandardFileName()
   _G.logger:info(_APPNAME..': new iodd file name to save : ' .. tostring(ioddStandardFileName))
-  for _, loadedIODDName in ipairs(ioddInterpreter_Model.availableIODDs) do
-    if loadedIODDName == ioddStandardFileName then
-      File.del(ioddFilePath)
-      tempIODD = nil
-      return false, 'IODD is already loaded'
-    end
-  end
+  ioddInterpreter_Model.parameters.availableIODDs[ioddStandardFileName] = {
+    vendorId = tempVendorId,
+    deviceId = tempDeviceId,
+    version = tempVersion
+  }
   local newioddFilePath = ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddStandardFileName
-  table.insert(ioddInterpreter_Model.availableIODDs, ioddStandardFileName)
   tempIODD:saveAsJSON(ioddInterpreter_Model.ioddFilesStorage, ioddStandardFileName..'.json')
   local success = File.copy(ioddFilePath, newioddFilePath .. '.xml')
   File.del(ioddFilePath)
@@ -97,18 +165,48 @@ local function addNewIODDfile(ioddFilePath)
 end
 ioddInterpreter_Model.addNewIODDfile = addNewIODDfile
 
+-- Function to check what IODD files are available when loading persistent data or restarting device
+local function updateAvailableIODDs()
+  local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
+  for ioddName, _ in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+    for i, fileName in ipairs(ioddFilesStorageContent) do
+      if string.sub(fileName, -5) == '.json' and string.sub(fileName, 1, -6) == ioddName then
+        goto nextIoddName
+      end
+    end
+    ioddInterpreter_Model.parameters.availableIODDs[ioddName] = nil
+    ::nextIoddName::
+  end
+  for i, fileName in ipairs(ioddFilesStorageContent) do
+    for ioddName, _ in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+      if string.sub(fileName, -5) == '.json' and string.sub(fileName, 1, -6) == ioddName then
+        goto nextFile
+      end
+    end
+    if string.sub(fileName, -5) == '.json' then
+      local tempIODD = ioddInterpreter_Model.ioddInt:new()
+      tempIODD:loadFromJson(ioddInterpreter_Model.ioddFilesStorage, fileName)
+      local tempVendorId, tempDeviceId, tempVersion = tempIODD:getVendorIdDeviceIdVersion()
+      local ioddStandardFileName = tempIODD:getStandardFileName()
+      ioddInterpreter_Model.parameters.availableIODDs[ioddStandardFileName] = {
+        vendorId = tempVendorId,
+        deviceId = tempDeviceId,
+        version = tempVersion,
+      }
+    end
+    ::nextFile::
+  end
+end
+ioddInterpreter_Model.updateAvailableIODDs = updateAvailableIODDs
+updateAvailableIODDs()
+
 --- Delete IODD file from IODD storage.
 ---@param ioddName string Name of the IODD file to be deleted
 local function deleteIODDFile(ioddName)
   File.del(ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddName .. '.xml')
   File.del(ioddInterpreter_Model.ioddFilesStorage .. '/' .. ioddName .. '.json')
-  ioddInterpreter_Model.availableIODDs = {}
-  local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
-  for i, fileName in ipairs(ioddFilesStorageContent) do
-    if string.sub(fileName, -5) == '.json' then
-      table.insert(ioddInterpreter_Model.availableIODDs, string.sub(fileName, 1, -6))
-    end
-  end
+  updateAvailableIODDs()
+  deactivateNotUsedActiveIodds()
 end
 ioddInterpreter_Model.deleteIODDFile = deleteIODDFile
 
@@ -168,59 +266,6 @@ local function loadIODD(instanceId, ioddName)
   setDefaultProcessDataInfo(instanceId, loadedIODD:getProcessDataInfo(currentInstance.currentProcessDataConditionValue))
 end
 ioddInterpreter_Model.loadIODD = loadIODD
-
-
---- Function to derive the latest version between two
----@param vers table Array of versions of IODD file 1 and file2
----@return string? higherVersion Higher version of the two
-local function getHigherVersion(vers)
-  local endings = {0,0}
-  local inits = {0,0}
-  while endings[1] do
-    inits[1],endings[1] = string.find(vers[1], "%d+", endings[1]+1)
-    inits[2],endings[2] = string.find(vers[2], "%d+", endings[2]+1)
-    if not inits[1] then
-      break
-    end
-    if tonumber(string.sub(vers[1], inits[1], endings[1])) > tonumber(string.sub(vers[2], inits[2], endings[2])) then
-      return vers[1]
-    elseif tonumber(string.sub(vers[1], inits[1], endings[1])) < tonumber(string.sub(vers[2], inits[2], endings[2])) then
-      return vers[2]
-    end
-  end
-  return nil
-end
-
---- Function to check if the currently used IODD file mathches needed venor ID, device ID and version. Used to check if this instance can still be used for connected IO-Link device.
---- NOTE! Only vendor and device ID check currently work as it is not clear what to do if version is lower
----@param vendorId string Vendor ID from device identification
----@param deviceId string Device ID from device identification
----@param version string Version from device identification
----@return bool success True if the vendor ID, device ID match the used IODD file
----@return string IODDname Name of the loaded IODD for external reference
-local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version)
-  for _, loadedIODDName in ipairs(ioddInterpreter_Model.availableIODDs) do
-    local tempIODD = ioddInterpreter_Model.ioddInt:new()
-    tempIODD:loadFromJson(ioddInterpreter_Model.ioddFilesStorage, loadedIODDName..'.json')
-    local tempVendorId, tempDeviceId, tempVersion = tempIODD:getVendorIdDeviceIdVersion()
-    if vendorId == tempVendorId and tempDeviceId == deviceId then
-      return true, loadedIODDName
-      -- As noted above, to be clarified in future
-      --if not version then
-      --  return true, loadedIODDName
-      --end
-      --if tempVersion == version then
-      --  return true, loadedIODDName
-      --elseif getHigherVersion({tempVersion, version}) == tempVersion then
-      --  return true, loadedIODDName
-      --else
-      --  return true, loadedIODDName
-      --end
-    end
-  end
-  return false, "NO MATCH"
-end
-ioddInterpreter_Model.checkVendorIdDeviceIdVersionMatchIODD = checkVendorIdDeviceIdVersionMatchIODD
 
 --- Function to check if the currently used IODD file mathches needed product name. Used to check if this instance can still be used for connected IO-Link device.
 ---@param productName string Product name from device identification

@@ -16,7 +16,9 @@ local ioddInterpreter_Model
 local selectedIODDToHandle = '' -- IODD file that is selected in UI to be deleted
 local currentCalloutType = 'info' -- Type of the status callot in UI
 local currentCalloutValue = 'Application started' -- Callout message to be shown in UI
-local selectedInstance = '' -- Current selected instance
+local selectedInstance = '' -- Current selected instance+
+local copyReadDataMessageContent -- temporary selected data copy to duplicate read messages between instances 
+local copyWriteDataMessageContent -- temporary selected data copy to duplicate write messages between instances
 
 -- Timer to update UI via events after page was loaded
 local tmrInstances = Timer.create()
@@ -158,7 +160,11 @@ local function handleOnExpiredTmrInstances()
 
   Script.notifyEvent('IODDInterpreter_OnNewCalloutType', currentCalloutType)
   Script.notifyEvent('IODDInterpreter_OnNewCalloutValue', currentCalloutValue)
-  Script.notifyEvent("IODDInterpreter_OnNewListIODD", ioddInterpreter_Model.json.encode(ioddInterpreter_Model.availableIODDs))
+  local availableList = {}
+  for ioddName, _ in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+    table.insert(availableList, ioddName)
+  end
+  Script.notifyEvent("IODDInterpreter_OnNewListIODD", ioddInterpreter_Model.json.encode(availableList))
   Script.notifyEvent("IODDInterpreter_OnNewSelectedIODDToHandle", ioddInterpreter_Model.json.encode(selectedIODDToHandle))
   Script.notifyEvent("IODDInterpreter_OnPersistentDataModuleAvailable", (CSK_PersistentData ~= nil))
   Script.notifyEvent("IODDInterpreter_OnNewStatusLoadParameterOnReboot", ioddInterpreter_Model.parameterLoadOnReboot)
@@ -191,7 +197,11 @@ Script.serveFunction("CSK_IODDInterpreter.pageCalledInstances", pageCalledInstan
 local function addIODDFile(path)
   local success, result = ioddInterpreter_Model.addNewIODDfile(path)
   if success then
-    Script.notifyEvent('IODDInterpreter_OnIODDListChanged')
+    local ioddList = {}
+    for ioddName in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+      table.insert(ioddList, ioddName)
+    end
+    Script.notifyEvent('IODDInterpreter_OnIODDListChanged', ioddList)
   end
   return success, result
 end
@@ -221,6 +231,7 @@ Script.serveFunction('CSK_IODDInterpreter.addInstance', addInstance)
 local function deleteInstance()
   ioddInterpreter_Model.parameters.instances[selectedInstance] = nil
   selectedInstance = ''
+  ioddInterpreter_Model.deactivateNotUsedActiveIodds()
   handleOnExpiredTmrInstances()
 end
 Script.serveFunction('CSK_IODDInterpreter.deleteInstance', deleteInstance)
@@ -274,7 +285,11 @@ local function deleteIODD()
   currentCalloutType = 'success'
   currentCalloutValue = 'Deleted IODD ' .. selectedIODDToHandle
   selectedIODDToHandle = ''
-  Script.notifyEvent('IODDInterpreter_OnIODDListChanged')
+  local ioddList = {}
+  for ioddName in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+    table.insert(ioddList, ioddName)
+  end
+  Script.notifyEvent('IODDInterpreter_OnIODDListChanged', ioddList)
   handleOnExpiredTmrInstances()
   return true, 'SUCCESS'
 end
@@ -286,9 +301,7 @@ Script.serveFunction('CSK_IODDInterpreter.deleteIODD', deleteIODD)
 --************************* Start Data Scope *******************************
 --**************************************************************************
 
-local function updateSelectedProcessDataTable(jsonSelectedRow, jsonSelectedProcessDataTable)
-  local selectedProcessDataTable = ioddInterpreter_Model.json.decode(jsonSelectedProcessDataTable)
-  local selectedRow = ioddInterpreter_Model.json.decode(jsonSelectedRow)
+local function updateSelectedProcessDataTable(selectedRow, selectedProcessDataTable)
   local state = selectedRow.selected
   local subindex = selectedRow.colPD1
   if subindex ~= "0" then
@@ -311,13 +324,9 @@ local function updateSelectedProcessDataTable(jsonSelectedRow, jsonSelectedProce
       end
     end
   end
-  return ioddInterpreter_Model.json.encode(selectedProcessDataTable)
 end
-Script.serveFunction('CSK_IODDInterpreter.updateSelectedProcessDataTable', updateSelectedProcessDataTable)
 
-local function updateSelectedParametersTable(jsonSelectedRow, jsonSelectedParametersTable)
-  local selectedParametersTable = ioddInterpreter_Model.json.decode(jsonSelectedParametersTable)
-  local selectedRow = ioddInterpreter_Model.json.decode(jsonSelectedRow)
+local function updateSelectedParametersTable(selectedRow, selectedParametersTable)
   local state = selectedRow.selected
   local index = selectedRow.colSD1
   local subindex = selectedRow.colSD2
@@ -341,9 +350,7 @@ local function updateSelectedParametersTable(jsonSelectedRow, jsonSelectedParame
       end
     end
   end
-  return ioddInterpreter_Model.json.encode(selectedParametersTable)
 end
-Script.serveFunction('CSK_IODDInterpreter.updateSelectedParametersTable', updateSelectedParametersTable)
 
 local function getParameterDataPointInfo(instanceId, index, subindex)
   local dataPointInfo
@@ -379,17 +386,18 @@ local function handleOnExpiredTmrReadData()
       Script.notifyEvent('IODDInterpreter_OnNewProcessDataStructureOptionsDropdownContent', ioddInterpreter_Model.json.encode(currentInstance.processDataConditionList))
       Script.notifyEvent('IODDInterpreter_OnNewSelectedProcessDataStructureOption', currentInstance.currentProcessDataConditionName)
     end
+    local processDataInfo = currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue)
     Script.notifyEvent('IODDInterpreter_OnNewProcessDataInTableContent',
       ioddInterpreter_Model.dynamicTableHelper.makeProcessDataTableContent(
         readPreficesToInclude,
-        currentInstance.processDataInInfo,
+        processDataInfo.ProcessDataIn,
         currentInstance.selectedProcessDataIn
       )
     )
     Script.notifyEvent('IODDInterpreter_OnNewReadParametersTableContent',
       ioddInterpreter_Model.dynamicTableHelper.makeIODDParameterTableContent(
         readPreficesToInclude,
-        currentInstance.allReadParameterInfo,
+        currentInstance.iodd:getAllReadParameterInfo(),
         currentInstance.selectedReadParameters
       )
     )
@@ -444,33 +452,23 @@ local function setReadSelectedData(jsonReadDataInfo)
 end
 Script.serveFunction('CSK_IODDInterpreter.setReadSelectedData', setReadSelectedData)
 
-local function processDataInRowSelected(jsonSelectedRow)
-  jsonSelectedRow = ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, readPreficesToInclude[1])
-  ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn = ioddInterpreter_Model.json.decode(
-    updateSelectedProcessDataTable(
-      jsonSelectedRow,
-      ioddInterpreter_Model.json.encode(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn)
-    )
+local function processDataInRowSelectedUI(jsonSelectedRow)
+  updateSelectedProcessDataTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, readPreficesToInclude[1]),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn
   )
   handleOnExpiredTmrReadData()
-  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
-  Script.notifyEvent('IODDInterpreter_OnNewReadDataJsonTemplateAndInfo', selectedInstance, jsonTemplate, jsonDataInfo)
 end
-Script.serveFunction('CSK_IODDInterpreter.processDataInRowSelected', processDataInRowSelected)
+Script.serveFunction('CSK_IODDInterpreter.processDataInRowSelectedUI', processDataInRowSelectedUI)
 
-local function readParameterRowSelected(jsonSelectedRow)
-  jsonSelectedRow = ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, readPreficesToInclude[1])
-  ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters = ioddInterpreter_Model.json.decode(
-    updateSelectedParametersTable(
-      jsonSelectedRow,
-      ioddInterpreter_Model.json.encode(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters)
-    )
+local function readParameterRowSelectedUI(jsonSelectedRow)
+  updateSelectedParametersTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, readPreficesToInclude[1]),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters
   )
   handleOnExpiredTmrReadData()
-  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
-  Script.notifyEvent('IODDInterpreter_OnNewReadDataJsonTemplateAndInfo', selectedInstance, jsonTemplate, jsonDataInfo)
 end
-Script.serveFunction('CSK_IODDInterpreter.readParameterRowSelected', readParameterRowSelected)
+Script.serveFunction('CSK_IODDInterpreter.readParameterRowSelectedUI', readParameterRowSelectedUI)
 
 --**************************************************************************
 --************************* End Read Data Scope ****************************
@@ -492,17 +490,18 @@ local function handleOnExpiredTmrWriteData()
       Script.notifyEvent('IODDInterpreter_OnNewProcessDataStructureOptionsDropdownContent', ioddInterpreter_Model.json.encode(currentInstance.processDataConditionList))
       Script.notifyEvent('IODDInterpreter_OnNewSelectedProcessDataStructureOption', currentInstance.currentProcessDataConditionName)
     end
+    local processDataInfo = currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue)
     Script.notifyEvent('IODDInterpreter_OnNewProcessDataOutTableContent',
       ioddInterpreter_Model.dynamicTableHelper.makeProcessDataTableContent(
         writePreficesToInclude,
-        currentInstance.processDataOutInfo,
+        processDataInfo.ProcessDataOut,
         currentInstance.selectedProcessDataOut
       )
     )
     Script.notifyEvent('IODDInterpreter_OnNewWriteParametersTableContent',
       ioddInterpreter_Model.dynamicTableHelper.makeIODDParameterTableContent(
         writePreficesToInclude,
-        currentInstance.allWriteParameterInfo,
+        currentInstance.iodd:getAllWriteParameterInfo(),
         currentInstance.selectedWriteParameters
       )
     )
@@ -557,33 +556,23 @@ local function setWriteSelectedData(jsonWriteDataInfo)
 end
 Script.serveFunction('CSK_IODDInterpreter.setWriteSelectedData', setWriteSelectedData)
 
-local function processDataOutRowSelected(jsonSelectedRow)
-  jsonSelectedRow = ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, writePreficesToInclude[1])
-  ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut = ioddInterpreter_Model.json.decode(
-    updateSelectedProcessDataTable(
-      jsonSelectedRow,
-      ioddInterpreter_Model.json.encode(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut)
-    )
+local function processDataOutRowSelectedUI(jsonSelectedRow)
+  updateSelectedProcessDataTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, writePreficesToInclude[1]),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut
   )
   handleOnExpiredTmrWriteData()
-  local jsonTemplate, jsonDataIndo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
-  Script.notifyEvent('IODDInterpreter_OnNewWriteDataJsonTemplateAndInfo', selectedInstance, jsonTemplate, jsonDataIndo)
 end
-Script.serveFunction('CSK_IODDInterpreter.processDataOutRowSelected', processDataOutRowSelected)
+Script.serveFunction('CSK_IODDInterpreter.processDataOutRowSelectedUI', processDataOutRowSelectedUI)
 
-local function writeParameterRowSelected(jsonSelectedRow)
-  jsonSelectedRow = ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, writePreficesToInclude[1])
-  ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters = ioddInterpreter_Model.json.decode(
-    updateSelectedParametersTable(
-      jsonSelectedRow,
-      ioddInterpreter_Model.json.encode(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters)
-    )
+local function writeParameterRowSelectedUI(jsonSelectedRow)
+  updateSelectedParametersTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, writePreficesToInclude[1]),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters
   )
   handleOnExpiredTmrWriteData()
-  local jsonTemplate, jsonDataIndo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
-  Script.notifyEvent('IODDInterpreter_OnNewWriteDataJsonTemplateAndInfo', selectedInstance, jsonTemplate, jsonDataIndo)
 end
-Script.serveFunction('CSK_IODDInterpreter.writeParameterRowSelected', writeParameterRowSelected)
+Script.serveFunction('CSK_IODDInterpreter.writeParameterRowSelectedUI', writeParameterRowSelectedUI)
 
 --**************************************************************************
 --************************* End Write Data Scope ***************************
@@ -618,7 +607,11 @@ Script.serveFunction('CSK_IODDInterpreter.changeProcessDataStructureOptionValue'
 --**************************************************************************
 
 local function getIODDList()
-  return ioddInterpreter_Model.availableIODDs
+  local availableList = {}
+  for ioddName, _ in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
+    table.insert(availableList, ioddName)
+  end
+  return availableList
 end
 Script.serveFunction('CSK_IODDInterpreter.getIODDList', getIODDList)
 
@@ -709,6 +702,200 @@ local function getProcessDataOutInfo()
 end
 Script.serveFunction('CSK_IODDInterpreter.getProcessDataOutInfo', getProcessDataOutInfo)
 
+
+local function processDataInRowSelected(jsonSelectedRow, prefix)
+  updateSelectedProcessDataTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, prefix),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn
+  )
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.processDataInRowSelected', processDataInRowSelected)
+
+local function processDataOutRowSelected(jsonSelectedRow, prefix)
+  updateSelectedProcessDataTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, prefix),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut
+  )
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.processDataOutRowSelected', processDataOutRowSelected)
+
+local function readParameterRowSelected(jsonSelectedRow, prefix)
+  updateSelectedParametersTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, prefix),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters
+  )
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.readParameterRowSelected', readParameterRowSelected)
+
+local function writeParameterRowSelected(jsonSelectedRow, prefix)
+  updateSelectedParametersTable(
+    ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, prefix),
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters
+  )
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.writeParameterRowSelected', writeParameterRowSelected)
+
+local function copyReadDataMessage()
+  if not selectedInstance or not ioddInterpreter_Model.parameters.instances[selectedInstance] or not ioddInterpreter_Model.parameters.instances[selectedInstance].iodd then
+    return
+  end
+  copyReadDataMessageContent = {}
+  copyReadDataMessageContent.vendorId, copyReadDataMessageContent.deviceId = ioddInterpreter_Model.parameters.instances[selectedInstance].iodd:getVendorIdDeviceIdVersion()
+  if ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn then
+    copyReadDataMessageContent.selectedProcessDataIn = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn)
+  end
+  if ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters then
+    copyReadDataMessageContent.selectedReadParameters = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters)
+  end
+end
+Script.serveFunction('CSK_IODDInterpreter.copyReadDataMessage', copyReadDataMessage)
+
+---@return string? jsonTemplate 
+---@return string? jsonDataInfo 
+local function pasteReadDataMessage()
+  if not copyReadDataMessageContent or not selectedInstance or not ioddInterpreter_Model.parameters.instances[selectedInstance] or not ioddInterpreter_Model.parameters.instances[selectedInstance].iodd then
+    return nil, nil
+  end
+  local vendorId, deviceId = ioddInterpreter_Model.parameters.instances[selectedInstance].iodd:getVendorIdDeviceIdVersion()
+  if vendorId ~= copyReadDataMessageContent.vendorId or deviceId ~= copyReadDataMessageContent.deviceId then
+    return nil, nil
+  end
+  if copyReadDataMessageContent.selectedProcessDataIn then
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn = ioddInterpreter_Model.helperFuncs.copy(copyReadDataMessageContent.selectedProcessDataIn)
+  end
+  if copyReadDataMessageContent.selectedReadParameters then
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters = ioddInterpreter_Model.helperFuncs.copy(copyReadDataMessageContent.selectedReadParameters)
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.pasteReadDataMessage', pasteReadDataMessage)
+
+local function copyWriteDataMessage()
+  if not selectedInstance or not ioddInterpreter_Model.parameters.instances[selectedInstance] or not ioddInterpreter_Model.parameters.instances[selectedInstance].iodd then
+    return
+  end
+  copyWriteDataMessageContent = {}
+  copyWriteDataMessageContent.vendorId, copyWriteDataMessageContent.deviceId = ioddInterpreter_Model.parameters.instances[selectedInstance].iodd:getVendorIdDeviceIdVersion()
+  if ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut then
+    copyWriteDataMessageContent.selectedProcessDataOut = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut)
+  end
+  if ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters then
+    copyWriteDataMessageContent.selectedWriteParameters = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters)
+  end
+end
+Script.serveFunction('CSK_IODDInterpreter.copyWriteDataMessage', copyWriteDataMessage)
+
+local function pasteWriteDataMessage()
+  if not copyWriteDataMessageContent or not selectedInstance or not ioddInterpreter_Model.parameters.instances[selectedInstance] or not ioddInterpreter_Model.parameters.instances[selectedInstance].iodd then
+    return nil, nil
+  end
+  local vendorId, deviceId = ioddInterpreter_Model.parameters.instances[selectedInstance].iodd:getVendorIdDeviceIdVersion()
+  if vendorId ~= copyWriteDataMessageContent.vendorId or deviceId ~= copyWriteDataMessageContent.deviceId then
+    return nil, nil
+  end
+  if copyWriteDataMessageContent.selectedProcessDataOut then
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut = ioddInterpreter_Model.helperFuncs.copy(copyWriteDataMessageContent.selectedProcessDataOut)
+  end
+  if copyWriteDataMessageContent.selectedWriteParameters then
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters = ioddInterpreter_Model.helperFuncs.copy(copyWriteDataMessageContent.selectedWriteParameters)
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.pasteWriteDataMessage', pasteWriteDataMessage)
+
+
+local function getReadDataTableContents(prefix)
+  local currentInstance = ioddInterpreter_Model.parameters.instances[selectedInstance]
+  local processDataInfo = currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue)
+  local processDataTableContent = ioddInterpreter_Model.dynamicTableHelper.makeProcessDataTableContent(
+    {prefix},
+    processDataInfo.ProcessDataIn,
+    currentInstance.selectedProcessDataIn
+  )
+  local parameterTableContent = ioddInterpreter_Model.dynamicTableHelper.makeIODDParameterTableContent(
+    {prefix},
+    currentInstance.iodd:getAllReadParameterInfo(),
+    currentInstance.selectedReadParameters
+  )
+  return processDataTableContent, parameterTableContent
+end
+Script.serveFunction('CSK_IODDInterpreter.getReadDataTableContents', getReadDataTableContents)
+
+local function getWriteDataTableContents(prefix)
+  local currentInstance = ioddInterpreter_Model.parameters.instances[selectedInstance]
+  local processDataInfo = currentInstance.iodd:getProcessDataInfo(currentInstance.currentProcessDataConditionValue)
+  local processDataTableContent = ioddInterpreter_Model.dynamicTableHelper.makeProcessDataTableContent(
+    {prefix},
+    processDataInfo.ProcessDataOut,
+    currentInstance.selectedProcessDataOut
+  )
+  local parameterTableContent = ioddInterpreter_Model.dynamicTableHelper.makeIODDParameterTableContent(
+    {prefix},
+    currentInstance.iodd:getAllWriteParameterInfo(),
+    currentInstance.selectedWriteParameters
+  )
+  return processDataTableContent, parameterTableContent
+end
+Script.serveFunction('CSK_IODDInterpreter.getWriteDataTableContents', getWriteDataTableContents)
+
+local function selectAllProcessDataIn(state)
+  for subIndex, _ in pairs(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn) do
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn[subIndex] = state
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.selectAllProcessDataIn', selectAllProcessDataIn)
+
+local function selectAllProcessDataOut(state)
+  for subIndex, _ in pairs(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut) do
+    ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataOut[subIndex] = state
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.selectAllProcessDataOut', selectAllProcessDataOut)
+
+local function selectAllReadParameters(state)
+  for index, indexInfo in pairs(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters) do
+    for subIndex, _ in pairs(indexInfo) do
+      ioddInterpreter_Model.parameters.instances[selectedInstance].selectedReadParameters[index][subIndex] = state
+    end
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.selectAllReadParameters', selectAllReadParameters)
+
+local function selectAllWriteParameters(state)
+  for index, indexInfo in pairs(ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters) do
+    for subIndex, _ in pairs(indexInfo) do
+      ioddInterpreter_Model.parameters.instances[selectedInstance].selectedWriteParameters[index][subIndex] = state
+    end
+  end
+  local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getWriteDataJsonTemplateAndInfo(selectedInstance)
+  return jsonTemplate, jsonDataInfo
+end
+Script.serveFunction('CSK_IODDInterpreter.selectAllWriteParameters', selectAllWriteParameters)
+
+local function copyInstanceSelectedTable(fromInstanceId, toInstanceId)
+  ioddInterpreter_Model.parameters.instances[toInstanceId].selectedProcessDataIn = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[fromInstanceId].selectedProcessDataIn)
+  ioddInterpreter_Model.parameters.instances[toInstanceId].selectedProcessDataOut = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[fromInstanceId].selectedProcessDataOut)
+  ioddInterpreter_Model.parameters.instances[toInstanceId].selectedReadParameters = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[fromInstanceId].selectedReadParameters)
+  ioddInterpreter_Model.parameters.instances[toInstanceId].selectedWriteParameters = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[fromInstanceId].selectedWriteParameters)
+end
+Script.serveFunction('CSK_IODDInterpreter.copyInstanceSelectedTable', copyInstanceSelectedTable)
+
 local function getStatusModuleActive()
   return _G.availableAPIs.default
 end
@@ -732,9 +919,73 @@ local function setParameterName(name)
 end
 Script.serveFunction("CSK_IODDInterpreter.setParameterName", setParameterName)
 
+local function sendInstancesListParameters(parameterName, instancesList)
+  if ioddInterpreter_Model.persistentModuleAvailable then
+    local parametersToSave =  ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters)
+    parametersToSave.instances = nil
+    local instancesToSave = {}
+    for _,instanceId in ipairs(instancesList) do
+      if not ioddInterpreter_Model.parameters.instances[instanceId] then
+        goto nextInstance
+      end
+      instancesToSave[instanceId] = ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters.instances[instanceId])
+      instancesToSave[instanceId].iodd = nil
+      ::nextInstance::
+    end
+    parametersToSave.jsonInstances = ioddInterpreter_Model.json.encode(instancesToSave)
+    local contTosave = ioddInterpreter_Model.helperFuncs.convertTable2Container(parametersToSave)
+    CSK_PersistentData.addParameter(contTosave, parameterName)
+  else
+    _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
+  end
+end
+Script.serveFunction('CSK_IODDInterpreter.sendInstancesListParameters', sendInstancesListParameters)
+
+local function loadInstancesListParameters(parameterName)
+  ioddInterpreter_Model.updateAvailableIODDs()
+  if ioddInterpreter_Model.persistentModuleAvailable then
+    local data = CSK_PersistentData.getParameter(parameterName)
+    if data then
+      local parameterSet = ioddInterpreter_Model.helperFuncs.convertContainer2Table(data)
+      local instances = ioddInterpreter_Model.json.decode(parameterSet.jsonInstances)
+      for instanceId, instanceInfo in pairs(instances) do
+        if ioddInterpreter_Model.parameters.availableIODDs[instanceInfo.ioddName] then
+          ioddInterpreter_Model.parameters.instances[instanceId] = {}
+          ioddInterpreter_Model.loadIODD(instanceId, instanceInfo.ioddName)
+          if instanceInfo.IsProcessDataStructureVariable then
+            ioddInterpreter_Model.changeProcessDataStructureOptionValue(instanceId, instanceInfo.currentProcessDataConditionValue)
+          end
+          for instanceParameter, instanceParameterInfo in pairs(instanceInfo) do
+            if instanceParameter ~= 'iodd' then
+              ioddInterpreter_Model.parameters.instances[instanceId][instanceParameter] = instanceParameterInfo
+            end
+          end
+        else
+          _G.logger:warning(nameOfModule .. ' instance ' .. instanceId .. ": Loading IODD file failed with name " .. tostring(instanceInfo.ioddName) .. ".")
+        end
+      end
+      parameterSet = nil
+      data = nil
+    else
+      _G.logger:warning(nameOfModule .. ' instance ' .. instanceId .. ": Loading parameters from CSK_PersistentData module did not work.")
+    end
+  else
+    _G.logger:warning(nameOfModule .. ": CSK_PersistentData Module not available.")
+  end
+end
+Script.serveFunction('CSK_IODDInterpreter.loadInstancesListParameters', loadInstancesListParameters)
+
+
 local function sendParameters(noDataSave)
   if ioddInterpreter_Model.persistentModuleAvailable then
-    CSK_PersistentData.addParameter(ioddInterpreter_Model.helperFuncs.convertTable2Container(ioddInterpreter_Model.parameters), ioddInterpreter_Model.parametersName)
+    local parametersToSave =  ioddInterpreter_Model.helperFuncs.copy(ioddInterpreter_Model.parameters)
+    for instanceId, _ in pairs(parametersToSave.instances) do
+      parametersToSave.instances[instanceId].iodd = nil
+    end
+    parametersToSave.jsonInstances = ioddInterpreter_Model.json.encode(parametersToSave.instances)
+    parametersToSave.instances = nil
+
+    CSK_PersistentData.addParameter(ioddInterpreter_Model.helperFuncs.convertTable2Container(parametersToSave), ioddInterpreter_Model.parametersName)
     CSK_PersistentData.setModuleParameterName(nameOfModule, ioddInterpreter_Model.parametersName, ioddInterpreter_Model.parameterLoadOnReboot)
     _G.logger:fine(nameOfModule .. ": Send IODDInterpreter parameters with name '" .. ioddInterpreter_Model.parametersName .. "' to CSK_PersistentData module.")
     if not noDataSave then
@@ -752,6 +1003,10 @@ local function loadParameters()
     if data then
       _G.logger:info(nameOfModule .. ": Loaded parameters from CSK_PersistentData module.")
       local parameterSet = ioddInterpreter_Model.helperFuncs.convertContainer2Table(data)
+      ioddInterpreter_Model.parameters.availableIODDs = parameterSet.availableIODDs
+      parameterSet.instances = ioddInterpreter_Model.json.decode(parameterSet.jsonInstances)
+      parameterSet.jsonInstances = nil
+      ioddInterpreter_Model.updateAvailableIODDs()
       for instanceId, instanceInfo in pairs(parameterSet.instances) do
         ioddInterpreter_Model.parameters.instances[instanceId] = {}
         ioddInterpreter_Model.loadIODD(instanceId, instanceInfo.ioddName)
@@ -768,10 +1023,12 @@ local function loadParameters()
       CSK_IODDInterpreter.pageCalledInstances()
       return true
     else
+      ioddInterpreter_Model.updateAvailableIODDs()
       _G.logger:warning(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
       return false
     end
   else
+    ioddInterpreter_Model.updateAvailableIODDs()
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData Module not available.")
     return false
   end
