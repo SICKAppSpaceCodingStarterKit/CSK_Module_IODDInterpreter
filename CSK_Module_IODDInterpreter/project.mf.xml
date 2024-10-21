@@ -475,7 +475,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
             </serves>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">1.1.0</meta>
+        <meta key="version">2.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>

@@ -709,7 +709,6 @@ local function processDataInRowSelected(jsonSelectedRow, prefix)
     ioddInterpreter_Model.parameters.instances[selectedInstance].selectedProcessDataIn
   )
   local jsonTemplate, jsonDataInfo = ioddInterpreter_Model.getReadDataJsonTemplateAndInfo(selectedInstance)
-  print(jsonDataInfo)
   return jsonTemplate, jsonDataInfo
 end
 Script.serveFunction('CSK_IODDInterpreter.processDataInRowSelected', processDataInRowSelected)
