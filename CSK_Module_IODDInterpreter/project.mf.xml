@@ -204,15 +204,15 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                     <desc>Function to process the selected row in process data in dynamic table that was selected in another CSK module.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                     <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
-                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
-                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                    <return desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <return desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="processDataOutRowSelected">
                     <desc>Function to process the selected row in process data out dynamic table in UI.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                     <param desc="Optional prefix to be reemoved from column names." multiplicity="?" name="prefix" type="string"/>
-                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
-                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                    <return desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <return desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="addIODDFile">
                     <desc>Add a new IODD file to be interpreted. Returns success of interpretation and new internal  name of IODD file created according to IODD file name standard.</desc>
@@ -372,16 +372,16 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                     <desc>Function to process the selected row of read parameters dynamic table in UI of external app.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                     <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
-                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
-                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                    <return desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <return desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="writeParameterRowSelected">
                     <trait>released</trait>
                     <desc>Function to process the selected row of write parameters dynamic table in UI of external app.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                     <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
-                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
-                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                    <return desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <return desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="getReadDataTableContents">
                     <trait>released</trait>

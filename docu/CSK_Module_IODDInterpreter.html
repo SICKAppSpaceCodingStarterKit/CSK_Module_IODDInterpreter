@@ -619,7 +619,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
 <span id="revnumber">version 1.1.0,</span>
-<span id="revdate">2024-10-17</span>
+<span id="revdate">2024-10-21</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -759,7 +759,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">2024-10-17</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2024-10-21</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Author</p></th>
@@ -2873,6 +2873,27 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optional prefix to be removed from column names.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_26">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jsonTemplate</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
@@ -2892,7 +2913,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.processDataInRowSelected(jsonSelectedRow, prefix, jsonTemplate, jsonDataInfo)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">jsonTemplate, jsonDataInfo = CSK_IODDInterpreter.processDataInRowSelected(jsonSelectedRow, prefix)</code></pre>
 </div>
 </div>
 </div>
@@ -2979,6 +3000,27 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optional prefix to be reemoved from column names.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_27">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jsonTemplate</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
@@ -2998,7 +3040,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.processDataOutRowSelected(jsonSelectedRow, prefix, jsonTemplate, jsonDataInfo)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">jsonTemplate, jsonDataInfo = CSK_IODDInterpreter.processDataOutRowSelected(jsonSelectedRow, prefix)</code></pre>
 </div>
 </div>
 </div>
@@ -3085,6 +3127,27 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optional prefix to be removed from column names.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_28">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jsonTemplate</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
@@ -3104,7 +3167,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.readParameterRowSelected(jsonSelectedRow, prefix, jsonTemplate, jsonDataInfo)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">jsonTemplate, jsonDataInfo = CSK_IODDInterpreter.readParameterRowSelected(jsonSelectedRow, prefix)</code></pre>
 </div>
 </div>
 </div>
@@ -3677,7 +3740,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 </table>
 </div>
 <div class="sect5">
-<h6 id="_return_values_26">Return values</h6>
+<h6 id="_return_values_29">Return values</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -3926,6 +3989,27 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Optional prefix to be removed from column names.</p></td>
 </tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_30">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">jsonTemplate</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
@@ -3945,7 +4029,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
 <h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_IODDInterpreter.writeParameterRowSelected(jsonSelectedRow, prefix, jsonTemplate, jsonDataInfo)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">jsonTemplate, jsonDataInfo = CSK_IODDInterpreter.writeParameterRowSelected(jsonSelectedRow, prefix)</code></pre>
 </div>
 </div>
 </div>
@@ -5451,7 +5535,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div id="footer">
 <div id="footer-text">
 Version 1.1.0<br>
-Last updated 2024-10-17 12:27:28 +0200
+Last updated 2024-10-21 10:50:46 +0200
 </div>
 </div>
 <script type="text/javascript">
