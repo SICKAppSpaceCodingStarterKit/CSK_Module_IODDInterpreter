@@ -166,6 +166,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                 <event name="OnIODDListChanged">
                     <trait>released</trait>
                     <desc>Event to notify if IODD file was deleted or a new IODD file was successfully uploaded.</desc>
+                    <param desc="New list with standartised names of available IODDs." multiplicity="*" name="listIODD" type="string"/>
                 </event>
                 <event name="OnNewStatusCSKStyle">
                     <desc>Notify UI style to use for CSK modules.</desc>
@@ -195,21 +196,23 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                     <desc>Function called when IODD file upload is finished in UI.</desc>
                     <param desc="Upload success." multiplicity="1" name="uploadSuccess" type="bool"/>
                 </function>
-                <function name="readParameterRowSelected">
-                    <desc>Function to process the selected row in read parameters dynamic table in UI.</desc>
-                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
-                </function>
-                <function name="writeParameterRowSelected">
+                <function name="writeParameterRowSelectedUI">
                     <desc>Function to process the selected row in write parameters dynamic table in UI.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
                 </function>
                 <function name="processDataInRowSelected">
-                    <desc>Function to process the selected row in process data in dynamic table in UI.</desc>
+                    <desc>Function to process the selected row in process data in dynamic table that was selected in another CSK module.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="processDataOutRowSelected">
                     <desc>Function to process the selected row in process data out dynamic table in UI.</desc>
                     <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="Optional prefix to be reemoved from column names." multiplicity="?" name="prefix" type="string"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
                 </function>
                 <function name="addIODDFile">
                     <desc>Add a new IODD file to be interpreted. Returns success of interpretation and new internal  name of IODD file created according to IODD file name standard.</desc>
@@ -261,18 +264,6 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                 <function name="getIODDList">
                     <desc>Get list of loaded IODD files.</desc>
                     <return desc="String array with names of loaded IODD files." multiplicity="*" name="ioddList" type="string"/>
-                </function>
-                <function name="updateSelectedProcessDataTable">
-                    <desc>Function that returns the new selected process data table after processing of a selected row JSON data from dynamic table. </desc>
-                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
-                    <param desc="JSON object with current selected process data table." multiplicity="1" name="jsonSelectedProcessDataTable" type="string"/>
-                    <return desc="JSON object with new selected process data table." multiplicity="1" name="newJsonSelectedProcessDataTable" type="string"/>
-                </function>
-                <function name="updateSelectedParametersTable">
-                    <desc>Function that returns the new selected parameters table after processing of a selected row JSON data from dynamic table. </desc>
-                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
-                    <param desc="JSON object with current selected parameters table." multiplicity="1" name="jsonSelectedParametersTable" type="string"/>
-                    <return desc="JSON object with new selected parameters table." multiplicity="1" name="newJsonSelectedParametersTable" type="string"/>
                 </function>
                 <function name="setSelectedInstance">
                     <trait>released</trait>
@@ -363,6 +354,106 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
                     <param desc="Index of the parameter." multiplicity="1" name="index" type="int"/>
                     <param desc="Subindex of the parameter." multiplicity="1" name="subindex" type="int"/>
                     <return desc="JSON object with description of index or subindex of the parameter. Nil if the parameter does not exist." multiplicity="?" name="jsonDataPointInfo" type="string"/>
+                </function>
+                <function name="processDataInRowSelectedUI">
+                    <desc>Function to process the selected row of process data in dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="readParameterRowSelectedUI">
+                    <desc>Function to process the selected row of read parameters dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="processDataOutRowSelectedUI">
+                    <desc>Function to process the selected row of process data out dynamic table in UI.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                </function>
+                <function name="readParameterRowSelected">
+                    <trait>released</trait>
+                    <desc>Function to process the selected row of read parameters dynamic table in UI of external app.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="writeParameterRowSelected">
+                    <trait>released</trait>
+                    <desc>Function to process the selected row of write parameters dynamic table in UI of external app.</desc>
+                    <param desc="JSON row data." multiplicity="1" name="jsonSelectedRow" type="string"/>
+                    <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="getReadDataTableContents">
+                    <trait>released</trait>
+                    <desc>Function to get content information of the selected read data.</desc>
+                    <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
+                    <return desc="JSON content of process data in table." multiplicity="1" name="processDataTableContent" type="string"/>
+                    <return desc="JSON content of read parameters table." multiplicity="1" name="parameterTableContent" type="string"/>
+                </function>
+                <function name="getWriteDataTableContents">
+                    <trait>released</trait>
+                    <desc>Function to get content information of the selected write data.</desc>
+                    <param desc="Optional prefix to be removed from column names." multiplicity="?" name="prefix" type="string"/>
+                    <return desc="JSON content of process data out table." multiplicity="1" name="processDataTableContent" type="string"/>
+                    <return desc="JSON content of write parameters table." multiplicity="1" name="parameterTableContent" type="string"/>
+                </function>
+                <function name="copyInstanceSelectedTable">
+                    <desc>Function to copy the selected tables content from one instance to another. Can be used to speed up integration.</desc>
+                    <param desc="" multiplicity="1" name="fromInstanceId" type="string"/>
+                    <param desc="" multiplicity="1" name="toInstanceId" type="string"/>
+                </function>
+                <function name="loadInstancesListParameters">
+                    <desc>Function to load only instances that belong to some sensor that is being loaded in external app.</desc>
+                    <param desc="Name of the saved parameters" multiplicity="1" name="parameterName" type="string"/>
+                </function>
+                <function name="sendInstancesListParameters">
+                    <desc>Function to save only instances that belong to some sensor that is being saved in external app.</desc>
+                    <param desc="Name of the saved parameters" multiplicity="1" name="parameterName" type="string"/>
+                    <param desc="List of the instances that belong to the sensor" multiplicity="*" name="instancesList" type="string"/>
+                </function>
+                <function name="selectAllReadParameters">
+                    <desc>Function to select or deselect all availalbe read parameters of the sensor.</desc>
+                    <param desc="True for selecting, false for deselecting." multiplicity="1" name="state" type="bool"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="selectAllWriteParameters">
+                    <desc>Function to select or deselect all availalbe write parameters of the sensor.</desc>
+                    <param desc="True for selecting, false for deselecting." multiplicity="1" name="state" type="bool"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="selectAllProcessDataIn">
+                    <desc>Function to select or deselect all availalbe process data in datapoints the sensor.</desc>
+                    <param desc="True for selecting, false for deselecting." multiplicity="1" name="state" type="bool"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="selectAllProcessDataOut">
+                    <desc>Function to select or deselect all availalbe process data out datapoints the sensor.</desc>
+                    <param desc="True for selecting, false for deselecting." multiplicity="1" name="state" type="bool"/>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="pasteReadDataMessage">
+                    <trait>released</trait>
+                    <desc>Function to paste the copied tables content of read data (both process data in and read parameters) to the selected instance. Can be used to speed up integration. The "copyReadDataMessage" function must be used before.</desc>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="copyReadDataMessage">
+                    <trait>released</trait>
+                    <desc>Function to copy the selected tables content of read data (both process data in and read parameters) of the selected instance. Can be used to speed up integration. The "pasteReadDataMessage" function must be used afterwards.</desc>
+                </function>
+                <function name="pasteWriteDataMessage">
+                    <trait>released</trait>
+                    <desc>Function to paste the copied tables content of write data (both process data out and write parameters) to the selected instance. Can be used to speed up integration. The "copyWriteDataMessage" function must be used before.</desc>
+                    <param desc="JSON template of new combined message." multiplicity="1" name="jsonTemplate" type="string"/>
+                    <param desc="JSON object with datapoints infos." multiplicity="1" name="jsonDataInfo" type="string"/>
+                </function>
+                <function name="copyWriteDataMessage">
+                    <trait>released</trait>
+                    <desc>Function to copy the selected tables content of write data (both process data out and write parameters) of the selected instance. Can be used to speed up integration. The "pasteWriteDataMessage" function must be used afterwards.</desc>
                 </function>
                 <function name="loadParameters">
                     <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
