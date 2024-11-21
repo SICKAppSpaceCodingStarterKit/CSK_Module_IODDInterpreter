@@ -480,7 +480,7 @@ Module can provide chunks of IODD file in JSON format to describe some datapoint
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
         <meta key="crown2-flow-engine">false</meta>
-        <meta key="LuaLoadAllEngineAPI">true</meta>
+        <meta key="LuaLoadAllEngineAPI">false</meta>
         <entry default="CSK_Module_IODDInterpreter.lua" path="scripts"/>
     </application>
 </manifest>

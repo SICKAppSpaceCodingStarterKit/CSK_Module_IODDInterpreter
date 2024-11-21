@@ -16,7 +16,7 @@ local ioddInterpreter_Model
 local selectedIODDToHandle = '' -- IODD file that is selected in UI to be deleted
 local currentCalloutType = 'info' -- Type of the status callot in UI
 local currentCalloutValue = 'Application started' -- Callout message to be shown in UI
-local selectedInstance = '' -- Current selected instance+
+local selectedInstance = '' -- Current selected instance
 local copyReadDataMessageContent -- temporary selected data copy to duplicate read messages between instances 
 local copyWriteDataMessageContent -- temporary selected data copy to duplicate write messages between instances
 
@@ -154,7 +154,7 @@ local function handleOnExpiredTmrInstances()
 
   updateUserLevel()
 
-  Script.notifyEvent("IODDInterpreter_OnNewStatusModuleVersion", ioddInterpreter_Model.version)
+  Script.notifyEvent("IODDInterpreter_OnNewStatusModuleVersion", 'v' .. ioddInterpreter_Model.version)
   Script.notifyEvent("IODDInterpreter_OnNewStatusCSKStyle", ioddInterpreter_Model.styleForUI)
   Script.notifyEvent("IODDInterpreter_OnNewStatusModuleIsActive", _G.availableAPIs.default)
 
@@ -301,6 +301,9 @@ Script.serveFunction('CSK_IODDInterpreter.deleteIODD', deleteIODD)
 --************************* Start Data Scope *******************************
 --**************************************************************************
 
+--- Function to update selected process data table
+---@param selectedRow string Selected row
+---@param selectedProcessDataTable string[] Selected process data
 local function updateSelectedProcessDataTable(selectedRow, selectedProcessDataTable)
   local state = selectedRow.selected
   local subindex = selectedRow.colPD1
@@ -326,6 +329,9 @@ local function updateSelectedProcessDataTable(selectedRow, selectedProcessDataTa
   end
 end
 
+--- Function to update selected process data table
+---@param selectedRow string Selected row
+---@param selectedParametersTable string[] Selected parameter data
 local function updateSelectedParametersTable(selectedRow, selectedParametersTable)
   local state = selectedRow.selected
   local index = selectedRow.colSD1
@@ -702,7 +708,6 @@ local function getProcessDataOutInfo()
 end
 Script.serveFunction('CSK_IODDInterpreter.getProcessDataOutInfo', getProcessDataOutInfo)
 
-
 local function processDataInRowSelected(jsonSelectedRow, prefix)
   updateSelectedProcessDataTable(
     ioddInterpreter_Model.dynamicTableHelper.removePrefixFromColumnNames(jsonSelectedRow, prefix),
@@ -758,8 +763,6 @@ local function copyReadDataMessage()
 end
 Script.serveFunction('CSK_IODDInterpreter.copyReadDataMessage', copyReadDataMessage)
 
----@return string? jsonTemplate 
----@return string? jsonDataInfo 
 local function pasteReadDataMessage()
   if not copyReadDataMessageContent or not selectedInstance or not ioddInterpreter_Model.parameters.instances[selectedInstance] or not ioddInterpreter_Model.parameters.instances[selectedInstance].iodd then
     return nil, nil

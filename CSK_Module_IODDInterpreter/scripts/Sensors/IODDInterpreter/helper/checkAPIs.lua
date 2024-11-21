@@ -14,6 +14,7 @@ local function loadAPIs()
   Log.SharedLogger = require 'API.Log.SharedLogger'
 
   Container = require 'API.Container'
+  File = require 'API.File'
   Engine = require 'API.Engine'  
   Object = require 'API.Object'
   Timer = require 'API.Timer'

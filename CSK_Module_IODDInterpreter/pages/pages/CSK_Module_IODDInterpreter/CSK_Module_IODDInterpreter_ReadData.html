@@ -48,10 +48,9 @@
                             </curie-table-column>
                             <curie-table-column id="read_colPD3" header="Data type, Range, Single value description">
                             </curie-table-column>
-							<crown-binding event="row-selected"
-								name="CSK_IODDInterpreter/processDataInRowSelectedUI"
-								path="param/args/jsonSelectedRow" auto-commit>
-							</crown-binding>
+                            <crown-binding event="row-selected" name="CSK_IODDInterpreter/processDataInRowSelectedUI"
+                                path="param/args/jsonSelectedRow" auto-commit>
+                            </crown-binding>
                             <crown-on property="data" crown-event="CSK_IODDInterpreter/OnNewProcessDataInTableContent">
                             </crown-on>
                         </curie-table>
@@ -71,10 +70,9 @@
                             </curie-table-column>
                             <curie-table-column id="read_colSD7" header="Description">
                             </curie-table-column>
-							<crown-binding event="row-selected"
-								name="CSK_IODDInterpreter/readParameterRowSelectedUI"
-								path="param/args/jsonSelectedRow" auto-commit>
-							</crown-binding>
+                            <crown-binding event="row-selected" name="CSK_IODDInterpreter/readParameterRowSelectedUI"
+                                path="param/args/jsonSelectedRow" auto-commit>
+                            </crown-binding>
                             <crown-on property="data" crown-event="CSK_IODDInterpreter/OnNewReadParametersTableContent">
                             </crown-on>
                         </curie-table>

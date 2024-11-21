@@ -159,8 +159,6 @@ local function addStandardDefinitions(DatatypeCollection, stdReferences, variabl
   end
 end
 
-
-
 function IODDInterpreter:interpretXMLFile(path)
   local ioddFile = File.open(path, 'r')
   if not ioddFile then
@@ -181,7 +179,6 @@ function IODDInterpreter:interpretXMLFile(path)
   else
     self.Variable = ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.Variable
   end
-
 
   self.ProcessData = ioddFullTable.IODevice.ProfileBody.DeviceFunction.ProcessDataCollection.ProcessData
   self.UserInterface = ioddFullTable.IODevice.ProfileBody.DeviceFunction.UserInterface
@@ -255,13 +252,6 @@ function IODDInterpreter:interpretXMLFile(path)
     self.ParamIndexMap = ParamIndexMap
     self.ParamIndexSubindexMap = ParamIndexSubindexMap
   end
-
-  --table.sort(
-  --  self.Variable,
-  --  function(left, right)
-  --    return tonumber(left.index) < tonumber(right.index)
-  --  end
-  --)
 
   if #self.ProcessData > 1 then
     --Inserting Datatypes instead of their references in ProcessData table for further convenience
@@ -499,6 +489,5 @@ function IODDInterpreter:getAllParameterInfo()
   changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
   return tempTable
 end
-
 
 return IODDInterpreter

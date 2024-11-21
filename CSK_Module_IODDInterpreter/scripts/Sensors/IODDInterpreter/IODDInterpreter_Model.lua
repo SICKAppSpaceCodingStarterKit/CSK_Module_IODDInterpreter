@@ -47,14 +47,6 @@ ioddInterpreter_Model.parameters.instances = {}
 ioddInterpreter_Model.parameters.activeIODDs = {} -- list of active iodds to keep lua tables in cash
 ioddInterpreter_Model.parameters.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
 
---ioddInterpreter_Model.availableIODDs = {} -- list of all loaded IODD files that were checked and ready for interpretation
---local ioddFilesStorageContent = File.list(ioddInterpreter_Model.ioddFilesStorage)
---for i, fileName in ipairs(ioddFilesStorageContent) do
---  if string.sub(fileName, -5) == '.json' then
---    table.insert(ioddInterpreter_Model.availableIODDs, string.sub(fileName, 1, -6))
---  end
---end
-
 --**************************************************************************
 --********************** End Global Scope **********************************
 --**************************************************************************
@@ -100,7 +92,8 @@ local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version
   for loadedIODDName, loadedIODDInfo in pairs(ioddInterpreter_Model.parameters.availableIODDs) do
     if loadedIODDInfo.vendorId == vendorId and loadedIODDInfo.deviceId == deviceId then
       return true, loadedIODDName
-      --TODO: decide what to do in case a newer IODD version is loaded
+      -- For future usage / TODO:
+      -- Decide what to do in case a newer IODD version is loaded
       --if not version then
       --  return true, loadedIODDName
       --end
@@ -117,6 +110,7 @@ local function checkVendorIdDeviceIdVersionMatchIODD(vendorId, deviceId, version
 end
 ioddInterpreter_Model.checkVendorIdDeviceIdVersionMatchIODD = checkVendorIdDeviceIdVersionMatchIODD
 
+--- Function to deactivate not used IODDs
 local function deactivateNotUsedActiveIodds()
   for ioddName, _ in pairs(ioddInterpreter_Model.parameters.activeIODDs) do
     for _, instanceConfig in pairs(ioddInterpreter_Model.parameters.instances) do

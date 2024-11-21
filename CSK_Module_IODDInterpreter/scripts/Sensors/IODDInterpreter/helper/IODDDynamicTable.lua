@@ -72,7 +72,7 @@ end
 local function makeIODDParameterTableContent(preficesToInclude, parameterTable, selectedTable)
   local tableContent = {}
   for _, indexParam in ipairs(parameterTable) do
-    --TODO remove this workaround
+    --TODO remove this workaround in future
     if indexParam.index~="40" and indexParam.index~="41" then
       local singleIndexParam = {
         colSD1 = indexParam.index,
@@ -158,7 +158,7 @@ local function makeDefaultSelectedParameterTable(parameterTable)
       end
     end
   end
-  --TODO remove this workaround
+  --TODO remove this workaround in future
   selectedTable["40"] = nil
   selectedTable["41"] = nil
   return selectedTable
