@@ -115,13 +115,26 @@ local function modifyRecordOrArray(ParameterInfo, dataType2IdRefMap, ParamIndexS
   end
 end
 
-local function addStandardDefinitions(stdReferences, variableTable, languageTable)
+local function addStandardDefinitions(DatatypeCollection, stdReferences, variableTable, languageTable)
   local standardDefinitionsFile = File.open('resources/CSK_Module_IODDInterpreter/IODD-StandardDefinitions1.1.xml', 'r')
   local standardDefinitionsXml = standardDefinitionsFile:read()
   standardDefinitionsFile:close()
   local standardDefinitions = xml2lua.convert(standardDefinitionsXml)
   local idMap = {}
   local stDefVaiable = standardDefinitions.IODDStandardDefinitions.VariableCollection.Variable
+  local stdDatatypeCollection = standardDefinitions.IODDStandardDefinitions.DatatypeCollection.Datatype
+  stdDatatypeCollection.SingleValue = nil
+  stdDatatypeCollection.ValueRange = nil
+  local hasStandardDataType = false
+  for _,v in ipairs(DatatypeCollection.Datatype) do
+    if v.id == "STD_D_SystemCommand" then
+      hasStandardDataType = true
+      break
+    end
+  end
+  if not hasStandardDataType then
+    table.insert(DatatypeCollection.Datatype, copy(stdDatatypeCollection))
+  end
   for i, v in ipairs(stDefVaiable) do
     idMap[v.id] = i
   end
@@ -146,7 +159,6 @@ local function addStandardDefinitions(stdReferences, variableTable, languageTabl
   end
 end
 
-
 function IODDInterpreter:interpretXMLFile(path)
   local ioddFile = File.open(path, 'r')
   if not ioddFile then
@@ -161,7 +173,13 @@ function IODDInterpreter:interpretXMLFile(path)
   self.CommNetworkProfile = ioddFullTable.IODevice.CommNetworkProfile
   self.Stamp = ioddFullTable.IODevice.Stamp
   self.DeviceIdentity = ioddFullTable.IODevice.ProfileBody.DeviceIdentity
-  self.Variable = ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.Variable
+  if #ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.Variable == 0 then
+    self.Variable = {}
+    table.insert(self.Variable, ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.Variable)
+  else
+    self.Variable = ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.Variable
+  end
+
   self.ProcessData = ioddFullTable.IODevice.ProfileBody.DeviceFunction.ProcessDataCollection.ProcessData
   self.UserInterface = ioddFullTable.IODevice.ProfileBody.DeviceFunction.UserInterface
   self.DeviceIdentity.DeviceVariantCollection.DeviceVariant = makeListOutOfSingleTable(self.DeviceIdentity.DeviceVariantCollection.DeviceVariant)
@@ -190,7 +208,17 @@ function IODDInterpreter:interpretXMLFile(path)
   end
   self.languages = languages
   self.currentLanguage = self.languages.Primary
+  if not ioddFullTable.IODevice.ProfileBody.DeviceFunction.DatatypeCollection then
+    ioddFullTable.IODevice.ProfileBody.DeviceFunction.DatatypeCollection = {Datatype = {}}
+  end
+  table.sort(
+    self.Variable,
+    function(left, right)
+      return tonumber(left.index) < tonumber(right.index)
+    end
+  )
   addStandardDefinitions(
+    ioddFullTable.IODevice.ProfileBody.DeviceFunction.DatatypeCollection,
     ioddFullTable.IODevice.ProfileBody.DeviceFunction.VariableCollection.StdVariableRef,
     self.Variable,
     self.languages
@@ -205,7 +233,6 @@ function IODDInterpreter:interpretXMLFile(path)
   local dataType2IdRefMap = {}
   if ioddFullTable.IODevice.ProfileBody.DeviceFunction.DatatypeCollection then
     for _, rawDataType in ipairs(ioddFullTable.IODevice.ProfileBody.DeviceFunction.DatatypeCollection.Datatype) do
-      local referenceId = rawDataType.id
       local DataTypeWOId = copy(rawDataType)
       DataTypeWOId.id = nil
       dataType2IdRefMap[rawDataType.id] = DataTypeWOId
@@ -235,8 +262,6 @@ function IODDInterpreter:interpretXMLFile(path)
         end
         modifyRecordOrArray(self.ProcessData[i].ProcessDataIn, dataType2IdRefMap)
       end
-      --print(json.encode(self.ProcessData))
-
       if ProcessDataOption.ProcessDataOut then
         if ProcessDataOption.ProcessDataOut.DatatypeRef then
           self.ProcessData[i].ProcessDataOut.Datatype = dataType2IdRefMap[ProcessDataOption.ProcessDataOut.DatatypeRef.datatypeId]

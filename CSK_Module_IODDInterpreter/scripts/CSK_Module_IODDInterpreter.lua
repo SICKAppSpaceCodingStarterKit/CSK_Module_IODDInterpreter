@@ -28,7 +28,7 @@
 -- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
 
---_G.availableAPIs = require('Sensors/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
+_G.availableAPIs = require('Sensors/IODDInterpreter/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
 -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
@@ -42,6 +42,10 @@ _G.logHandle:applyConfig()
 -- Loading script regarding IODDInterpreter_Model
 -- Check this script regarding IODDInterpreter_Model parameters and functions
 _G.ioddInterpreter_Model = require('Sensors/IODDInterpreter/IODDInterpreter_Model')
+
+if _G.availableAPIs.default == false then
+  _G.logger:warning("CSK_IODDIntrepreter: Relevant CROWN(s) not available on device. Module is not supported...")
+end
 
 --**************************************************************************
 --**********************End Global Scope ***********************************

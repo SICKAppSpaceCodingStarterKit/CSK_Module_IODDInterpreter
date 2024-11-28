@@ -72,58 +72,57 @@ end
 local function makeIODDParameterTableContent(preficesToInclude, parameterTable, selectedTable)
   local tableContent = {}
   for _, indexParam in ipairs(parameterTable) do
-    local singleIndexParam = {
-      colSD1 = indexParam.index,
-      colSD2 = "0",
-      colSD3 = indexParam.id,
-      colSD4 = indexParam.Name,
-      colSD6 = indexParam.accessRights,
-      selected = false or selectedTable[indexParam.index]["0"]
-    }
-    if indexParam.Datatype then
-      singleIndexParam.colSD5 = compileDataTypeInfo(indexParam.Datatype)
-    elseif indexParam.DatatypeRef then
-      singleIndexParam.colSD5 = json.encode(indexParam.DatatypeRef)
-    end
-    if indexParam.Description then
-      singleIndexParam.colSD7 = indexParam.Description
-    end
-    --singleIndexParam.selected = false
-    --table.insert(tableContent, singleIndexParam)
-    table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleIndexParam))
-    if indexParam.Datatype and indexParam.Datatype['xsi:type'] == "ArrayT" then
-      for i = 1, indexParam.Datatype.count do
-        local singleSubindex = {
-          colSD1 = indexParam.index,
-          colSD2 = i,
-          selected = false or selectedTable[indexParam.index][tostring(i)]
-        }
-        if indexParam.Datatype.SimpleDatatype then
-          singleSubindex.colSD4 = compileDataTypeInfo(indexParam.Datatype.SimpleDatatype)
-        elseif indexParam.Datatype.DataTypeRef then
-          singleSubindex.colSD4 = json.encode(indexParam.Datatype.DataTypeRef)
-        end
-        --table.insert(tableContent, singleSubindex)
-        table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleSubindex))
+    --TODO remove this workaround in future
+    if indexParam.index~="40" and indexParam.index~="41" then
+      local singleIndexParam = {
+        colSD1 = indexParam.index,
+        colSD2 = "0",
+        colSD3 = indexParam.id,
+        colSD4 = indexParam.Name,
+        colSD6 = indexParam.accessRights,
+        selected = false or selectedTable[indexParam.index]["0"]
+      }
+      if indexParam.Datatype then
+        singleIndexParam.colSD5 = compileDataTypeInfo(indexParam.Datatype)
+      elseif indexParam.DatatypeRef then
+        singleIndexParam.colSD5 = json.encode(indexParam.DatatypeRef)
       end
-    end
-    if indexParam.Datatype and indexParam.Datatype['xsi:type'] == "RecordT" then
-      for _, subindexParam in ipairs(indexParam.Datatype.RecordItem) do
-        local singleSubindex = {
-          colSD1 = indexParam.index,
-          colSD2 = subindexParam.subindex,
-          colSD4 = subindexParam.Name,
-          selected = false or selectedTable[indexParam.index][subindexParam.subindex]
-        }
-        if subindexParam.SimpleDatatype then
-          singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset .. '; ' .. compileDataTypeInfo(subindexParam.SimpleDatatype)
-        elseif subindexParam.DataTypeRef then
-          singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset .. '; ' .. json.encode(subindexParam.DataTypeRef)
-        else
-          singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset
+      if indexParam.Description then
+        singleIndexParam.colSD7 = indexParam.Description
+      end
+      table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleIndexParam))
+      if indexParam.Datatype and indexParam.Datatype['xsi:type'] == "ArrayT" then
+        for i = 1, indexParam.Datatype.count do
+          local singleSubindex = {
+            colSD1 = indexParam.index,
+            colSD2 = i,
+            selected = false or selectedTable[indexParam.index][tostring(i)]
+          }
+          if indexParam.Datatype.SimpleDatatype then
+            singleSubindex.colSD4 = compileDataTypeInfo(indexParam.Datatype.SimpleDatatype)
+          elseif indexParam.Datatype.DataTypeRef then
+            singleSubindex.colSD4 = json.encode(indexParam.Datatype.DataTypeRef)
+          end
+          table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleSubindex))
         end
-        --table.insert(tableContent, singleSubindex)
-        table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleSubindex))
+      end
+      if indexParam.Datatype and indexParam.Datatype['xsi:type'] == "RecordT" then
+        for _, subindexParam in ipairs(indexParam.Datatype.RecordItem) do
+          local singleSubindex = {
+            colSD1 = indexParam.index,
+            colSD2 = subindexParam.subindex,
+            colSD4 = subindexParam.Name,
+            selected = false or selectedTable[indexParam.index][subindexParam.subindex]
+          }
+          if subindexParam.SimpleDatatype then
+            singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset .. '; ' .. compileDataTypeInfo(subindexParam.SimpleDatatype)
+          elseif subindexParam.DataTypeRef then
+            singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset .. '; ' .. json.encode(subindexParam.DataTypeRef)
+          else
+            singleSubindex.colSD5 = 'Bit offset: ' .. subindexParam.bitOffset
+          end
+          table.insert(tableContent, addPrefixesToRowData(preficesToInclude, singleSubindex))
+        end
       end
     end
   end
@@ -153,26 +152,25 @@ local function makeDefaultSelectedParameterTable(parameterTable)
           selectedTable[indexParam.index][tostring(i)] = false
         end
       elseif indexParam.Datatype['xsi:type'] == "RecordT" then
-      --  if #indexParam.Datatype.RecordItem > 0 then
-          for _, subindexParam in ipairs(indexParam.Datatype.RecordItem) do
-            selectedTable[indexParam.index][subindexParam.subindex] = false
-          end
-      --  else
-      --    selectedTable[indexParam.index][indexParam.Datatype.RecordItem.subindex] = false
-      --  end
+        for _, subindexParam in ipairs(indexParam.Datatype.RecordItem) do
+          selectedTable[indexParam.index][subindexParam.subindex] = false
+        end
       end
     end
   end
+  --TODO remove this workaround in future
+  selectedTable["40"] = nil
+  selectedTable["41"] = nil
   return selectedTable
 end
 IODDDynamicTable.makeDefaultSelectedParameterTable = makeDefaultSelectedParameterTable
 
-local function makeDefaultSelectedProcessDataTable(processDataInfo)
+local function makeDefaultSelectedProcessDataTable(processDataInfo, subindexAccessSupported)
   local selectedTable = {}
   if processDataInfo and processDataInfo.Datatype then
     selectedTable["0"] = false
     if processDataInfo.Datatype['xsi:type'] == "ArrayT" or processDataInfo.Datatype['xsi:type'] == "RecordT" then
-      selectedTable.subindexAccessSupported = false
+      selectedTable.subindexAccessSupported = subindexAccessSupported
       if processDataInfo.Datatype['xsi:type'] == "ArrayT" then
         for i = 1, processDataInfo.Datatype.count do
           selectedTable[tostring(i)] = false
@@ -256,6 +254,9 @@ IODDDynamicTable.addPrefixToColumnNames = addPrefixToColumnNames
 
 local function removePrefixFromColumnNames(jsonRowContent, prefixToRemove)
   local rowContent = json.decode(jsonRowContent)
+  if not prefixToRemove then
+    return rowContent
+  end
   local newRowContent = {}
   for colName, colContent in pairs(rowContent) do
     if string.sub(colName, 1, #prefixToRemove) == prefixToRemove then
@@ -264,7 +265,7 @@ local function removePrefixFromColumnNames(jsonRowContent, prefixToRemove)
       newRowContent[colName] = colContent
     end
   end
-  return json.encode(newRowContent)
+  return newRowContent
 end
 IODDDynamicTable.removePrefixFromColumnNames = removePrefixFromColumnNames
 

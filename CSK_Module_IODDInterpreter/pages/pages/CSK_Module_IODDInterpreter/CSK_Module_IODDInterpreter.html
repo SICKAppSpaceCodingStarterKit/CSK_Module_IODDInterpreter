@@ -1,215 +1,359 @@
-<layout-row id="RowLayout1">
-	<layout-column id="ColumnLayout1" style="align-items:stretch">
-		<curie-callout id="DC_IODDUploadStatus">
-			<crown-edpws-binding property="type"
-				name="CSK_IODDInterpreter/OnNewCalloutType" update-on-resume>
-			</crown-edpws-binding>
-			<crown-edpws-binding property="value"
-				name="CSK_IODDInterpreter/OnNewCalloutValue" update-on-resume>
-			</crown-edpws-binding>
-		</curie-callout>
-		<layout-row id="RowLayout8">
-			<appspace-file-upload-button id="FUB_IODDUpload" button-type="primary"
-				path="public/tempIODD.xml" is-file>
-				<span>Upload IODD XML</span>
-				<crown-binding event="finished"
-					name="CSK_IODDInterpreter/uploadFinished"
-					path="param/args/uploadSuccess" auto-commit>
-				</crown-binding>
-			</appspace-file-upload-button>
-			<davinci-drop-down id="DD_IODDListToDelete"
-				label="Select IODD to delete">
-				<crown-on property="data"
-					crown-event="CSK_IODDInterpreter/OnNewListIODD"
-					converter="convertToList">
-				</crown-on>
-				<crown-on property="value"
-					crown-event="CSK_IODDInterpreter/OnNewSelectedIODDToHandle">
-				</crown-on>
-				<crown-set event="change"
-					crown-function="CSK_IODDInterpreter/setSelectedIODDToHandle"
-					protocol="crownMSGPACK" crown-path="newSelectedIODDToHandle">
-				</crown-set>
-			</davinci-drop-down>
-			<davinci-button id="B_DeleteIODD" type="primary"
-				icon-position="append">
-				<span>Delete IODD</span>
-				<crown-set event="submit"
-					crown-function="CSK_IODDInterpreter/deleteIODD"
-					protocol="crownMSGPACK">
-				</crown-set>
-			</davinci-button>
-		</layout-row>
-		<davinci-button id="B_CreateInstance" type="primary"
-			icon-position="append">
-			<span>Create Instance</span>
-			<crown-set event="submit"
-				crown-function="CSK_IODDInterpreter/addInstance"
-				protocol="crownMSGPACK">
-			</crown-set>
-		</davinci-button>
-		<davinci-drop-down id="DD_InstanceList" label="Select Instance">
-			<crown-on property="data"
-				crown-event="CSK_IODDInterpreter/OnNewListIntances"
-				converter="convertToList">
-			</crown-on>
-			<crown-on property="value"
-				crown-event="CSK_IODDInterpreter/OnNewSelectedInstance">
-			</crown-on>
-			<crown-set event="change"
-				crown-function="CSK_IODDInterpreter/setSelectedInstance"
-				protocol="crownMSGPACK" crown-path="newSelectedInstance">
-			</crown-set>
-		</davinci-drop-down>
-		<stacked-view id="SV_isInstanceSelected">
-			<stacked-pane id="SP_instanceISSelected" value="true">
-				<layout-column id="ColumnLayout7">
-					<layout-row id="RowLayout6">
-						<davinci-text-field id="TF_InstanceId" type="text"
-							label="Instance ID">
-							<crown-on property="value"
-								crown-event="CSK_IODDInterpreter/OnNewInstanceName">
-							</crown-on>
-							<crown-set event="change"
-								crown-function="CSK_IODDInterpreter/setInstanceName"
-								protocol="crownMSGPACK" crown-path="newInstanceName">
-							</crown-set>
-						</davinci-text-field>
-						<davinci-button id="B_DeleteInstance" type="primary"
-							icon-position="append">
-							<span>Delete Instance</span>
-							<crown-set event="submit"
-								crown-function="CSK_IODDInterpreter/deleteInstance"
-								protocol="crownMSGPACK">
-							</crown-set>
-						</davinci-button>
-					</layout-row>
-					<layout-row id="RowLayout5" style="width: 100%">
-						<davinci-drop-down id="DD_IODDListForInstace"
-							label="Select IODD to be used by instance" style="width: 50%">
-							<crown-on property="data"
-								crown-event="CSK_IODDInterpreter/OnNewListIODD"
-								converter="convertToList">
-							</crown-on>
-							<crown-on property="value"
-								crown-event="CSK_IODDInterpreter/OnNewSelectedIODD">
-							</crown-on>
-							<crown-set event="change"
-								crown-function="CSK_IODDInterpreter/setSelectedIODD"
-								protocol="crownMSGPACK" crown-path="ioddName">
-							</crown-set>
-						</davinci-drop-down>
-					</layout-row>
-				</layout-column>
-			</stacked-pane>
-			<stacked-pane id="SP_instanceIsNOTSelected" value="false">
-			</stacked-pane>
-			<crown-on property="value"
-				crown-event="CSK_IODDInterpreter/isInstanceSelected"
-				converter="bool2str">
-			</crown-on>
-		</stacked-view>
-		<stacked-view id="SV_Login">
-			<stacked-pane id="SP_LoginOK" value="true">
-				<layout-column id="Column_PersistentData"
-					class="myCustomFrame_CSK_Module_IODDInterpreter"
-					style="align-items: stretch">
-					<layout-row id="RowLayout4"
-						style="justify-content: space-between; align-items: center">
-						<layout-column id="ColumnLayout5" style="align-items: stretch">
-							<davinci-value-display id="VD_ParameterName" value="Parameter name:"
-								title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-							</davinci-value-display>
-						</layout-column>
-						<layout-column id="ColumnLayout6" style="align-items: stretch">
-							<davinci-text-field id="TF_ParameterName" type="text"
-								title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-								<crown-edpws-binding property="value"
-									name="CSK_IODDInterpreter/OnNewParameterName" update-on-resume>
-								</crown-edpws-binding>
-								<crown-binding event="change" name="CSK_IODDInterpreter/setParameterName"
-									path="param/args/name" auto-commit>
-								</crown-binding>
-								<crown-edpws-binding property="disabled"
-									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
-									update-on-resume converter="function(value) {return !value;}">
-								</crown-edpws-binding>
-							</davinci-text-field>
-						</layout-column>
-					</layout-row>
-					<layout-row id="RowLayout2"
-						style="justify-content: space-between; align-items: center">
-						<davinci-value-display id="VD_LoadConfig"
-							value="Load config on app start:"
-							title="Load configured parameters from CSK_PersistentData on app start.">
-						</davinci-value-display>
-						<davinci-checkbox id="CB_LoadConfig"
-							title="Load configured parameters from CSK_PersistentData on app start.">
-							<span></span>
-							<crown-edpws-binding property="checked"
-								name="CSK_IODDInterpreter/OnNewStatusLoadParameterOnReboot"
-								update-on-resume>
-							</crown-edpws-binding>
-							<crown-edpws-binding property="disabled"
-								name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
-								update-on-resume converter="function(value) {return !value;}">
-							</crown-edpws-binding>
-							<crown-binding event="change" name="CSK_IODDInterpreter/setLoadOnReboot"
-								path="param/args/status" auto-commit>
-							</crown-binding>
-						</davinci-checkbox>
-					</layout-row>
-					<layout-row id="RowLayout3">
-						<layout-column id="ColumnLayout3" style="align-items: stretch">
-							<davinci-button id="B_LoadConfig" type="primary"
-								icon-position="append"
-								title="Load configured parameters from CSK_PersistentData module.">
-								<span>Load Config</span>
-								<crown-binding event="submit" name="CSK_IODDInterpreter/loadParameters"
-									auto-commit>
-								</crown-binding>
-								<crown-edpws-binding property="disabled"
-									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
-									update-on-resume converter="function(value) {return !value;}">
-								</crown-edpws-binding>
-							</davinci-button>
-						</layout-column>
-						<layout-column id="ColumnLayout4" style="align-items: stretch">
-							<davinci-button id="B_SaveConfig" type="primary"
-								icon-position="append"
-								title="Save current configured parameters of this module within CSK_PersistentData module.">
-								<span>Save Config</span>
-								<crown-binding event="submit" name="CSK_IODDInterpreter/sendParameters"
-									auto-commit>
-								</crown-binding>
-								<crown-edpws-binding property="disabled"
-									name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
-									update-on-resume converter="function(value) {return !value;}">
-								</crown-edpws-binding>
-							</davinci-button>
-						</layout-column>
-					</layout-row>
-				</layout-column>
-			</stacked-pane>
-			<stacked-pane id="SP_LoginNotOK" value="false">
-				<davinci-callout id="Callout1" type="info">
-					<span>
-						Please log in via CSK_UserManagement module (at least via user level "Operator")
-					</span>
-				</davinci-callout>
-			</stacked-pane>
-			<crown-edpws-binding property="value"
-				name="CSK_IODDInterpreter/OnUserLevelOperatorActive" update-on-resume
-				converter="function(value) {return value.toString();}">
-			</crown-edpws-binding>
-		</stacked-view>
-		<stacked-view id="SV_PageCalled">
-			<crown-binding property="value"
-				name="CSK_IODDInterpreter/pageCalledInstances"
-				path="result/data/empty" auto-update="0" update-on-resume>
-			</crown-binding>
-		</stacked-view>
-	</layout-column>
-	<layout-column id="ColumnLayout2"></layout-column>
-  
+<layout-row id="RowLayout1" class="myCustomBackground_CSK_Module_IODDInterpreter">
+    <layout-column id="ColumnLayout1" class="myCustomFrameNoColor_CSK_Module_IODDInterpreter"
+        style="align-items: stretch">
+        <layout-row id="RowLayout11" class="myCustomSpacerVert20_CSK_Module_IODDInterpreter">
+        </layout-row>
+        <layout-row id="RowLayout12">
+            <layout-column id="ColumnLayout2" style="align-items: stretch">
+                <layout-row id="RowLayout01" style="align-items: baseline">
+                    <davinci-value-display id="VD_Title" class="myCustomLabel_CSK_Module_IODDInterpreter"
+                        value="IODD Interpreter">
+                    </davinci-value-display>
+                    <davinci-value-display id="VD_Version">
+                        <crown-edpws-binding property="value" name="CSK_IODDInterpreter/OnNewStatusModuleVersion"
+                            update-on-resume>
+                        </crown-edpws-binding>
+                    </davinci-value-display>
+                </layout-row>
+            </layout-column>
+        </layout-row>
+        <stacked-view id="SV_FeatureSupport">
+            <stacked-pane id="SP_Supported" value="true">
+                <stacked-view id="SV_Login">
+                    <stacked-pane id="SP_LoginOK" value="true">
+                        <layout-row id="RowLayout9">
+                            <layout-column id="ColumnLayout14" style="align-items: stretch">
+                                <layout-row id="RowLayout42" class="myCustomMarginFirstRow_CSK_Module_IODDInterpreter"
+                                    style="align-items: stretch">
+                                    <layout-column id="ColumnLayout3" style="align-items: stretch">
+                                        <layout-row id="RowLayout4" style="align-items: center">
+                                            <layout-column id="ColumnLayout22" style="align-items: stretch">
+                                            </layout-column>
+                                            <layout-column id="ColumnLayout83" style="align-items: stretch">
+                                                <layout-row id="RowLayout15" style="align-items: center">
+                                                    <layout-column id="ColumnLayout33" style="align-items: stretch">
+                                                        <davinci-value-display id="VD_SelectInstance" value="Instance">
+                                                        </davinci-value-display>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout4" style="align-items: stretch">
+                                                        <davinci-drop-down id="DD_InstanceList" label="Select Instance">
+                                                            <crown-on property="data"
+                                                                crown-event="CSK_IODDInterpreter/OnNewListIntances"
+                                                                converter="convertToList">
+                                                            </crown-on>
+                                                            <crown-on property="value"
+                                                                crown-event="CSK_IODDInterpreter/OnNewSelectedInstance">
+                                                            </crown-on>
+                                                            <crown-set event="change"
+                                                                crown-function="CSK_IODDInterpreter/setSelectedInstance"
+                                                                protocol="crownMSGPACK" crown-path="newSelectedInstance">
+                                                            </crown-set>
+                                                        </davinci-drop-down>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout78" style="align-items: stretch">
+                                                        <layout-row id="RowLayout17"
+                                                            class="myCustomMarginTop7PX_CSK_Module_IODDInterpreter"
+                                                            style="justify-content: center; align-items: center">
+                                                            <davinci-button id="Button_AddInstance"
+                                                                class="myCustomButton_CSK_Module_IODDInterpreter" type="outline"
+                                                                icon-position="append" title="Add instance"
+                                                                icon="content/add">
+                                                                <span></span>
+                                                                <crown-binding event="submit"
+                                                                    name="CSK_IODDInterpreter/addInstance" auto-commit>
+                                                                </crown-binding>
+                                                            </davinci-button>
+                                                            <davinci-button id="B_DeleteInstance"
+                                                                class="myCustomButton_CSK_Module_IODDInterpreter" type="outline"
+                                                                icon-position="append" title="Delete Instance"
+                                                                icon="action/delete">
+                                                                <span></span>
+                                                                <crown-set event="submit"
+                                                                    crown-function="CSK_IODDInterpreter/deleteInstance"
+                                                                    protocol="crownMSGPACK">
+                                                                </crown-set>
+                                                            </davinci-button>
+                                                        </layout-row>
+                                                    </layout-column>
+                                                </layout-row>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                    <layout-column id="ColumnLayout8" class="myCustomBorderLeft_CSK_Module_IODDInterpreter"
+                                        style="align-items: stretch">
+                                        <layout-row id="RowLayout46" style="align-items: baseline">
+                                            <layout-column id="ColumnLayout81" style="align-items: stretch">
+                                                <layout-row id="RowLayout24" style="align-items: center">
+                                                    <layout-column id="ColumnLayout57" style="align-items: stretch">
+                                                        <davinci-value-display id="VD_PersistentData" value="Persistent Data">
+                                                        </davinci-value-display>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout73"
+                                                        style="align-items: stretch; flex-grow: 2">
+                                                        <davinci-text-field id="TF_ParameterName" type="text"
+                                                            title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+                                                            <crown-edpws-binding property="value"
+                                                                name="CSK_IODDInterpreter/OnNewParameterName" update-on-resume>
+                                                            </crown-edpws-binding>
+                                                            <crown-binding event="change"
+                                                                name="CSK_IODDInterpreter/setParameterName"
+                                                                path="param/args/name" auto-commit>
+                                                            </crown-binding>
+                                                            <crown-edpws-binding property="disabled"
+                                                                name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+                                                                update-on-resume converter="function(value) {return !value;}">
+                                                            </crown-edpws-binding>
+                                                        </davinci-text-field>
+                                                    </layout-column>
+                                                    <layout-column id="Column_PersistentData" style="align-items: stretch">
+                                                        <layout-row id="RowLayout55">
+                                                            <layout-column id="ColumnLayout76" style="align-items: stretch">
+                                                                <layout-row id="RowLayout3"
+                                                                    class="myCustomMarginTop7PX_CSK_Module_IODDInterpreter"
+                                                                    style="justify-content: center; align-items: center">
+                                                                    <davinci-button id="B_LoadConfig"
+                                                                        class="myCustomButton_CSK_Module_IODDInterpreter"
+                                                                        type="outline" icon-position="append"
+                                                                        title="Load configured parameters from CSK_PersistentData module."
+                                                                        icon="action/history">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_IODDInterpreter/loadParameters"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+                                                                            update-on-resume
+                                                                            converter="function(value) {return !value;}">
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                    <davinci-button id="B_SaveConfig"
+                                                                        class="myCustomButton_CSK_Module_IODDInterpreter"
+                                                                        type="outline" icon-position="append"
+                                                                        title="Save current configured parameters of this module within CSK_PersistentData module."
+                                                                        icon="content/save">
+                                                                        <span></span>
+                                                                        <crown-binding event="submit"
+                                                                            name="CSK_IODDInterpreter/sendParameters"
+                                                                            auto-commit>
+                                                                        </crown-binding>
+                                                                        <crown-edpws-binding property="disabled"
+                                                                            name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+                                                                            update-on-resume
+                                                                            converter="function(value) {return !value;}">
+                                                                        </crown-edpws-binding>
+                                                                    </davinci-button>
+                                                                </layout-row>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                    </layout-column>
+                                                </layout-row>
+                                                <layout-row id="RowLayout57" style="align-items: center">
+                                                    <layout-column id="ColumnLayout5" style="align-items: stretch">
+                                                        <davinci-collapse id="Collapse_PersistentData"
+                                                            class="myCustomPersistentDataMargin_CSK_Module_IODDInterpreter"
+                                                            collapsed-title="..." expanded-title="...">
+                                                            <layout-row id="RowLayout45"
+                                                                class="myCustomPersistentDataMarginBack_CSK_Module_IODDInterpreter"
+                                                                style="align-items: center">
+                                                                <layout-column id="ColumnLayout6" style="align-items: stretch">
+                                                                </layout-column>
+                                                                <layout-column id="ColumnLayout72"
+                                                                    style="align-items: stretch; flex-grow: 2">
+                                                                    <layout-row id="RowLayout6">
+                                                                        <layout-column id="ColumnLayout12"
+                                                                            style="align-items: stretch">
+                                                                            <layout-row id="RowLayout2"
+                                                                                style="align-items: center">
+                                                                                <davinci-value-display id="VD_LoadConfig"
+                                                                                    value="Load on reboot:"
+                                                                                    title="Load configured parameters from CSK_PersistentData on app start.">
+                                                                                </davinci-value-display>
+                                                                                <davinci-checkbox id="CB_LoadConfig"
+                                                                                    title="Load configured parameters from CSK_PersistentData on app start.">
+                                                                                    <span></span>
+                                                                                    <crown-edpws-binding property="checked"
+                                                                                        name="CSK_IODDInterpreter/OnNewStatusLoadParameterOnReboot"
+                                                                                        update-on-resume>
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-edpws-binding property="disabled"
+                                                                                        name="CSK_IODDInterpreter/OnPersistentDataModuleAvailable"
+                                                                                        update-on-resume
+                                                                                        converter="function(value) {return !value;}">
+                                                                                    </crown-edpws-binding>
+                                                                                    <crown-binding event="change"
+                                                                                        name="CSK_IODDInterpreter/setLoadOnReboot"
+                                                                                        path="param/args/status" auto-commit>
+                                                                                    </crown-binding>
+                                                                                </davinci-checkbox>
+                                                                            </layout-row>
+                                                                        </layout-column>
+                                                                        <layout-column id="ColumnLayout77"
+                                                                            style="align-items: stretch">
+                                                                        </layout-column>
+                                                                    </layout-row>
+                                                                </layout-column>
+                                                                <layout-column id="ColumnLayout79" style="align-items: stretch">
+                                                                </layout-column>
+                                                            </layout-row>
+                                                        </davinci-collapse>
+                                                    </layout-column>
+                                                </layout-row>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                </layout-row>
+                                <layout-row id="RowLayout60" class="myCustomSpacerVert10_CSK_Module_IODDInterpreter">
+                                </layout-row>
+                                <layout-row id="RowLayout47" class="myCustomBorderBottom_CSK_Module_IODDInterpreter"
+                                    style="flex-grow: 0; flex-shrink: 0">
+                                </layout-row>
+                                <layout-row id="RowLayout61" class="myCustomSpacerVert20_CSK_Module_IODDInterpreter"
+                                    style="flex-grow: 0; flex-shrink: 0">
+                                </layout-row>
+                                <layout-row id="RowLayout10">
+                                    <layout-column id="ColumnLayout13" class="myCustomFrame_CSK_Module_IODDInterpreter"
+                                        style="align-items: stretch">
+                                        <davinci-value-display id="VD_Setup"
+                                            class="myCustomFrameLabel_CSK_Module_IODDInterpreter" label="Setup"
+                                            style="align-self: flex-start">
+                                        </davinci-value-display>
+                                        <curie-callout id="DC_IODDUploadStatus">
+                                            <crown-edpws-binding property="type" name="CSK_IODDInterpreter/OnNewCalloutType"
+                                                update-on-resume>
+                                            </crown-edpws-binding>
+                                            <crown-edpws-binding property="value" name="CSK_IODDInterpreter/OnNewCalloutValue"
+                                                update-on-resume>
+                                            </crown-edpws-binding>
+                                        </curie-callout>
+                                        <layout-row id="RowLayout5">
+                                            <layout-column id="ColumnLayout15" style="align-items: stretch">
+                                                <layout-row id="RowLayout8">
+                                                    <layout-column id="ColumnLayout85" style="align-items: center">
+                                                        <appspace-file-upload-button id="FUB_IODDUpload" button-type="outline"
+                                                            path="public/tempIODD.xml" is-file icon="file/file_upload"
+                                                            title="Upload IODD XML file">
+                                                            <span>Upload IODD</span>
+                                                            <crown-binding event="finished"
+                                                                name="CSK_IODDInterpreter/uploadFinished"
+                                                                path="param/args/uploadSuccess" auto-commit>
+                                                            </crown-binding>
+                                                        </appspace-file-upload-button>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout10" style="align-items: stretch">
+                                                        <davinci-drop-down id="DD_IODDListToDelete"
+                                                            label="Select IODD to delete">
+                                                            <crown-on property="data"
+                                                                crown-event="CSK_IODDInterpreter/OnNewListIODD"
+                                                                converter="convertToList">
+                                                            </crown-on>
+                                                            <crown-on property="value"
+                                                                crown-event="CSK_IODDInterpreter/OnNewSelectedIODDToHandle">
+                                                            </crown-on>
+                                                            <crown-set event="change"
+                                                                crown-function="CSK_IODDInterpreter/setSelectedIODDToHandle"
+                                                                protocol="crownMSGPACK" crown-path="newSelectedIODDToHandle">
+                                                            </crown-set>
+                                                        </davinci-drop-down>
+                                                    </layout-column>
+                                                    <layout-column id="ColumnLayout9" style="align-items: center">
+                                                        <davinci-button id="B_DeleteIODD"
+                                                            class="myCustomButton_CSK_Module_IODDInterpreter" type="outline"
+                                                            icon-position="append" title="Delete selected IODD File"
+                                                            icon="action/delete">
+                                                            <span></span>
+                                                            <crown-set event="submit"
+                                                                crown-function="CSK_IODDInterpreter/deleteIODD"
+                                                                protocol="crownMSGPACK">
+                                                            </crown-set>
+                                                        </davinci-button>
+                                                    </layout-column>
+                                                </layout-row>
+                                            </layout-column>
+                                            <layout-column id="ColumnLayout16"
+                                                class="myCustomBorderLeft_CSK_Module_IODDInterpreter"
+                                                style="align-items: stretch">
+                                                <stacked-view id="SV_isInstanceSelected">
+                                                    <stacked-pane id="SP_instanceISSelected" value="true">
+                                                        <layout-row id="RowLayout7" style="justify-content: space-between">
+                                                            <layout-column id="ColumnLayout7" style="align-items: stretch">
+                                                                <davinci-text-field id="TF_InstanceId" type="text"
+                                                                    label="Instance ID">
+                                                                    <crown-on property="value"
+                                                                        crown-event="CSK_IODDInterpreter/OnNewInstanceName">
+                                                                    </crown-on>
+                                                                    <crown-set event="change"
+                                                                        crown-function="CSK_IODDInterpreter/setInstanceName"
+                                                                        protocol="crownMSGPACK" crown-path="newInstanceName">
+                                                                    </crown-set>
+                                                                </davinci-text-field>
+                                                            </layout-column>
+                                                            <layout-column id="ColumnLayout11" style="align-items: stretch">
+                                                                <davinci-drop-down id="DD_IODDListForInstace"
+                                                                    label="Select IODD to be used by instance">
+                                                                    <crown-on property="data"
+                                                                        crown-event="CSK_IODDInterpreter/OnNewListIODD"
+                                                                        converter="convertToList">
+                                                                    </crown-on>
+                                                                    <crown-on property="value"
+                                                                        crown-event="CSK_IODDInterpreter/OnNewSelectedIODD">
+                                                                    </crown-on>
+                                                                    <crown-set event="change"
+                                                                        crown-function="CSK_IODDInterpreter/setSelectedIODD"
+                                                                        protocol="crownMSGPACK" crown-path="ioddName">
+                                                                    </crown-set>
+                                                                </davinci-drop-down>
+                                                            </layout-column>
+                                                        </layout-row>
+                                                    </stacked-pane>
+                                                    <stacked-pane id="SP_instanceIsNOTSelected" value="false">
+                                                    </stacked-pane>
+                                                    <crown-on property="value"
+                                                        crown-event="CSK_IODDInterpreter/isInstanceSelected"
+                                                        converter="bool2str">
+                                                    </crown-on>
+                                                </stacked-view>
+                                            </layout-column>
+                                        </layout-row>
+                                    </layout-column>
+                                </layout-row>
+                            </layout-column>
+                        </layout-row>
+                    </stacked-pane>
+                    <stacked-pane id="SP_LoginNotOK" value="false">
+                        <davinci-callout id="Callout1" type="info">
+                            <span>
+                                Please log in via CSK_UserManagement module (at least via user level "Operator")
+        					</span>
+                        </davinci-callout>
+                    </stacked-pane>
+                    <crown-edpws-binding property="value" name="CSK_IODDInterpreter/OnUserLevelOperatorActive" update-on-resume
+                        converter="function(value) {return value.toString();}">
+                    </crown-edpws-binding>
+                </stacked-view>
+            </stacked-pane>
+            <stacked-pane id="SP_NoSupport" value="false">
+                <layout-row id="RowLayout110">
+                    <layout-column id="ColumnLayout122">
+                        <davinci-callout id="Callout31" type="warning" style="width: 99%">
+                            <span>Module is not supported on this device...</span>
+                        </davinci-callout>
+                        <img id="UI_sample" src="assets/CSK_Module_IODDInterpreter/UI_sample.png"
+                            alt="UI sample">
+                    </layout-column>
+                </layout-row>
+            </stacked-pane>
+            <crown-edpws-binding property="value" name="CSK_IODDInterpreter/OnNewStatusModuleIsActive" update-on-resume
+                converter="function(value) {return value.toString();}">
+            </crown-edpws-binding>
+        </stacked-view>
+        <stacked-view id="SV_PageCalled">
+            <crown-binding property="value" name="CSK_IODDInterpreter/pageCalledInstances" path="result/data/empty"
+                auto-update="0" update-on-resume>
+            </crown-binding>
+            <crown-edpws-binding property="value" name="CSK_IODDInterpreter/OnNewStatusCSKStyle" update-on-resume
+                converter="changeStyle">
+            </crown-edpws-binding>
+        </stacked-view>
+    </layout-column>
 </layout-row>

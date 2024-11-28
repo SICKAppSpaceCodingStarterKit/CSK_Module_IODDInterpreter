@@ -1,3 +1,9 @@
 {
-"showLoginButton": false
+  "canChangeLanguage": true,
+  "showLoginButton": false,
+  "defaultLanguage": "en",
+  "disableEditMode": true,
+  "showPageHistory": true,
+  "compactMode": false,
+  "canChangeCompactMode": false
 }
