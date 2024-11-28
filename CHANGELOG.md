@@ -12,6 +12,7 @@ Major internal code edits!
 ### Improvements
 - Only keep IODD tables which are used by instances
 - Share single IODD table among instances that use same IODD (no copies anymore)
+- Set 'LuaLoadAllEngineAPI' to false
 - New UI design available (e.g. selectable via CSK_Module_PersistentData v4.1.0 or higher), see 'OnNewStatusCSKStyle'
 - 'loadParameters' returns its success
 - 'sendParameters' can control if sent data should be saved directly by CSK_Module_PersistentData
