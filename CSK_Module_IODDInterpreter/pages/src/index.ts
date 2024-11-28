@@ -11,6 +11,14 @@ document.addEventListener('sopasjs-ready', () => {
   page_3.classList.remove('fa-file');
   page_3.classList.add('fa-sort-amount-desc');
 
+  const page_FirstLabel = document.querySelector('div.sopasjs-ui-navbar-wrapper > div > ul > li:nth-child(2)');
+  const page_App = document.querySelector('div.sopasjs-ui-navbar-wrapper > div > ul > li:nth-child(6)');
+  const page_Setup = document.querySelector('div.sopasjs-ui-navbar-wrapper > div > ul > li:nth-child(7) > a');
+
+  page_FirstLabel.remove();
+  page_App.remove();
+  page_Setup.remove();
+
   setTimeout(() => {
     document.title = 'CSK_Module_IODDInterpreter'
   }, 500);
