@@ -47,9 +47,15 @@ end
 
 function IODDInterpreter:getSubIndexParameter(index, subindex)
   if self.ParamIndexMap[index] and self.ParamIndexSubindexMap[index][subindex] then
-    local tempTable = copy(self.Variable[self.ParamIndexMap[index]].Datatype.RecordItem[self.ParamIndexSubindexMap[index][subindex]])
-    changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
-    return tempTable
+    if self.Variable[self.ParamIndexMap[index]].Datatype['xsi:type'] == "ArrayT" then
+      local tempTable = copy(self.Variable[self.ParamIndexMap[index]].Datatype.SimpleDatatype)
+      changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
+      return tempTable
+    else
+      local tempTable = copy(self.Variable[self.ParamIndexMap[index]].Datatype.RecordItem[self.ParamIndexSubindexMap[index][subindex]])
+      changeTextIDtoText(tempTable, self.languages[self.currentLanguage])
+      return tempTable
+    end
   else
     return false
   end

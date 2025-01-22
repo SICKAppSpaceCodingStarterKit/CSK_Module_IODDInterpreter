@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Release 2.1.0
+
+### New features
+- User can select a subindex to read (even if subindex access is not supported)
+
 ## Release 2.0.0
 Major internal code edits!
 
