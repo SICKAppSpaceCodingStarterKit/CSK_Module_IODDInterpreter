@@ -954,7 +954,7 @@ local function loadInstancesListParameters(parameterName)
       parameterSet = nil
       data = nil
     else
-      _G.logger:warning(nameOfModule .. ' instance ' .. instanceId .. ": Loading parameters from CSK_PersistentData module did not work.")
+      _G.logger:info(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
     end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData Module not available.")
