@@ -203,7 +203,7 @@ local function getDatatypeBitlength(datatypeInfo)
   elseif datatypeInfo.type == "StringT" or datatypeInfo.type == "OctetStringT" then
     return tonumber(datatypeInfo.fixedLength)
   elseif datatypeInfo.type == "ArrayT" then
-    return tonumber(datatypeInfo.count)*getDatatypeBitlength(datatypeInfo.Datatype)
+    return tonumber(datatypeInfo.count)*getDatatypeBitlength(datatypeInfo.SimpleDatatype)
   end
 end
 
@@ -218,122 +218,162 @@ local defaultValueForSimpleType = {
 
 local function makeExpectedPayload(compiledTable)
   local expectedTable = {}
-  for _, dataPointInfo in pairs(compiledTable) do
-    dataPointInfo = renameDatatype(dataPointInfo)
-    if dataPointInfo.Datatype.type == 'ArrayT' then
-      expectedTable[dataPointInfo.Name] = {}
-      for i = 1, dataPointInfo.Datatype.count do
-        expectedTable[dataPointInfo.Name]["element_" .. tostring(i)] = {}
-        expectedTable[dataPointInfo.Name]["element_" .. tostring(i)].value = defaultValueForSimpleType[dataPointInfo.Datatype.Datatype.type]
-      end
-    elseif dataPointInfo.Datatype.type =='RecordT' then
-      expectedTable[dataPointInfo.Name] = {}
-      local repeatedNames = {}
-      for _, recordInfo in ipairs(dataPointInfo.Datatype.RecordItem) do
-        local recordName = recordInfo.Name
-        if expectedTable[dataPointInfo.Name][recordInfo.Name] then
-          table.insert(repeatedNames, recordInfo.Name)
-          expectedTable[dataPointInfo.Name][recordInfo.Name..'_1'] = copy(expectedTable[dataPointInfo.Name][recordInfo.Name])
-          local repeatedIndex = 2
-          recordName = recordInfo.Name .. '_' .. tostring(repeatedIndex)
-          while expectedTable[dataPointInfo.Name][recordName] do
-            recordName = recordInfo.Name .. '_' .. tostring(repeatedIndex)
-            repeatedIndex = repeatedIndex + 1
-          end
-        end
-        expectedTable[dataPointInfo.Name][recordName] = {}
-        expectedTable[dataPointInfo.Name][recordName].value = defaultValueForSimpleType[recordInfo.Datatype.type]
-      end
-      for i, recordName in ipairs(repeatedNames) do
-        expectedTable[dataPointInfo.Name][recordName] = nil
+  for dataPointId, dataPointInfo in pairs(compiledTable) do
+    if dataPointInfo.subindeces then
+      expectedTable[dataPointId] = {}
+      for subindexId, subindexInfo in pairs(dataPointInfo.subindeces) do
+        expectedTable[dataPointId][subindexId] = {
+          value = defaultValueForSimpleType[subindexInfo.info.type]
+        }
       end
     else
-      expectedTable[dataPointInfo.Name] = {}
-      if dataPointInfo.Datatype then
-        expectedTable[dataPointInfo.Name].value = defaultValueForSimpleType[dataPointInfo.Datatype.type]
-      elseif dataPointInfo.Datatype then
-        expectedTable[dataPointInfo.Name].value = defaultValueForSimpleType[dataPointInfo.Datatype.type]
-      end
+      expectedTable[dataPointId] = {
+        value = defaultValueForSimpleType[dataPointInfo.info.type]
+      }
     end
   end
+  --for _, dataPointInfo in pairs(compiledTable) do
+  --  --dataPointInfo = renameDatatype(dataPointInfo)
+  --  if dataPointInfo.Datatype.type == 'ArrayT' then
+  --    expectedTable[dataPointInfo.Name] = {}
+  --    for i = 1, dataPointInfo.Datatype.count do
+  --      expectedTable[dataPointInfo.Name]["element_" .. tostring(i)] = {}
+  --      expectedTable[dataPointInfo.Name]["element_" .. tostring(i)].value = defaultValueForSimpleType[dataPointInfo.Datatype.Datatype.type]
+  --    end
+  --  elseif dataPointInfo.Datatype.type =='RecordT' then
+  --    expectedTable[dataPointInfo.Name] = {}
+  --    local repeatedNames = {}
+  --    for _, recordInfo in ipairs(dataPointInfo.Datatype.RecordItem) do
+  --      if not recordInfo.Name then
+  --        recordInfo.Name = "Null parameter"
+  --      end
+  --      local recordName = recordInfo.Name
+  --      if expectedTable[dataPointInfo.Name][recordInfo.Name] then
+  --        table.insert(repeatedNames, recordInfo.Name)
+  --        expectedTable[dataPointInfo.Name][recordInfo.Name..'_1'] = copy(expectedTable[dataPointInfo.Name][recordInfo.Name])
+  --        local repeatedIndex = 2
+  --        recordName = recordInfo.Name .. '_' .. tostring(repeatedIndex)
+  --        while expectedTable[dataPointInfo.Name][recordName] do
+  --          recordName = recordInfo.Name .. '_' .. tostring(repeatedIndex)
+  --          repeatedIndex = repeatedIndex + 1
+  --        end
+  --      end
+  --      expectedTable[dataPointInfo.Name][recordName] = {}
+  --      expectedTable[dataPointInfo.Name][recordName].value = defaultValueForSimpleType[recordInfo.Datatype.type]
+  --    end
+  --    for i, recordName in ipairs(repeatedNames) do
+  --      expectedTable[dataPointInfo.Name][recordName] = nil
+  --    end
+  --  else
+  --    expectedTable[dataPointInfo.Name] = {}
+  --    if dataPointInfo.Datatype then
+  --      expectedTable[dataPointInfo.Name].value = defaultValueForSimpleType[dataPointInfo.Datatype.type]
+  --    elseif dataPointInfo.Datatype then
+  --      expectedTable[dataPointInfo.Name].value = defaultValueForSimpleType[dataPointInfo.Datatype.type]
+  --    end
+  --  end
+  --end
   return expectedTable
 end
 funcs.makeExpectedPayload = makeExpectedPayload
 
-local function compileProcessDataTable(processDataInfo, selectedTable)
+local function getSingleInfoTable(rawInfoTable)
+  local info = copy(rawInfoTable)
+  if rawInfoTable.Datatype then
+    for key, value in pairs(rawInfoTable.Datatype) do
+      info[key] = value
+    end
+  end
+  if rawInfoTable.SimpleDatatype then
+    for key, value in pairs(rawInfoTable.SimpleDatatype) do
+      info[key] = value
+    end
+  end
+  info.type = info["xsi:type"]
+  info["xsi:type"] = nil
+  info.RecordItem = nil
+  info.Datatype = nil
+  info.SimpleDatatype = nil
+  return info
+end
+
+local function compileDataPointTable(dataInfo, selectedTable)
+  if not dataInfo then
+    return nil
+  end
   local compiledTable = {}
-  if selectedTable["0"] == true then
-    local singleProcessData = copy(processDataInfo)
-    singleProcessData.bitOffset = 0
-    singleProcessData.Frequency = 0
-    singleProcessData.requested = false
-    compiledTable[singleProcessData.Name] = singleProcessData
-    --table.insert(compiledTable, singleProcessData)
-  elseif selectedTable["1"] ~= nil then
+  if dataInfo.Datatype["xsi:type"] == "ArrayT" or dataInfo.Datatype["xsi:type"] == "RecordT" then
     for subindex, selected in pairs(selectedTable) do
       if selected == true and subindex ~= "0" and subindex ~= "subindexAccessSupported" then
-        if processDataInfo.Datatype["xsi:type"] == "ArrayT" then
-          local singleProcessData = copy(processDataInfo.Datatype)
-          singleProcessData.subindex = subindex
-          singleProcessData.bitOffset = tonumber(subindex) * getDatatypeBitlength(singleProcessData.SimpleDatatype)
-          singleProcessData.Frequency = 0
-          singleProcessData.requested = false
-          singleProcessData.Name = processDataInfo.Name.. '_element' .. tostring(subindex)
-          compiledTable[singleProcessData.Name] = singleProcessData
-          --table.insert(compiledTable, singleProcessData)
-        elseif processDataInfo.Datatype["xsi:type"] == "RecordT" then
+        if not compiledTable[dataInfo.Name] then
+          local info = copy(dataInfo)
+          for key, value in pairs(dataInfo.Datatype) do
+            info[key] = value
+          end
+          info.type = info["xsi:type"]
+          info["xsi:type"] = nil
+          if dataInfo.Datatype["xsi:type"] == "ArrayT" then
+            info.SimpleDatatype.type = info.SimpleDatatype["xsi:type"]
+          end
+          info.BitLength = getDatatypeBitlength(info)
+          info.RecordItem = nil
+          info.SimpleDatatype = nil
+          compiledTable[dataInfo.Name] = {
+            info = info,
+            subindeces = {}
+          }
+        end
+        if dataInfo.Datatype["xsi:type"] == "ArrayT" then
+          local singleProcessDatatype = copy(dataInfo.Datatype.SimpleDatatype)
+          singleProcessDatatype.subindex = subindex
+          singleProcessDatatype.type = singleProcessDatatype["xsi:type"]
+          singleProcessDatatype.bitOffset = (tonumber(subindex)-1) * getDatatypeBitlength(singleProcessDatatype)
+          singleProcessDatatype.Name = dataInfo.Name.. '_element' .. tostring(subindex)
+          compiledTable[dataInfo.Name].subindeces[singleProcessDatatype.Name] = {
+            info = singleProcessDatatype
+          }
+          
+        elseif dataInfo.Datatype["xsi:type"] == "RecordT" then
           local subindexMap = {}
-          for i, subindexInfo in ipairs(processDataInfo.Datatype.RecordItem) do
+          for i, subindexInfo in ipairs(dataInfo.Datatype.RecordItem) do
             subindexMap[subindexInfo.subindex] = i
           end
-          local singleProcessData = copy(processDataInfo.Datatype.RecordItem[subindexMap[subindex]])
-          singleProcessData.Frequency = 0
-          singleProcessData.requested = false
-          compiledTable[singleProcessData.Name] = singleProcessData
-          --table.insert(compiledTable, singleProcessData)
+          local singleProcessDatatype = copy(dataInfo.Datatype.RecordItem[subindexMap[subindex]])
+          singleProcessDatatype.subindex = subindex
+          if not singleProcessDatatype.Name then
+            singleProcessDatatype.Name = "Null parameter"
+          end
+          compiledTable[dataInfo.Name].subindeces[singleProcessDatatype.Name] = {
+            info = getSingleInfoTable(singleProcessDatatype)
+          }
         end
       end
     end
+  elseif selectedTable["0"] == true then
+    compiledTable[dataInfo.Name] = {
+      info = getSingleInfoTable(dataInfo)
+    }
   end
   if getTableSize(compiledTable) == 0 then
     return nil
   end
   return compiledTable
 end
-funcs.compileProcessDataTable = compileProcessDataTable
 
-local function compileParametersTable(iodd, selectedTable)
+
+local function compileParametersTableNew(iodd, selectedTable)
   local compiledTable = {}
   for index, subindeces in pairs(selectedTable) do
-    if subindeces["0"] == true then
-      local ioddIndexdata = iodd:getParameterInfoFromIndex(index)
-      ioddIndexdata.subindex = "0"
-      ioddIndexdata.Frequency = 0
-      ioddIndexdata.requested = false
-      compiledTable[ioddIndexdata.Name] = ioddIndexdata
-      --table.insert(compiledTable, ioddIndexdata)
-    elseif subindeces["1"] ~= nil then
-      for subindex, selected in pairs(subindeces) do
-        if selected == true and subindex ~= "0" and subindex ~= "subindexAccessSupported" then
-          local ioddIndexdata = iodd:getParameterInfoFromIndex(index)
-          if ioddIndexdata.Datatype["xsi:type"] == "ArrayT" then
-            local ioddSubIndexdata = ioddIndexdata.Datatype
-            ioddSubIndexdata.index = index
-            ioddSubIndexdata.subindex = subindex
-            ioddSubIndexdata.Frequency = 0
-            ioddSubIndexdata.requested = false
-            ioddSubIndexdata.Name = ioddIndexdata.Name.. '_element' .. tostring(subindex)
-            --table.insert(compiledTable, ioddSubIndexdata)
-            compiledTable[ioddIndexdata.Name] = ioddSubIndexdata
-          elseif ioddIndexdata.Datatype["xsi:type"] == "RecordT" then
-            local ioddSubIndexdata = iodd:getSubIndexParameter(index, subindex)
-            ioddSubIndexdata.index = index
-            ioddSubIndexdata.Frequency = 0
-            ioddSubIndexdata.requested = false
-            --table.insert(compiledTable, ioddSubIndexdata)
-            compiledTable[ioddSubIndexdata.Name] = ioddSubIndexdata
+    for subindex, selected in pairs(subindeces) do
+      if selected == true then
+        local ioddIndexdata = iodd:getParameterInfoFromIndex(index)
+        local compiledDataPointTable = compileDataPointTable(ioddIndexdata, subindeces)
+        if compiledDataPointTable then
+          for key, value in pairs(compiledDataPointTable) do
+            compiledTable[key] = value
           end
         end
+        break
       end
     end
   end
@@ -342,7 +382,98 @@ local function compileParametersTable(iodd, selectedTable)
   end
   return compiledTable
 end
-funcs.compileParametersTable = compileParametersTable
+
+--local function compileProcessDataTable(processDataInfo, selectedTable)
+--  local compiledTable = {}
+--  if selectedTable["0"] == true then
+--    local singleProcessData = copy(processDataInfo)
+--    singleProcessData.bitOffset = 0
+--    singleProcessData.Frequency = 0
+--    singleProcessData.requested = false
+--    compiledTable[singleProcessData.Name] = singleProcessData
+--    --table.insert(compiledTable, singleProcessData)
+--  elseif selectedTable["1"] ~= nil then
+--    for subindex, selected in pairs(selectedTable) do
+--      if selected == true and subindex ~= "0" and subindex ~= "subindexAccessSupported" then
+--        if not compiledTable[processDataInfo.Name] then
+--          compiledTable[processDataInfo.Name] = copy(processDataInfo)
+--        end
+--        if processDataInfo.Datatype["xsi:type"] == "ArrayT" then
+--          local singleProcessData = copy(processDataInfo.Datatype.SimpleDatatype)
+--          singleProcessData.subindex = subindex
+--          singleProcessData.bitOffset = tonumber(subindex) * getDatatypeBitlength(singleProcessData.SimpleDatatype)
+--          --singleProcessData.Frequency = 0
+--          --singleProcessData.requested = false
+--          singleProcessData.Name = processDataInfo.Name.. '_element' .. tostring(subindex)
+--          compiledTable[processDataInfo.Name][singleProcessData.Name] = singleProcessData
+--          --table.insert(compiledTable, singleProcessData)
+--        elseif processDataInfo.Datatype["xsi:type"] == "RecordT" then
+--          local subindexMap = {}
+--          for i, subindexInfo in ipairs(processDataInfo.Datatype.RecordItem) do
+--            subindexMap[subindexInfo.subindex] = i
+--          end
+--          local singleProcessData = copy(processDataInfo.Datatype.RecordItem[subindexMap[subindex]])
+--          --singleProcessData.Frequency = 0
+--          --singleProcessData.requested = false
+--          compiledTable[processDataInfo.Name][singleProcessData.Name] = singleProcessData
+--          --table.insert(compiledTable, singleProcessData)
+--        end
+--      end
+--    end
+--  end
+--  if getTableSize(compiledTable) == 0 then
+--    return nil
+--  end
+--  return compiledTable
+--end
+funcs.compileProcessDataTable = compileDataPointTable
+
+--local function compileParametersTable(iodd, selectedTable)
+--  local compiledTable = {}
+--  for index, subindeces in pairs(selectedTable) do
+--    if subindeces["0"] == true then
+--      local ioddIndexdata = iodd:getParameterInfoFromIndex(index)
+--      ioddIndexdata.subindex = "0"
+--      --ioddIndexdata.Frequency = 0
+--      --ioddIndexdata.requested = false
+--      compiledTable[ioddIndexdata.Name] = ioddIndexdata
+--      --table.insert(compiledTable, ioddIndexdata)
+--    elseif subindeces["1"] ~= nil then
+--      for subindex, selected in pairs(subindeces) do
+--        if selected == true and subindex ~= "0" and subindex ~= "subindexAccessSupported" then
+--          local ioddIndexdata = iodd:getParameterInfoFromIndex(index)
+--          if not compiledTable[ioddIndexdata.Name] then
+--            compiledTable[ioddIndexdata.Name] = {}
+--          end
+--          if ioddIndexdata.Datatype["xsi:type"] == "ArrayT" then
+--            local ioddSubIndexdata = iodd:getSubIndexParameter(index, subindex)
+--            ioddSubIndexdata.subindexAccessSupported = subindeces.subindexAccessSupported
+--            ioddSubIndexdata.index = index
+--            ioddSubIndexdata.subindex = subindex
+--            --ioddSubIndexdata.Frequency = 0
+--            --ioddSubIndexdata.requested = false
+--            ioddSubIndexdata.Name = ioddIndexdata.Name.. '_element' .. tostring(subindex)
+--            --table.insert(compiledTable, ioddSubIndexdata)
+--            compiledTable[ioddIndexdata.Name][ioddSubIndexdata.Name] = ioddSubIndexdata
+--          elseif ioddIndexdata.Datatype["xsi:type"] == "RecordT" then
+--            local ioddSubIndexdata = iodd:getSubIndexParameter(index, subindex)
+--            ioddSubIndexdata.subindexAccessSupported = subindeces.subindexAccessSupported
+--            ioddSubIndexdata.index = index
+--            --ioddSubIndexdata.Frequency = 0
+--            --ioddSubIndexdata.requested = false
+--            --table.insert(compiledTable, ioddSubIndexdata)
+--            compiledTable[ioddIndexdata.Name][ioddSubIndexdata.Name] = ioddSubIndexdata
+--          end
+--        end
+--      end
+--    end
+--  end
+--  if getTableSize(compiledTable) == 0 then
+--    return nil
+--  end
+--  return compiledTable
+--end
+funcs.compileParametersTable = compileParametersTableNew
 
 return funcs
 
