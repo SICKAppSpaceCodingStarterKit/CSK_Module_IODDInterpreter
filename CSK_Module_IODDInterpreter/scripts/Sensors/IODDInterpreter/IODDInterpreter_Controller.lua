@@ -311,15 +311,7 @@ local function updateSelectedProcessDataTable(selectedRow, selectedProcessDataTa
     if state == false and selectedProcessDataTable["0"] == true then
       selectedProcessDataTable["0"] = false
     end
-    if selectedProcessDataTable.subindexAccessSupported == true then
-      selectedProcessDataTable[subindex] = state
-    else
-      for tempSubndex, _ in pairs(selectedProcessDataTable) do
-        if tempSubndex ~= "subindexAccessSupported" then
-          selectedProcessDataTable[tempSubndex] = state
-        end
-      end
-    end
+    selectedProcessDataTable[subindex] = state
   else
     for tempSubndex, _ in pairs(selectedProcessDataTable) do
       if tempSubndex ~= "subindexAccessSupported" then
@@ -340,15 +332,7 @@ local function updateSelectedParametersTable(selectedRow, selectedParametersTabl
     if state == false and selectedParametersTable[index]["0"] == true then
       selectedParametersTable[index]["0"] = false
     end
-    if selectedParametersTable[index].subindexAccessSupported == true then
-      selectedParametersTable[index][subindex] = state
-    else
-      for subindex1, _ in pairs(selectedParametersTable[index]) do
-        if subindex1 ~= "subindexAccessSupported" then
-          selectedParametersTable[index][subindex1] = state
-        end
-      end
-    end
+    selectedParametersTable[index][subindex] = state
   else
     for subindex1, _ in pairs(selectedParametersTable[index]) do
       if subindex1 ~= "subindexAccessSupported" then
@@ -970,7 +954,7 @@ local function loadInstancesListParameters(parameterName)
       parameterSet = nil
       data = nil
     else
-      _G.logger:warning(nameOfModule .. ' instance ' .. instanceId .. ": Loading parameters from CSK_PersistentData module did not work.")
+      _G.logger:info(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
     end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData Module not available.")
