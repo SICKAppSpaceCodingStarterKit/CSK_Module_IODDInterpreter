@@ -306,7 +306,7 @@ Script.serveFunction('CSK_IODDInterpreter.deleteIODD', deleteIODD)
 ---@param selectedProcessDataTable string[] Selected process data
 local function updateSelectedProcessDataTable(selectedRow, selectedProcessDataTable)
   local state = selectedRow.selected
-  local subindex = selectedRow.colPD1
+  local subindex = tostring(selectedRow.colPD1)
   if subindex ~= "0" then
     if state == false and selectedProcessDataTable["0"] == true then
       selectedProcessDataTable["0"] = false
@@ -326,8 +326,8 @@ end
 ---@param selectedParametersTable string[] Selected parameter data
 local function updateSelectedParametersTable(selectedRow, selectedParametersTable)
   local state = selectedRow.selected
-  local index = selectedRow.colSD1
-  local subindex = selectedRow.colSD2
+  local index = tostring(selectedRow.colSD1)
+  local subindex = tostring(selectedRow.colSD2)
   if subindex ~= "0" then
     if state == false and selectedParametersTable[index]["0"] == true then
       selectedParametersTable[index]["0"] = false
@@ -352,6 +352,7 @@ local function getParameterDataPointInfo(instanceId, index, subindex)
   if not dataPointInfo then
     return nil
   end
+  dataPointInfo = {info = ioddInterpreter_Model.helperFuncs.getSingleInfoTable(dataPointInfo)}
   local jsonDataPointInfo = ioddInterpreter_Model.json.encode(dataPointInfo)
   return jsonDataPointInfo
 end
