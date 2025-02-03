@@ -255,6 +255,7 @@ local function getSingleInfoTable(rawInfoTable)
   info.SimpleDatatype = nil
   return info
 end
+funcs.getSingleInfoTable = getSingleInfoTable
 
 local function compileDataPointTable(dataInfo, selectedTable)
   if not dataInfo then

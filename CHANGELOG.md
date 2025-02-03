@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## Release 2.1.1
+
+### Bugfixes
+- Bugfix of selecting process data format with new version of IODD interpreter
+
 ## Release 2.1.0
 
 ### New features
