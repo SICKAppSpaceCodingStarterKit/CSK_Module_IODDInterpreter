@@ -333,8 +333,11 @@ end
 
 function IODDInterpreter:getStandardFileName()
   local vendorName = self.DeviceIdentity.vendorName
-  local deviceNameTextId = self.DeviceIdentity.DeviceName.textId
-  local deviceName = self.languages[self.languages.Primary][deviceNameTextId]
+  local deviceName = self.DeviceIdentity.deviceId
+  if self.DeviceIdentity.DeviceName then
+    local deviceNameTextId = self.DeviceIdentity.DeviceName.textId
+    deviceName = self.languages[self.languages.Primary][deviceNameTextId]
+  end
   local releaseDateRaw = self.DocumentInfo.releaseDate
   local releaseDate = string.gsub(releaseDateRaw, '-', '')
   local profileRevision = self.ProfileHeader.ProfileRevision
