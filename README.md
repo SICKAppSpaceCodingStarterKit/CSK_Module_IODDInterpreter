@@ -42,7 +42,7 @@ Tested on
 
 |Device|Firmware version|Module version|
 |--|--|--|
-|SICK AppEngine|V1.7.0|V1.1.0|
+|SIM1012|V2.4.2|V2.1.3|
 |SIM1012|V2.4.2|V2.1.1|
 |SIM1012|V2.4.2|V2.1.0|
 |SIM1012|V2.4.2|V1.1.0|
@@ -50,6 +50,7 @@ Tested on
 |SIM1012|v2.3.0|v1.0.0|
 |SIM1012|v2.4.1|v1.0.1|
 |SIM1012|v2.4.1|v1.0.0|
+|SICK AppEngine|V1.7.0|V1.1.0|
 
 This module is part of the SICK AppSpace Coding Starter Kit developing approach.  
 It is programmed in an object-oriented way. Some of the modules use kind of "classes" in Lua to make it possible to reuse code / classes in other projects.  
