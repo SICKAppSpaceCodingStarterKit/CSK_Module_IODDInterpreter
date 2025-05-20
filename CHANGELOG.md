@@ -3,6 +3,9 @@ All notable changes to this project will be documented in this file.
 
 ## Release 2.1.3
 
+### Improvements
+- Check for BOM in XML file
+
 ### Bugfix
 - Legacy bindings of ValueDisplay elements and FileUpload feature within UI did not work if deployed with VS Code AppSpace SDK
 - UI differs if deployed via Appstudio or VS Code AppSpace SDK
