@@ -412,7 +412,16 @@ local function parseXmlDeclaration(self, xml, f)
     f.match, f.endMatch, f.text = string.find(xml, self._PI, f.pos)
     if not f.match then 
         err(self, self._errstr.declErr, f.pos)
-    end 
+    end
+
+    -- Check for BOM
+    if f.match == 4 then
+      xml = string.sub(xml, 4)
+      f.match, f.endMatch, f.text = string.find(xml, self._PI, f.pos)
+      if not f.match then 
+          err(self, self._errstr.declErr, f.pos)
+      end
+    end
 
     if f.match ~= 1 then
         -- Must be at start of doc if present

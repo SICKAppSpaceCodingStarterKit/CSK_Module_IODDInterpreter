@@ -221,10 +221,10 @@ end
 ---@return string newInstanceId Name of the created instance
 local function createNewInstance()
   local instanceNumber = ioddInterpreter_Model.helperFuncs.getTableSize(ioddInterpreter_Model.parameters.instances)
-  local newInstanceId = 'newIntance' .. tostring(instanceNumber)
+  local newInstanceId = 'newInstance' .. tostring(instanceNumber)
   while ioddInterpreter_Model.parameters.instances[newInstanceId] do
     instanceNumber = instanceNumber + 1
-    newInstanceId = 'newIntance' .. tostring(instanceNumber)
+    newInstanceId = 'newInstance' .. tostring(instanceNumber)
   end
   ioddInterpreter_Model.parameters.instances[newInstanceId] = {
     selectedReadParameters = {},
